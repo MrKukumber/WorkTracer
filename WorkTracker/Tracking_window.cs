@@ -15,6 +15,7 @@ namespace WorkTracker
         public Tracking_window()
         {
             InitializeComponent();
+            Console.WriteLine();
         }
     }
 }
