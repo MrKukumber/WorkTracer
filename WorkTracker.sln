@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkTracker", "WorkTracker\WorkTracker.csproj", "{F5836A9E-5DF9-4617-AD94-B928248BFA7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkTracker", "WorkTracker\WorkTracker.csproj", "{F5836A9E-5DF9-4617-AD94-B928248BFA7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testovanie_funkcionalit", "Testovanie_funkcionalit\Testovanie_funkcionalit.csproj", "{30C45365-741F-4840-BBCA-AFA0C1DE2126}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F5836A9E-5DF9-4617-AD94-B928248BFA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5836A9E-5DF9-4617-AD94-B928248BFA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5836A9E-5DF9-4617-AD94-B928248BFA7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
