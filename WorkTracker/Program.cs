@@ -22,5 +22,14 @@ namespace WorkTracker
             ApplicationConfiguration.Initialize();
             Application.Run(new Main_form());
         }
+
+        public static Main_form main_form = new Main_form();
+        public static Configure_form configure_form = new Configure_form();
+        public static Recording_form recording_form = new Recording_form();
+        public static Commit_form commit_form = new Commit_form();
+        public static CreateRepo_form createRepo_form = new CreateRepo_form();
+        public static NotCommitedExit_form notCommitedExit_form = new NotCommitedExit_form();
+        public static Form previousForm = new Form();
+
     }
 }

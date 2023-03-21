@@ -100,6 +100,9 @@
 git rev-parse --is-inside-work-tree
 ```
 
+- ak sa nachadzam v nejakom directory a som v repo mode ale dany directory neobsahuje ihned git repozitar, backtracknem do repozitara, kde sa nachadza .git a ulozim tam csv-cko ale bude mat v nazve tu cestu nejako....
+- aebo proste dovoloim recordovat iba projekty priamo s .git repozitarom
+
 ## pri spusteni aplikacie
 
 - nastavim vsetko podla config file-u
