@@ -19,6 +19,11 @@ namespace WorkTracker
 
         private void NoCommit_button_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void YesCommit_button_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -41,6 +41,7 @@
             this.YesSure_button.TabIndex = 0;
             this.YesSure_button.Text = "button1";
             this.YesSure_button.UseVisualStyleBackColor = true;
+            this.YesSure_button.Click += new System.EventHandler(this.YesSure_button_Click);
             // 
             // NoSure_button
             // 
@@ -50,6 +51,7 @@
             this.NoSure_button.TabIndex = 1;
             this.NoSure_button.Text = "button2";
             this.NoSure_button.UseVisualStyleBackColor = true;
+            this.NoSure_button.Click += new System.EventHandler(this.NoSure_button_Click);
             // 
             // AreYouSure_label
             // 

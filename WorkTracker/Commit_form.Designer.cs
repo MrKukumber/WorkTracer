@@ -41,6 +41,7 @@
             this.YesCommit_button.TabIndex = 0;
             this.YesCommit_button.Text = "button1";
             this.YesCommit_button.UseVisualStyleBackColor = true;
+            this.YesCommit_button.Click += new System.EventHandler(this.YesCommit_button_Click);
             // 
             // NoCommit_button
             // 

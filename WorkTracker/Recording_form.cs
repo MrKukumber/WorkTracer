@@ -20,33 +20,27 @@ namespace WorkTracker
             Console.WriteLine();
         }
 
-        private void Recording_Form_Load(object sender, EventArgs e)
+
+        private void Play_roundButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void Play_RoundButton_Click(object sender, EventArgs e)
+        private void Pause_roundButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void Pause_RoundButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Stop_RoundButton_Click(object sender, EventArgs e)
+        private void Stop_roundButton_Click(object sender, EventArgs e)
         {
             Program.commit_form.Show();
             this.Enabled = false;
-
         }
 
         private void ReturnToMain_Button_Click(object sender, EventArgs e)
         {
             Program.main_form.Show();
             this.Hide();
-
         }
 
         private void ConfigFormOpening_button_Click(object sender, EventArgs e)
@@ -61,6 +55,11 @@ namespace WorkTracker
         {
             System.Windows.Forms.Application.Exit();
         }
+
+
+
+
+
     }
 
     public class RoundButton : Button

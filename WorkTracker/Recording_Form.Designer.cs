@@ -43,7 +43,7 @@
             this.Play_roundButton.TabIndex = 0;
             this.Play_roundButton.Text = "roundButton1";
             this.Play_roundButton.UseVisualStyleBackColor = true;
-            this.Play_roundButton.Click += new System.EventHandler(this.Play_RoundButton_Click);
+            this.Play_roundButton.Click += new System.EventHandler(this.Play_roundButton_Click);
             // 
             // Pause_roundButton
             // 
@@ -53,7 +53,7 @@
             this.Pause_roundButton.TabIndex = 1;
             this.Pause_roundButton.Text = "roundButton2";
             this.Pause_roundButton.UseVisualStyleBackColor = true;
-            this.Pause_roundButton.Click += new System.EventHandler(this.Pause_RoundButton_Click);
+            this.Pause_roundButton.Click += new System.EventHandler(this.Pause_roundButton_Click);
             // 
             // Stop_roundButton
             // 
@@ -63,7 +63,7 @@
             this.Stop_roundButton.TabIndex = 2;
             this.Stop_roundButton.Text = "roundButton3";
             this.Stop_roundButton.UseVisualStyleBackColor = true;
-            this.Stop_roundButton.Click += new System.EventHandler(this.Stop_RoundButton_Click);
+            this.Stop_roundButton.Click += new System.EventHandler(this.Stop_roundButton_Click);
             // 
             // ReturnToMain_button
             // 
@@ -98,7 +98,6 @@
             this.Name = "Recording_form";
             this.Text = "Form2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Recording_form_FormClosing);
-            this.Load += new System.EventHandler(this.Recording_Form_Load);
             this.ResumeLayout(false);
 
         }

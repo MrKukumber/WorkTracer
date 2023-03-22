@@ -28,7 +28,8 @@ namespace WorkTracker
         public static Recording_form recording_form = new Recording_form();
         public static Commit_form commit_form = new Commit_form();
         public static CreateRepo_form createRepo_form = new CreateRepo_form();
-        public static NotCommitedExit_form notCommitedExit_form = new NotCommitedExit_form();
+        public static AreYouSure_form areYouSureExitWithoutStop_form = new AreYouSureExitWithoutStop_form();
+        public static AreYouSure_form areYouSureNotToCommit_form = new AreYouSureNotCommiting_form();
         public static Form previousForm = new Form();
 
     }
