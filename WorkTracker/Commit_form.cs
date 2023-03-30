@@ -19,12 +19,22 @@ namespace WorkTracker
 
         private void NoCommit_button_Click(object sender, EventArgs e)
         {
-            
+            YesNoDialog_form areYouSureNotCommiting_Form = new YesNoDialog_form("Are you sure?", "yes", "no");
+            areYouSureNotCommiting_Form.ShowDialog();
+            if(areYouSureNotCommiting_Form.DialogResult is DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void YesCommit_button_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        private void Commit_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.recording_form.Show();
         }
     }
 }

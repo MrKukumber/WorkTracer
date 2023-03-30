@@ -53,7 +53,6 @@
             this.Pause_roundButton.TabIndex = 1;
             this.Pause_roundButton.Text = "roundButton2";
             this.Pause_roundButton.UseVisualStyleBackColor = true;
-            this.Pause_roundButton.Click += new System.EventHandler(this.Pause_roundButton_Click);
             // 
             // Stop_roundButton
             // 
@@ -73,7 +72,7 @@
             this.ReturnToMain_button.TabIndex = 3;
             this.ReturnToMain_button.Text = "ReturnToMain_button";
             this.ReturnToMain_button.UseVisualStyleBackColor = true;
-            this.ReturnToMain_button.Click += new System.EventHandler(this.ReturnToMain_Button_Click);
+            this.ReturnToMain_button.Click += new System.EventHandler(this.ReturnToMain_button_Click);
             // 
             // ConfigFormOpening_button
             // 

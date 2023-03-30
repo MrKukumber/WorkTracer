@@ -21,14 +21,16 @@ namespace WorkTracker
 
         }
 
-        private void ChooseCommit_Button_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
+
+        private void ChooseClosestCommit_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

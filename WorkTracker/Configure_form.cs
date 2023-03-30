@@ -18,10 +18,6 @@ namespace WorkTracker
             InitializeComponent();
         }
 
-        private void ProjectSelection_Button_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
         {
@@ -42,6 +38,11 @@ namespace WorkTracker
         {
             previousForm.Show();
             this.Hide();
+        }
+
+        private void ProjectSelection_button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

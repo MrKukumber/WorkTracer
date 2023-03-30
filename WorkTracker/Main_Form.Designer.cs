@@ -32,11 +32,12 @@
             this.ConfigFormOpening_button = new System.Windows.Forms.Button();
             this.Commit_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.Commit_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.ChooseCommit_button = new System.Windows.Forms.Button();
+            this.ChooseClosestCommit_button = new System.Windows.Forms.Button();
             this.TortoiseFileNotSelected_label = new System.Windows.Forms.Label();
             this.ProjNotSelected_label = new System.Windows.Forms.Label();
             this.CurrTrackState_label = new System.Windows.Forms.Label();
             this.Mode_label = new System.Windows.Forms.Label();
+            this.CommitShowing_vScrollBar = new System.Windows.Forms.VScrollBar();
             this.SuspendLayout();
             // 
             // RecordingFormOpening_button
@@ -69,22 +70,22 @@
             // 
             // Commit_richTextBox
             // 
-            this.Commit_richTextBox.Location = new System.Drawing.Point(297, 249);
+            this.Commit_richTextBox.Location = new System.Drawing.Point(288, 249);
             this.Commit_richTextBox.Name = "Commit_richTextBox";
             this.Commit_richTextBox.ReadOnly = true;
             this.Commit_richTextBox.Size = new System.Drawing.Size(204, 441);
             this.Commit_richTextBox.TabIndex = 3;
             this.Commit_richTextBox.Text = "";
             // 
-            // ChooseCommit_button
+            // ChooseClosestCommit_button
             // 
-            this.ChooseCommit_button.Location = new System.Drawing.Point(343, 203);
-            this.ChooseCommit_button.Name = "ChooseCommit_button";
-            this.ChooseCommit_button.Size = new System.Drawing.Size(91, 40);
-            this.ChooseCommit_button.TabIndex = 4;
-            this.ChooseCommit_button.Text = "button3";
-            this.ChooseCommit_button.UseVisualStyleBackColor = true;
-            this.ChooseCommit_button.Click += new System.EventHandler(this.ChooseCommit_Button_Click);
+            this.ChooseClosestCommit_button.Location = new System.Drawing.Point(349, 203);
+            this.ChooseClosestCommit_button.Name = "ChooseClosestCommit_button";
+            this.ChooseClosestCommit_button.Size = new System.Drawing.Size(91, 40);
+            this.ChooseClosestCommit_button.TabIndex = 4;
+            this.ChooseClosestCommit_button.Text = "button3";
+            this.ChooseClosestCommit_button.UseVisualStyleBackColor = true;
+            this.ChooseClosestCommit_button.Click += new System.EventHandler(this.ChooseClosestCommit_button_Click);
             // 
             // TortoiseFileNotSelected_label
             // 
@@ -122,16 +123,24 @@
             this.Mode_label.TabIndex = 10;
             this.Mode_label.Text = "label1";
             // 
+            // CommitShowing_vScrollBar
+            // 
+            this.CommitShowing_vScrollBar.Location = new System.Drawing.Point(504, 291);
+            this.CommitShowing_vScrollBar.Name = "CommitShowing_vScrollBar";
+            this.CommitShowing_vScrollBar.Size = new System.Drawing.Size(26, 321);
+            this.CommitShowing_vScrollBar.TabIndex = 11;
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 702);
+            this.Controls.Add(this.CommitShowing_vScrollBar);
             this.Controls.Add(this.Mode_label);
             this.Controls.Add(this.CurrTrackState_label);
             this.Controls.Add(this.ProjNotSelected_label);
             this.Controls.Add(this.TortoiseFileNotSelected_label);
-            this.Controls.Add(this.ChooseCommit_button);
+            this.Controls.Add(this.ChooseClosestCommit_button);
             this.Controls.Add(this.Commit_richTextBox);
             this.Controls.Add(this.Commit_dateTimePicker);
             this.Controls.Add(this.ConfigFormOpening_button);
@@ -150,10 +159,11 @@
         private Button ConfigFormOpening_button;
         private DateTimePicker Commit_dateTimePicker;
         private RichTextBox Commit_richTextBox;
-        private Button ChooseCommit_button;
+        private Button ChooseClosestCommit_button;
         private Label TortoiseFileNotSelected_label;
         private Label ProjNotSelected_label;
         private Label CurrTrackState_label;
         private Label Mode_label;
+        private VScrollBar CommitShowing_vScrollBar;
     }
 }

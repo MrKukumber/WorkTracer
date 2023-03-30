@@ -36,7 +36,7 @@
             this.ChooseLanguge_Label = new System.Windows.Forms.Label();
             this.SK_pictureBox = new System.Windows.Forms.PictureBox();
             this.EN_pictureBox = new System.Windows.Forms.PictureBox();
-            this.ProjectSelection_Button = new System.Windows.Forms.Button();
+            this.ProjectSelection_button = new System.Windows.Forms.Button();
             this.ChooseProjDir_label = new System.Windows.Forms.Label();
             this.ProjDir_label = new System.Windows.Forms.Label();
             this.BackToPrevForm_button = new System.Windows.Forms.Button();
@@ -124,15 +124,15 @@
             this.EN_pictureBox.TabIndex = 8;
             this.EN_pictureBox.TabStop = false;
             // 
-            // ProjectSelection_Button
+            // ProjectSelection_button
             // 
-            this.ProjectSelection_Button.Location = new System.Drawing.Point(257, 50);
-            this.ProjectSelection_Button.Name = "ProjectSelection_Button";
-            this.ProjectSelection_Button.Size = new System.Drawing.Size(94, 29);
-            this.ProjectSelection_Button.TabIndex = 9;
-            this.ProjectSelection_Button.Text = "button1";
-            this.ProjectSelection_Button.UseVisualStyleBackColor = true;
-            this.ProjectSelection_Button.Click += new System.EventHandler(this.ProjectSelection_Button_Click);
+            this.ProjectSelection_button.Location = new System.Drawing.Point(257, 50);
+            this.ProjectSelection_button.Name = "ProjectSelection_button";
+            this.ProjectSelection_button.Size = new System.Drawing.Size(94, 29);
+            this.ProjectSelection_button.TabIndex = 9;
+            this.ProjectSelection_button.Text = "button1";
+            this.ProjectSelection_button.UseVisualStyleBackColor = true;
+            this.ProjectSelection_button.Click += new System.EventHandler(this.ProjectSelection_button_Click);
             // 
             // ChooseProjDir_label
             // 
@@ -211,7 +211,7 @@
             this.Controls.Add(this.BackToPrevForm_button);
             this.Controls.Add(this.ProjDir_label);
             this.Controls.Add(this.ChooseProjDir_label);
-            this.Controls.Add(this.ProjectSelection_Button);
+            this.Controls.Add(this.ProjectSelection_button);
             this.Controls.Add(this.EN_pictureBox);
             this.Controls.Add(this.SK_pictureBox);
             this.Controls.Add(this.ChooseLanguge_Label);
@@ -242,7 +242,7 @@
         private Label ChooseLanguge_Label;
         private PictureBox SK_pictureBox;
         private PictureBox EN_pictureBox;
-        private Button ProjectSelection_Button;
+        private Button ProjectSelection_button;
         private Label ChooseProjDir_label;
         private Label ProjDir_label;
         private Button BackToPrevForm_button;

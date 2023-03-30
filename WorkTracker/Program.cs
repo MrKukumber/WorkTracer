@@ -26,11 +26,26 @@ namespace WorkTracker
         public static Main_form main_form = new Main_form();
         public static Configure_form configure_form = new Configure_form();
         public static Recording_form recording_form = new Recording_form();
-        public static Commit_form commit_form = new Commit_form();
-        public static CreateRepo_form createRepo_form = new CreateRepo_form();
-        public static AreYouSure_form areYouSureExitWithoutStop_form = new AreYouSureExitWithoutStop_form();
-        public static AreYouSure_form areYouSureNotToCommit_form = new AreYouSureNotCommiting_form();
-        public static Form previousForm = new Form();
+    }
+    
+    /// <summary>
+    /// Inicialize parameters of GUI from text file or set default
+    /// </summary>
+    internal static class Inicializer
+    {
+        
+    }
+
+    internal static class SessionParameterSaver
+    {
 
     }
+
+    internal static class LocalizationManager
+    {
+
+    }
+
+    
+
 }

@@ -7,7 +7,7 @@
 - Recording_form
 - Configure_form
 - Commit_form
-- Not_commited_exit_form
+- YesNoDialog_form
 
 ## Co chcem
 
@@ -20,7 +20,8 @@
 2. *ConfigFormOpening_button* - otvori configuracny formular
     - dva labely pod buttonnom sluzia na upozornenie, ze nieje vybrany source projekt a source tortoise-git-u
 3. *ChooseCommit_button* - ukaze commit vybraneho datumu v richTextBox-e
-    - #TODO
+    - budem si vazne vyberat len datum a ukaze mi to prvy commit tohto datumu
+    - nasledne tam budem mat sipky, ktorymi budem moct listovat medzi commitmi tohto datumu
 
 - pridam label, ktory mi bude vraviet v akom stave recordingu akurat som, nakolko pocas recordingu budem moct vyjst z record formulara
 - zaroven este pridam Mode_label, ktory mi hovori v ktorom mode som - ci local alebo repo

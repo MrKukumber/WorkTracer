@@ -1,0 +1,59 @@
+@startuml nakres_prechodov
+
+' object Main_form{
+
+' }
+
+' object Configure_form{
+
+' }
+
+' object Recording_form{
+
+' }
+
+' object Commit_form{
+    
+' }
+
+' object YesNoDialog_form{
+'     vazne nechces
+'     commit
+' }
+
+' object YesNoDialog_form_{
+'     chces exit-nut 
+'     bez zastavenia
+' }
+
+' object YesNoDialog_form__{
+'     chces vytvorit repo
+' }
+
+Main_form --> Configure_form : ConfigFormOpening_button
+Main_form --> Recording_form : RecordingFormOpening_button
+Main_form --> YesNoDialogExitWithoutStop_form : ExitWithoutStop
+
+Recording_form --> Main_form : ReturnToMain_button
+Recording_form --> Configure_form : ConfigFormOpening_button
+Recording_form --> Commit_form : Stop_roundButton
+Recording_form --> YesNoDialogExitWithoutStop_form : ExitWithoutStop
+
+Configure_form --> Main_form : BackToPrevForm_button
+Configure_form --> Recording_form : BackToPrevForm_button
+Configure_form --> YesNoDialogCreatRepo_form : Chosing proj withou repo
+Configure_form --> YesNoDialogExitWithoutStop_form : ExitWithoutStop
+
+Commit_form --> Recording_form : YesCommit_button(through TGit) / Exit
+Commit_form --> YesNoDialogNoCommit_form : NoCommit_button
+
+YesNoDialogExitWithoutStop_form --> Main_form : No_button / Exit
+YesNoDialogExitWithoutStop_form --> Recording_form : No_button / Exit
+YesNoDialogExitWithoutStop_form --> Configure_form : No_button / Exit
+
+YesNoDialogNoCommit_form --> Commit_form : No_button / Exit
+YesNoDialogNoCommit_form --> Recording_form : Yes_button
+
+YesNoDialogCreatRepo_form --> Configure_form : Yes_button / No_button / Exit
+
+@enduml

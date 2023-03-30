@@ -72,6 +72,7 @@
             this.Controls.Add(this.YesCommit_button);
             this.Name = "Commit_form";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Commit_form_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
