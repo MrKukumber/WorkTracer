@@ -32,12 +32,14 @@
             this.ConfigFormOpening_button = new System.Windows.Forms.Button();
             this.Commit_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.Commit_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.ChooseClosestCommit_button = new System.Windows.Forms.Button();
             this.TortoiseFileNotSelected_label = new System.Windows.Forms.Label();
             this.ProjNotSelected_label = new System.Windows.Forms.Label();
             this.CurrTrackState_label = new System.Windows.Forms.Label();
             this.Mode_label = new System.Windows.Forms.Label();
             this.CommitShowing_vScrollBar = new System.Windows.Forms.VScrollBar();
+            this.Name_label = new System.Windows.Forms.Label();
+            this.Commit_label = new System.Windows.Forms.Label();
+            this.ProgressFormOpening_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // RecordingFormOpening_button
@@ -63,29 +65,19 @@
             // Commit_dateTimePicker
             // 
             this.Commit_dateTimePicker.Checked = false;
-            this.Commit_dateTimePicker.Location = new System.Drawing.Point(266, 170);
+            this.Commit_dateTimePicker.Location = new System.Drawing.Point(262, 216);
             this.Commit_dateTimePicker.Name = "Commit_dateTimePicker";
             this.Commit_dateTimePicker.Size = new System.Drawing.Size(259, 27);
             this.Commit_dateTimePicker.TabIndex = 2;
             // 
             // Commit_richTextBox
             // 
-            this.Commit_richTextBox.Location = new System.Drawing.Point(288, 249);
+            this.Commit_richTextBox.Location = new System.Drawing.Point(287, 249);
             this.Commit_richTextBox.Name = "Commit_richTextBox";
             this.Commit_richTextBox.ReadOnly = true;
             this.Commit_richTextBox.Size = new System.Drawing.Size(204, 441);
             this.Commit_richTextBox.TabIndex = 3;
             this.Commit_richTextBox.Text = "";
-            // 
-            // ChooseClosestCommit_button
-            // 
-            this.ChooseClosestCommit_button.Location = new System.Drawing.Point(349, 203);
-            this.ChooseClosestCommit_button.Name = "ChooseClosestCommit_button";
-            this.ChooseClosestCommit_button.Size = new System.Drawing.Size(91, 40);
-            this.ChooseClosestCommit_button.TabIndex = 4;
-            this.ChooseClosestCommit_button.Text = "button3";
-            this.ChooseClosestCommit_button.UseVisualStyleBackColor = true;
-            this.ChooseClosestCommit_button.Click += new System.EventHandler(this.ChooseClosestCommit_button_Click);
             // 
             // TortoiseFileNotSelected_label
             // 
@@ -110,18 +102,18 @@
             this.CurrTrackState_label.AutoSize = true;
             this.CurrTrackState_label.Location = new System.Drawing.Point(74, 345);
             this.CurrTrackState_label.Name = "CurrTrackState_label";
-            this.CurrTrackState_label.Size = new System.Drawing.Size(50, 20);
+            this.CurrTrackState_label.Size = new System.Drawing.Size(143, 20);
             this.CurrTrackState_label.TabIndex = 9;
-            this.CurrTrackState_label.Text = "label1";
+            this.CurrTrackState_label.Text = "CurrTrackState_label";
             // 
             // Mode_label
             // 
             this.Mode_label.AutoSize = true;
             this.Mode_label.Location = new System.Drawing.Point(182, 577);
             this.Mode_label.Name = "Mode_label";
-            this.Mode_label.Size = new System.Drawing.Size(50, 20);
+            this.Mode_label.Size = new System.Drawing.Size(87, 20);
             this.Mode_label.TabIndex = 10;
-            this.Mode_label.Text = "label1";
+            this.Mode_label.Text = "Mode_label";
             // 
             // CommitShowing_vScrollBar
             // 
@@ -130,17 +122,49 @@
             this.CommitShowing_vScrollBar.Size = new System.Drawing.Size(26, 321);
             this.CommitShowing_vScrollBar.TabIndex = 11;
             // 
+            // Name_label
+            // 
+            this.Name_label.AutoSize = true;
+            this.Name_label.Font = new System.Drawing.Font("Segoe Script", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Name_label.Location = new System.Drawing.Point(57, 51);
+            this.Name_label.Name = "Name_label";
+            this.Name_label.Size = new System.Drawing.Size(434, 95);
+            this.Name_label.TabIndex = 12;
+            this.Name_label.Text = "Work Tracer";
+            // 
+            // Commit_label
+            // 
+            this.Commit_label.AutoSize = true;
+            this.Commit_label.Location = new System.Drawing.Point(343, 193);
+            this.Commit_label.Name = "Commit_label";
+            this.Commit_label.Size = new System.Drawing.Size(101, 20);
+            this.Commit_label.TabIndex = 13;
+            this.Commit_label.Text = "Commit_label";
+            this.Commit_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // ProgressFormOpening_button
+            // 
+            this.ProgressFormOpening_button.Location = new System.Drawing.Point(57, 431);
+            this.ProgressFormOpening_button.Name = "ProgressFormOpening_button";
+            this.ProgressFormOpening_button.Size = new System.Drawing.Size(94, 50);
+            this.ProgressFormOpening_button.TabIndex = 14;
+            this.ProgressFormOpening_button.Text = "ProgressFormOpening_button";
+            this.ProgressFormOpening_button.UseVisualStyleBackColor = true;
+            this.ProgressFormOpening_button.Click += new System.EventHandler(this.ProgressFormOpening_button_Click);
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 702);
+            this.Controls.Add(this.ProgressFormOpening_button);
+            this.Controls.Add(this.Commit_label);
+            this.Controls.Add(this.Name_label);
             this.Controls.Add(this.CommitShowing_vScrollBar);
             this.Controls.Add(this.Mode_label);
             this.Controls.Add(this.CurrTrackState_label);
             this.Controls.Add(this.ProjNotSelected_label);
             this.Controls.Add(this.TortoiseFileNotSelected_label);
-            this.Controls.Add(this.ChooseClosestCommit_button);
             this.Controls.Add(this.Commit_richTextBox);
             this.Controls.Add(this.Commit_dateTimePicker);
             this.Controls.Add(this.ConfigFormOpening_button);
@@ -157,13 +181,15 @@
 
         private Button RecordingFormOpening_button;
         private Button ConfigFormOpening_button;
-        private DateTimePicker Commit_dateTimePicker;
-        private RichTextBox Commit_richTextBox;
-        private Button ChooseClosestCommit_button;
         private Label TortoiseFileNotSelected_label;
         private Label ProjNotSelected_label;
         private Label CurrTrackState_label;
         private Label Mode_label;
         private VScrollBar CommitShowing_vScrollBar;
+        private Label Name_label;
+        private Label Commit_label;
+        private Button ProgressFormOpening_button;
+        private DateTimePicker Commit_dateTimePicker;
+        private RichTextBox Commit_richTextBox;
     }
 }

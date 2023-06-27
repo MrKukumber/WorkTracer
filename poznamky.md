@@ -47,10 +47,11 @@
 - nebudem zanechavat csv-cko v nejakom konzistentnom stave, proste co tam posledne uzivatel zada, to tam bude, ked tak sa ho len mozem opytat, ked bude chciet zavriet okno, ci nechce zastavit nahravanie
 - vzdy ked zaktivnim dane okno...a.k.a. kliknem nanho, tak skontrolujem directory csv-cka, tortoise gitu a aj projektu, popripade upozornim uzivatela na to ze sa zmenili direktory, ze si to musi upravit..
 - dokym niesu vsetky adresare spravne nastavene, nenecham ho stlacit ziadne trackovacie tlacidlo
+- zaznamenavat aj fazu programovania, faza sa moze menit iba pocas pauznutia/stopnutia - faza sa zaznamenava v dalsom stlpci v csv-cku
 
 ### v configuracii
 
-1. *ChooseTGitDir_button* - otvori mi file manager, kde si mozem najst folder s projektom
+1. *ChooseTGitDir_button* - otvori mi file manager, kde si mozem najst folder s tortoisom
     - nejakym sposobom musim skontrolovat, ci to je vazne subor s tortosiom...
     #TODO
 2. *ProjectSelection_Button* - otvori mi file manager, v ktorom si vyberiem folder s projektom, bud:
@@ -75,6 +76,10 @@
 - skontrolovat ci uz sa tam csv nachadza v danom projekte a popripade dat prec upozornenie, ak tam 
 - vypisovat v labeloch iba meno projektu, nie celu path k nemu..., ak nevalidny projekt, tak vypisovat No valid project cervene napriklad.
 
+## v trackovani
+
+
+
 - **vsetky nastavenia si ukladam tiez do config textaku**
 
 ## Myslienky
@@ -85,6 +90,8 @@
 - vytvorit triedu na kontrolovanie zdrojov, ktora bude mat nejake funkcie, ktore budu vracat error kody v zavislosti na tom co sa pokazilo, co uz neplati, alebo naopak ci je vsetko v pohode
 
 - formulare si inicializovat v programe a ulozit si ich a otvarat stale tie iste, nevytvarat nove stale
+
+
 
 ## co treba vzdy kontrolovat
 
@@ -108,6 +115,8 @@ git rev-parse --is-inside-work-tree
 
 - nastavim vsetko podla config file-u
 - kontrolujem, ci stale existuje cesta ku tortoise-git-u
+- nastavim stav nahravania podla posledneho stavu nahravania
+- zistim kod posledneho commit-u
 
 1. mod repo:
     - kontrolujem ci stale existuje dany projekt a ci v nom je stale repozitar - ak niektora z tychto veci neplati, napisem, ze nieje vybrany cielovy projekt

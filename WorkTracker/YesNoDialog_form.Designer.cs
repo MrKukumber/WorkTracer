@@ -33,44 +33,44 @@
             this.YesNoDialog_label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // YesSure_button
+            // Yes_button
             // 
-            this.Yes_button.Location = new System.Drawing.Point(76, 102);
-            this.Yes_button.Name = "YesSure_button";
+            this.Yes_button.Location = new System.Drawing.Point(54, 102);
+            this.Yes_button.Name = "Yes_button";
             this.Yes_button.Size = new System.Drawing.Size(94, 29);
             this.Yes_button.TabIndex = 0;
             this.Yes_button.Text = "button1";
             this.Yes_button.UseVisualStyleBackColor = true;
             this.Yes_button.Click += new System.EventHandler(this.YesSure_button_Click);
             // 
-            // NoSure_button
+            // No_button
             // 
-            this.No_button.Location = new System.Drawing.Point(268, 103);
-            this.No_button.Name = "NoSure_button";
+            this.No_button.Location = new System.Drawing.Point(259, 102);
+            this.No_button.Name = "No_button";
             this.No_button.Size = new System.Drawing.Size(94, 29);
             this.No_button.TabIndex = 1;
             this.No_button.Text = "button2";
             this.No_button.UseVisualStyleBackColor = true;
             this.No_button.Click += new System.EventHandler(this.NoSure_button_Click);
             // 
-            // AreYouSure_label
+            // YesNoDialog_label
             // 
             this.YesNoDialog_label.AutoSize = true;
-            this.YesNoDialog_label.Location = new System.Drawing.Point(160, 23);
-            this.YesNoDialog_label.Name = "AreYouSure_label";
+            this.YesNoDialog_label.Location = new System.Drawing.Point(181, 23);
+            this.YesNoDialog_label.Name = "YesNoDialog_label";
             this.YesNoDialog_label.Size = new System.Drawing.Size(50, 20);
             this.YesNoDialog_label.TabIndex = 2;
             this.YesNoDialog_label.Text = "label1";
             // 
-            // AreYouSure_form
+            // YesNoDialog_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 167);
+            this.ClientSize = new System.Drawing.Size(401, 158);
             this.Controls.Add(this.YesNoDialog_label);
             this.Controls.Add(this.No_button);
             this.Controls.Add(this.Yes_button);
-            this.Name = "AreYouSure_form";
+            this.Name = "YesNoDialog_form";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -27,10 +27,10 @@ namespace WorkTracker
             System.Windows.Forms.Application.Exit();
         }
 
-        private void ChooseClosestCommit_button_Click(object sender, EventArgs e)
+        private void ProgressFormOpening_button_Click(object sender, EventArgs e)
         {
-
+            Program.progress_form.Show();
+            this.Hide();
         }
-
     }
 }

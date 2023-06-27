@@ -118,99 +118,99 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Commit_NoCommit_button_text" xml:space="preserve">
-    <value>Nie</value>
+    <value>No</value>
   </data>
   <data name="Commit_WantCommit_label_text" xml:space="preserve">
-    <value>Chceš komitnúť zmeny?</value>
+    <value>Do you want to commit your work?</value>
   </data>
   <data name="Commit_YesCommit_button_text" xml:space="preserve">
-    <value>Áno</value>
+    <value>Yes</value>
   </data>
   <data name="Config_BackToPrevForm_button_text" xml:space="preserve">
-    <value>Vráť sa naspäť</value>
+    <value>Return back</value>
   </data>
   <data name="Config_ChooseLanguge_Label_text" xml:space="preserve">
-    <value>Nastav jazyk</value>
+    <value>Choose language</value>
   </data>
   <data name="Config_ChooseProjDir_label_text" xml:space="preserve">
-    <value>Vyber adresár s projektom</value>
+    <value>Select project for tracking</value>
   </data>
   <data name="Config_ChooseTGitDir_button_text" xml:space="preserve">
-    <value>Vyber</value>
+    <value>Select</value>
   </data>
   <data name="Config_ChooseTGitDir_label_text" xml:space="preserve">
-    <value>Vyber adresár s tortois git programom.</value>
+    <value>Select directory with tortoise git</value>
   </data>
   <data name="Config_Mode1_label_text" xml:space="preserve">
-    <value>Vyber mód</value>
+    <value>Select mode</value>
   </data>
   <data name="Config_Mode2_label_text" xml:space="preserve">
     <value>repo     local</value>
   </data>
   <data name="Config_ProjectSelection_Button_text" xml:space="preserve">
-    <value>Vyber</value>
+    <value>Select</value>
   </data>
-  <data name="Main_ChooseClosestCommit_button_text" xml:space="preserve">
-    <value>Ukáž vybrané komity</value>
+  <data name="Main_Commit_label_text" xml:space="preserve">
+    <value>Show project commits</value>
   </data>
   <data name="Main_ConfigFormOpening_button_text" xml:space="preserve">
-    <value>Otvor nastavnia</value>
+    <value>Open configuration</value>
   </data>
   <data name="Main_CurrTrackState_label_pause_text" xml:space="preserve">
-    <value>Nahrávanie je pozastavené</value>
+    <value>Recording is paused</value>
   </data>
   <data name="Main_CurrTrackState_label_play_text" xml:space="preserve">
-    <value>Nahráva sa</value>
+    <value>Recording is on</value>
   </data>
   <data name="Main_CurrTrackState_label_stop_text" xml:space="preserve">
-    <value>Nahrávanie je zastavené</value>
+    <value>Recording is Stoped</value>
   </data>
   <data name="Main_Mode_label_local_text" xml:space="preserve">
-    <value>Mód: lokálny</value>
+    <value>Mode: Local</value>
   </data>
   <data name="Main_Mode_label_repo_text" xml:space="preserve">
-    <value>Mód: repozitár</value>
+    <value>Mode: Repozitory</value>
   </data>
   <data name="Main_ProjNotSelected_label_text" xml:space="preserve">
-    <value>Nie je vybraný žiadny projekt</value>
+    <value>No project is selected</value>
   </data>
   <data name="Main_RecordingFormOpening_Button_text" xml:space="preserve">
-    <value>Začni nahrávať</value>
+    <value>Record</value>
   </data>
   <data name="Main_TortoiseFileNotSelected_label_text" xml:space="preserve">
-    <value>Nie je vyraný žiadny adresár s Tortois Git-om.</value>
+    <value>TGit directory not selected</value>
   </data>
   <data name="NotCommiting_No_button_text" xml:space="preserve">
-    <value>Nie</value>
+    <value>No</value>
   </data>
   <data name="NotCommiting_YesNoDialog_label_text" xml:space="preserve">
-    <value>Naozaj nechceš komitnúť?</value>
+    <value>Are you sure you don't want to commit?</value>
   </data>
   <data name="NotCommiting_Yes_button_text" xml:space="preserve">
-    <value>Áno</value>
+    <value>Yes</value>
   </data>
   <data name="NotStopedExit_No_button_text" xml:space="preserve">
-    <value>Nie</value>
+    <value>No</value>
   </data>
   <data name="NotStopedExit_YesNoDialog_label_text" xml:space="preserve">
-    <value>Tvoje nahrávanie nieje zastavené. Naozaj chceš odísť?</value>
+    <value>You did not stoped your recording?\nAre you sure, you want to exit?</value>
   </data>
   <data name="NotStopedExit_Yes_button_text" xml:space="preserve">
-    <value>Áno</value>
+    <value>Yes</value>
   </data>
   <data name="Recording_ConfigFormOpening_button_text" xml:space="preserve">
-    <value>Otvor nastavenia</value>
+    <value>Open configuration</value>
   </data>
   <data name="Recording_ReturnToMain_button_text" xml:space="preserve">
-    <value>Vráť sa do\nhlavného menu.</value>
+    <value>Return to Main</value>
   </data>
   <data name="WantCreateRepo_No_button_text" xml:space="preserve">
-    <value>Nie</value>
+    <value>No</value>
   </data>
   <data name="WantCreateRepo_YesNoDialog_label_text" xml:space="preserve">
-    <value>Vo vybranom adresáry sa nenachádza žiadny repozitár.\nChceš vytvoriť nový?</value>
+    <value>In current directory is no repository.\nWould you like to create one?</value>
   </data>
   <data name="WantCreateRepo_Yes_button_text" xml:space="preserve">
-    <value>Áno</value>
+    <value>Yes</value>
   </data>
 </root>
