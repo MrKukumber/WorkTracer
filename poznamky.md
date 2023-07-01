@@ -19,9 +19,11 @@
     - kontrolujem ci existuje csv-sko na zapisovanie, ak nie, vytvorim
 2. *ConfigFormOpening_button* - otvori configuracny formular
     - dva labely pod buttonnom sluzia na upozornenie, ze nieje vybrany source projekt a source tortoise-git-u
-3. *ChooseCommit_button* - ukaze commit vybraneho datumu v richTextBox-e
+3. *Commit_dateTimePicker* - ukaze commit vybraneho datumu v richTextBox-e
     - budem si vazne vyberat len datum a ukaze mi to prvy commit tohto datumu
-    - nasledne tam budem mat sipky, ktorymi budem moct listovat medzi commitmi tohto datumu
+    - nasledne tam budem mat scrollbar, ktorym budem moct listovat medzi commitmi tohto datumu
+    - ak nieje vybrany projekt alebo sme v local mode, je v richTextBoxe napisana prislusna hlaska
+4. *ProgressFormOpening_button* - ak je vybrany validny projekt, otvori formular s nahliadnutim progressu v danom projekte, neda sa zmacknut, ak nieje vybrany projekt
 
 - pridam label, ktory mi bude vraviet v akom stave recordingu akurat som, nakolko pocas recordingu budem moct vyjst z record formulara
 - zaroven este pridam Mode_label, ktory mi hovori v ktorom mode som - ci local alebo repo
@@ -76,8 +78,12 @@
 - skontrolovat ci uz sa tam csv nachadza v danom projekte a popripade dat prec upozornenie, ak tam 
 - vypisovat v labeloch iba meno projektu, nie celu path k nemu..., ak nevalidny projekt, tak vypisovat No valid project cervene napriklad.
 
-## v trackovani
+## v Progresse
 
+1. *From_dateTimePicker/To_dateTimePicker* - zoberiem interval,medzi korym mam zobrazit dni/7dni/mesiace,
+    - vzdy nastavim v *from* maximalny date z *to* a symetricky minimalny v *to* z *from*
+    - minimalny v *from* je datum prveho zaznamu a maximalny v *to* je datum posledneho zaznamu v csv-cku
+2. *Commit_dateTimePicker* podobne ako v mainu
 
 
 - **vsetky nastavenia si ukladam tiez do config textaku**
@@ -91,7 +97,7 @@
 
 - formulare si inicializovat v programe a ulozit si ich a otvarat stale tie iste, nevytvarat nove stale
 
-
+-uvolnovat tlacidla az po tom, co prebehnu vsetky ostatne procesy, taka pasivna ochrana voci zlomyselnikom
 
 ## co treba vzdy kontrolovat
 
@@ -125,7 +131,8 @@ git rev-parse --is-inside-work-tree
 
 ## Zatvaranie aplikacie
 
-#TODO
+- aplikácia sa vypína jednoduchým stlačením tlačidla pre uzatvorenie okna
+- pokiaľ je náhodou nahrávanie v sputenom alebo pozastavenom stave, vyskočí na uživatela upozornenie, že stav nahrávania nieje zastavený a či naozaj chce odísť z aplikácie
 
 ## Problemy na vyriesenie
 

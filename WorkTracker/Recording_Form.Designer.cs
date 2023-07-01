@@ -33,17 +33,18 @@
             this.Stop_roundButton = new WorkTracker.RoundButton();
             this.ReturnToMain_button = new System.Windows.Forms.Button();
             this.ConfigFormOpening_button = new System.Windows.Forms.Button();
-            this.Faze_trackBar = new System.Windows.Forms.TrackBar();
             this.FazeCreat_label = new System.Windows.Forms.Label();
             this.FazeProgr_label = new System.Windows.Forms.Label();
             this.FazeDebug_label = new System.Windows.Forms.Label();
             this.Faze_label = new System.Windows.Forms.Label();
+            this.Faze_trackBar = new System.Windows.Forms.TrackBar();
+            this.CurrTrackState_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Faze_trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // Play_roundButton
             // 
-            this.Play_roundButton.Location = new System.Drawing.Point(27, 32);
+            this.Play_roundButton.Location = new System.Drawing.Point(27, 24);
             this.Play_roundButton.Name = "Play_roundButton";
             this.Play_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Play_roundButton.TabIndex = 0;
@@ -53,7 +54,7 @@
             // 
             // Pause_roundButton
             // 
-            this.Pause_roundButton.Location = new System.Drawing.Point(136, 32);
+            this.Pause_roundButton.Location = new System.Drawing.Point(136, 24);
             this.Pause_roundButton.Name = "Pause_roundButton";
             this.Pause_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Pause_roundButton.TabIndex = 1;
@@ -62,7 +63,7 @@
             // 
             // Stop_roundButton
             // 
-            this.Stop_roundButton.Location = new System.Drawing.Point(245, 32);
+            this.Stop_roundButton.Location = new System.Drawing.Point(245, 24);
             this.Stop_roundButton.Name = "Stop_roundButton";
             this.Stop_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Stop_roundButton.TabIndex = 2;
@@ -72,7 +73,7 @@
             // 
             // ReturnToMain_button
             // 
-            this.ReturnToMain_button.Location = new System.Drawing.Point(195, 235);
+            this.ReturnToMain_button.Location = new System.Drawing.Point(206, 247);
             this.ReturnToMain_button.Name = "ReturnToMain_button";
             this.ReturnToMain_button.Size = new System.Drawing.Size(94, 50);
             this.ReturnToMain_button.TabIndex = 3;
@@ -82,7 +83,7 @@
             // 
             // ConfigFormOpening_button
             // 
-            this.ConfigFormOpening_button.Location = new System.Drawing.Point(43, 235);
+            this.ConfigFormOpening_button.Location = new System.Drawing.Point(43, 247);
             this.ConfigFormOpening_button.Name = "ConfigFormOpening_button";
             this.ConfigFormOpening_button.Size = new System.Drawing.Size(94, 50);
             this.ConfigFormOpening_button.TabIndex = 4;
@@ -90,19 +91,10 @@
             this.ConfigFormOpening_button.UseVisualStyleBackColor = true;
             this.ConfigFormOpening_button.Click += new System.EventHandler(this.ConfigFormOpening_button_Click);
             // 
-            // Faze_trackBar
-            // 
-            this.Faze_trackBar.LargeChange = 1;
-            this.Faze_trackBar.Location = new System.Drawing.Point(12, 173);
-            this.Faze_trackBar.Maximum = 2;
-            this.Faze_trackBar.Name = "Faze_trackBar";
-            this.Faze_trackBar.Size = new System.Drawing.Size(325, 56);
-            this.Faze_trackBar.TabIndex = 5;
-            // 
             // FazeCreat_label
             // 
             this.FazeCreat_label.AutoSize = true;
-            this.FazeCreat_label.Location = new System.Drawing.Point(-2, 150);
+            this.FazeCreat_label.Location = new System.Drawing.Point(-2, 162);
             this.FazeCreat_label.Name = "FazeCreat_label";
             this.FazeCreat_label.Size = new System.Drawing.Size(112, 20);
             this.FazeCreat_label.TabIndex = 6;
@@ -111,7 +103,7 @@
             // FazeProgr_label
             // 
             this.FazeProgr_label.AutoSize = true;
-            this.FazeProgr_label.Location = new System.Drawing.Point(116, 150);
+            this.FazeProgr_label.Location = new System.Drawing.Point(116, 162);
             this.FazeProgr_label.Name = "FazeProgr_label";
             this.FazeProgr_label.Size = new System.Drawing.Size(113, 20);
             this.FazeProgr_label.TabIndex = 7;
@@ -120,7 +112,7 @@
             // FazeDebug_label
             // 
             this.FazeDebug_label.AutoSize = true;
-            this.FazeDebug_label.Location = new System.Drawing.Point(245, 150);
+            this.FazeDebug_label.Location = new System.Drawing.Point(245, 162);
             this.FazeDebug_label.Name = "FazeDebug_label";
             this.FazeDebug_label.Size = new System.Drawing.Size(122, 20);
             this.FazeDebug_label.TabIndex = 8;
@@ -129,17 +121,36 @@
             // Faze_label
             // 
             this.Faze_label.AutoSize = true;
-            this.Faze_label.Location = new System.Drawing.Point(126, 119);
+            this.Faze_label.Location = new System.Drawing.Point(126, 131);
             this.Faze_label.Name = "Faze_label";
             this.Faze_label.Size = new System.Drawing.Size(77, 20);
             this.Faze_label.TabIndex = 9;
             this.Faze_label.Text = "Faze_label";
             // 
+            // Faze_trackBar
+            // 
+            this.Faze_trackBar.LargeChange = 1;
+            this.Faze_trackBar.Location = new System.Drawing.Point(12, 185);
+            this.Faze_trackBar.Maximum = 2;
+            this.Faze_trackBar.Name = "Faze_trackBar";
+            this.Faze_trackBar.Size = new System.Drawing.Size(325, 56);
+            this.Faze_trackBar.TabIndex = 5;
+            // 
+            // CurrTrackState_label
+            // 
+            this.CurrTrackState_label.AutoSize = true;
+            this.CurrTrackState_label.Location = new System.Drawing.Point(99, 93);
+            this.CurrTrackState_label.Name = "CurrTrackState_label";
+            this.CurrTrackState_label.Size = new System.Drawing.Size(143, 20);
+            this.CurrTrackState_label.TabIndex = 10;
+            this.CurrTrackState_label.Text = "CurrTrackState_label";
+            // 
             // Recording_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 297);
+            this.ClientSize = new System.Drawing.Size(349, 307);
+            this.Controls.Add(this.CurrTrackState_label);
             this.Controls.Add(this.Faze_label);
             this.Controls.Add(this.FazeDebug_label);
             this.Controls.Add(this.FazeProgr_label);
@@ -166,10 +177,11 @@
         private RoundButton Stop_roundButton;
         private Button ReturnToMain_button;
         private Button ConfigFormOpening_button;
-        private TrackBar Faze_trackBar;
         private Label FazeCreat_label;
         private Label FazeProgr_label;
         private Label FazeDebug_label;
         private Label Faze_label;
+        private TrackBar Faze_trackBar;
+        private Label CurrTrackState_label;
     }
 }
