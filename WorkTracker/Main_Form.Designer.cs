@@ -42,9 +42,10 @@
             // 
             // RecordingFormOpening_button
             // 
+            this.RecordingFormOpening_button.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordingFormOpening_button.Location = new System.Drawing.Point(57, 276);
             this.RecordingFormOpening_button.Name = "RecordingFormOpening_button";
-            this.RecordingFormOpening_button.Size = new System.Drawing.Size(94, 50);
+            this.RecordingFormOpening_button.Size = new System.Drawing.Size(110, 70);
             this.RecordingFormOpening_button.TabIndex = 0;
             this.RecordingFormOpening_button.Text = "RecordingFormOpening_Button";
             this.RecordingFormOpening_button.UseVisualStyleBackColor = true;
@@ -52,9 +53,10 @@
             // 
             // ConfigFormOpening_button
             // 
-            this.ConfigFormOpening_button.Location = new System.Drawing.Point(57, 562);
+            this.ConfigFormOpening_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ConfigFormOpening_button.Location = new System.Drawing.Point(57, 552);
             this.ConfigFormOpening_button.Name = "ConfigFormOpening_button";
-            this.ConfigFormOpening_button.Size = new System.Drawing.Size(94, 50);
+            this.ConfigFormOpening_button.Size = new System.Drawing.Size(110, 70);
             this.ConfigFormOpening_button.TabIndex = 1;
             this.ConfigFormOpening_button.Text = "ConfigFormOpening_Button";
             this.ConfigFormOpening_button.UseVisualStyleBackColor = true;
@@ -62,6 +64,7 @@
             // 
             // Commit_richTextBox
             // 
+            this.Commit_richTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Commit_richTextBox.Location = new System.Drawing.Point(287, 249);
             this.Commit_richTextBox.Name = "Commit_richTextBox";
             this.Commit_richTextBox.ReadOnly = true;
@@ -71,42 +74,44 @@
             // 
             // TortoiseFileNotSelected_label
             // 
-            this.TortoiseFileNotSelected_label.AutoSize = true;
-            this.TortoiseFileNotSelected_label.Location = new System.Drawing.Point(57, 628);
+            this.TortoiseFileNotSelected_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TortoiseFileNotSelected_label.Location = new System.Drawing.Point(57, 648);
             this.TortoiseFileNotSelected_label.Name = "TortoiseFileNotSelected_label";
-            this.TortoiseFileNotSelected_label.Size = new System.Drawing.Size(50, 20);
+            this.TortoiseFileNotSelected_label.Size = new System.Drawing.Size(224, 45);
             this.TortoiseFileNotSelected_label.TabIndex = 7;
             this.TortoiseFileNotSelected_label.Text = "label2";
             // 
             // ProjNotSelected_label
             // 
-            this.ProjNotSelected_label.AutoSize = true;
-            this.ProjNotSelected_label.Location = new System.Drawing.Point(57, 660);
+            this.ProjNotSelected_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ProjNotSelected_label.Location = new System.Drawing.Point(57, 625);
             this.ProjNotSelected_label.Name = "ProjNotSelected_label";
-            this.ProjNotSelected_label.Size = new System.Drawing.Size(50, 20);
+            this.ProjNotSelected_label.Size = new System.Drawing.Size(224, 20);
             this.ProjNotSelected_label.TabIndex = 8;
             this.ProjNotSelected_label.Text = "label1";
             // 
             // CurrTrackState_label
             // 
-            this.CurrTrackState_label.AutoSize = true;
-            this.CurrTrackState_label.Location = new System.Drawing.Point(74, 345);
+            this.CurrTrackState_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CurrTrackState_label.Location = new System.Drawing.Point(57, 360);
             this.CurrTrackState_label.Name = "CurrTrackState_label";
-            this.CurrTrackState_label.Size = new System.Drawing.Size(143, 20);
+            this.CurrTrackState_label.Size = new System.Drawing.Size(224, 20);
             this.CurrTrackState_label.TabIndex = 9;
             this.CurrTrackState_label.Text = "CurrTrackState_label";
             // 
             // Mode_label
             // 
-            this.Mode_label.AutoSize = true;
-            this.Mode_label.Location = new System.Drawing.Point(182, 577);
+            this.Mode_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Mode_label.Location = new System.Drawing.Point(173, 577);
             this.Mode_label.Name = "Mode_label";
-            this.Mode_label.Size = new System.Drawing.Size(87, 20);
+            this.Mode_label.Size = new System.Drawing.Size(108, 20);
             this.Mode_label.TabIndex = 10;
             this.Mode_label.Text = "Mode_label";
+            this.Mode_label.Click += new System.EventHandler(this.Mode_label_Click);
             // 
             // Name_label
             // 
+            this.Name_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Name_label.AutoSize = true;
             this.Name_label.Font = new System.Drawing.Font("Segoe Script", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name_label.Location = new System.Drawing.Point(57, 51);
@@ -117,19 +122,20 @@
             // 
             // Commit_label
             // 
-            this.Commit_label.AutoSize = true;
-            this.Commit_label.Location = new System.Drawing.Point(340, 208);
+            this.Commit_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Commit_label.Location = new System.Drawing.Point(287, 208);
             this.Commit_label.Name = "Commit_label";
-            this.Commit_label.Size = new System.Drawing.Size(101, 20);
+            this.Commit_label.Size = new System.Drawing.Size(204, 20);
             this.Commit_label.TabIndex = 13;
             this.Commit_label.Text = "Commit_label";
             this.Commit_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ProgressFormOpening_button
             // 
-            this.ProgressFormOpening_button.Location = new System.Drawing.Point(57, 431);
+            this.ProgressFormOpening_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ProgressFormOpening_button.Location = new System.Drawing.Point(57, 423);
             this.ProgressFormOpening_button.Name = "ProgressFormOpening_button";
-            this.ProgressFormOpening_button.Size = new System.Drawing.Size(94, 50);
+            this.ProgressFormOpening_button.Size = new System.Drawing.Size(110, 70);
             this.ProgressFormOpening_button.TabIndex = 14;
             this.ProgressFormOpening_button.Text = "ProgressFormOpening_button";
             this.ProgressFormOpening_button.UseVisualStyleBackColor = true;

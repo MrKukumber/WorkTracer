@@ -35,32 +35,35 @@
             // 
             // Yes_button
             // 
+            this.Yes_button.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Yes_button.Location = new System.Drawing.Point(54, 102);
             this.Yes_button.Name = "Yes_button";
             this.Yes_button.Size = new System.Drawing.Size(94, 29);
             this.Yes_button.TabIndex = 0;
-            this.Yes_button.Text = "button1";
+            this.Yes_button.Text = "Yes_button";
             this.Yes_button.UseVisualStyleBackColor = true;
             this.Yes_button.Click += new System.EventHandler(this.YesSure_button_Click);
             // 
             // No_button
             // 
+            this.No_button.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.No_button.Location = new System.Drawing.Point(259, 102);
             this.No_button.Name = "No_button";
             this.No_button.Size = new System.Drawing.Size(94, 29);
             this.No_button.TabIndex = 1;
-            this.No_button.Text = "button2";
+            this.No_button.Text = "No_button";
             this.No_button.UseVisualStyleBackColor = true;
             this.No_button.Click += new System.EventHandler(this.NoSure_button_Click);
             // 
             // YesNoDialog_label
             // 
-            this.YesNoDialog_label.AutoSize = true;
-            this.YesNoDialog_label.Location = new System.Drawing.Point(181, 23);
+            this.YesNoDialog_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.YesNoDialog_label.Location = new System.Drawing.Point(54, 23);
             this.YesNoDialog_label.Name = "YesNoDialog_label";
-            this.YesNoDialog_label.Size = new System.Drawing.Size(50, 20);
+            this.YesNoDialog_label.Size = new System.Drawing.Size(299, 50);
             this.YesNoDialog_label.TabIndex = 2;
-            this.YesNoDialog_label.Text = "label1";
+            this.YesNoDialog_label.Text = "YesNoDialog_label";
+            this.YesNoDialog_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // YesNoDialog_form
             // 
@@ -73,7 +76,6 @@
             this.Name = "YesNoDialog_form";
             this.Text = "Form1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -6,7 +6,7 @@ Work Tracer
 
 ## Krátky popis
 
-- Aplikácia s uživatelským rozhraním slúžiaca na zaznamenávanie času strávenom na práci na danom projekte.
+- Aplikácia s grafickým uživatelským rozhraním slúžiaca na zaznamenávanie času strávenom na práci na danom projekte.
 - Ďalej obsahuje:
   - interface pre prácu s GIT repozitárom - k tomuto účelu využíva externú aplikáciu **TortoiseGit**
   - grafické znázornenie práce na projekte

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WorkTracker.Properties;
 
 namespace WorkTracker
 {
@@ -26,6 +27,18 @@ namespace WorkTracker
         private void Progress_form_FormClosing(object sender, FormClosingEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+        public void Relabel()
+        {
+            From_label.Text = Localization.Progress_From_label_text;
+            To_label.Text = Localization.Progress_To_label_text;
+            Day_label.Text = Localization.Progress_Day_label_text;
+            Month_label.Text = Localization.Progress_Month_label_text;
+            DayMean_label.Text = Localization.Progress_DayMean_label_text;
+            //TODO: doplnit vysledne hodnoty doby prace 
+            CompDuration_label.Text = Localization.Progress_CompDuration_label_text;
+            CompDurationWithStop_label.Text = Localization.Progress_CompDurationWithStop_label_text;
+            ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
         }
     }
 }

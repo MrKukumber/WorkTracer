@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic.Devices;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -22,14 +23,15 @@ namespace WorkTracker
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(main_form);
             Initializer.Execute();
+            Application.Run(main_form);
         }
 
         public static Main_form main_form = new Main_form();
         public static Configure_form configure_form = new Configure_form();
         public static Recording_form recording_form = new Recording_form();
         public static Progress_form progress_form = new Progress_form();
+        public static Commit_form commit_form = new Commit_form();
     }
     
     /// <summary>
@@ -40,6 +42,7 @@ namespace WorkTracker
         static public void Execute()
         {
             Dictionary<string,string> init_params = InitParamsParser();
+            Initialize(init_params);
         }
 
         static private Dictionary<string, string> InitParamsParser()
@@ -63,31 +66,43 @@ namespace WorkTracker
             }
             return parameters;
         }
-    }
 
-    internal static class SessionParameterSaver
-    {
-
-    }
-
-    internal static class LocalizationManager
-    {
-        static private string current_lang;
-        static public void Initialize(string current_lang)
+        static private void Initialize (Dictionary<string,string> init_params)
         {
-
+            ModesMan.Initialize(init_params["mode"]);
+            LocalizationMan.Initialize(init_params["lang"]);
+            TortoiseGitMan.Initialize(init_params["tgit_dir"]);
+            ProjectMan.Initialize(init_params["last_proj_dir"]);
+            CommitMan.Initialize();
         }
     }
 
-    internal static class CommitManager
+    internal static class TortoiseGitMan
     {
-        static private string lastCommitCode;
-        static public void Initialize(string lastCommitCode)
+        static private string tgit_dir = "";
+        static public void Initialize(string init_tgit_dir)
         {
-            CommitManager.lastCommitCode = lastCommitCode;
+            tgit_dir = init_tgit_dir;
+            //TODO: ak je zapnuty repo mod, skontrolovat, ci sa tam vazne tgit nachadza
+        }
+    }
+    internal static class ProjectMan
+    {
+        static private string proj_dir = "";
+        static public void Initialize(string init_proj_dir)
+        {
+            proj_dir = init_proj_dir;
+            //TODO: ak je zapnuty repo, skontrolovat ci sa tam nachadza repo...            
         }
     }
 
-    
+    internal static class CommitMan
+    {
+        static public string lastCommitCode;
+        static public void Initialize()
+        {
+            //TODO:
+        }
+    }
 
 }

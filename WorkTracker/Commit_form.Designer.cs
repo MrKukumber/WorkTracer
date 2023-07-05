@@ -35,32 +35,35 @@
             // 
             // YesCommit_button
             // 
-            this.YesCommit_button.Location = new System.Drawing.Point(78, 82);
+            this.YesCommit_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.YesCommit_button.Location = new System.Drawing.Point(61, 100);
             this.YesCommit_button.Name = "YesCommit_button";
             this.YesCommit_button.Size = new System.Drawing.Size(94, 29);
             this.YesCommit_button.TabIndex = 0;
-            this.YesCommit_button.Text = "button1";
+            this.YesCommit_button.Text = "YesCommit_button";
             this.YesCommit_button.UseVisualStyleBackColor = true;
             this.YesCommit_button.Click += new System.EventHandler(this.YesCommit_button_Click);
             // 
             // NoCommit_button
             // 
-            this.NoCommit_button.Location = new System.Drawing.Point(248, 82);
+            this.NoCommit_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.NoCommit_button.Location = new System.Drawing.Point(248, 100);
             this.NoCommit_button.Name = "NoCommit_button";
             this.NoCommit_button.Size = new System.Drawing.Size(94, 29);
             this.NoCommit_button.TabIndex = 1;
-            this.NoCommit_button.Text = "button2";
+            this.NoCommit_button.Text = "NoCommit_button";
             this.NoCommit_button.UseVisualStyleBackColor = true;
             this.NoCommit_button.Click += new System.EventHandler(this.NoCommit_button_Click);
             // 
             // WantCommit_label
             // 
-            this.WantCommit_label.AutoSize = true;
-            this.WantCommit_label.Location = new System.Drawing.Point(179, 32);
+            this.WantCommit_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.WantCommit_label.Location = new System.Drawing.Point(61, 32);
             this.WantCommit_label.Name = "WantCommit_label";
-            this.WantCommit_label.Size = new System.Drawing.Size(50, 20);
+            this.WantCommit_label.Size = new System.Drawing.Size(281, 47);
             this.WantCommit_label.TabIndex = 2;
-            this.WantCommit_label.Text = "label1";
+            this.WantCommit_label.Text = "WantCommit_label";
+            this.WantCommit_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Commit_form
             // 
@@ -74,7 +77,6 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Commit_form_FormClosing);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

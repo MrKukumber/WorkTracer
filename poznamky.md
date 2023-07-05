@@ -14,15 +14,10 @@
 ### v mainu
 
 1. *RecordingFormOpening_button* - otvori sa mi okno na nahravanie
-    - musim skontrolovat ci mam nastaveny tortoise git folder a subor projektu - ak nieje nieco nastavene, odnaviguje uzivatela na miesto kde to ma nastavit pomcou *MessageBox*
+    - skonrolujem ci mam nastaveny tortoise git folder a subor projektu - ak nieje nieco nastavene, odnaviguje uzivatela na miesto kde to ma nastavit pomcou *MessageBox*
       - tortois kontrolujem iba ak som v repo mode
-    - kontrolujem ci existuje csv-sko na zapisovanie, ak nie, vytvorim
 2. *ConfigFormOpening_button* - otvori configuracny formular
     - dva labely pod buttonnom sluzia na upozornenie, ze nieje vybrany source projekt a source tortoise-git-u
-3. *Commit_dateTimePicker* - ukaze commit vybraneho datumu v richTextBox-e
-    - budem si vazne vyberat len datum a ukaze mi to prvy commit tohto datumu
-    - nasledne tam budem mat scrollbar, ktorym budem moct listovat medzi commitmi tohto datumu
-    - ak nieje vybrany projekt alebo sme v local mode, je v richTextBoxe napisana prislusna hlaska
 4. *ProgressFormOpening_button* - ak je vybrany validny projekt, otvori formular s nahliadnutim progressu v danom projekte, neda sa zmacknut, ak nieje vybrany projekt
 
 - pridam label, ktory mi bude vraviet v akom stave recordingu akurat som, nakolko pocas recordingu budem moct vyjst z record formulara
@@ -32,6 +27,7 @@
 
 1. *Play_roundButton* - zapise do csv suboru ze sa zacalo trackovanie
     - zmeni sa vnutorny stav na play-stav
+    - az teraz budem vytvarat csv-cko, ak sa nahodou v projekte nenachadza...teda asi sa vytvori proste samo, tym ze donho prvykrat budem chciet zapisat
 2. *Pause_roundButton* - zapise sa do csv suboru zastavenie trackovania
     - zmeni sa vnutorny stav na zastavenie
 3. *Stop_roundButton* - pri repo mode:
@@ -48,6 +44,7 @@
 
 - nebudem zanechavat csv-cko v nejakom konzistentnom stave, proste co tam posledne uzivatel zada, to tam bude, ked tak sa ho len mozem opytat, ked bude chciet zavriet okno, ci nechce zastavit nahravanie
 - vzdy ked zaktivnim dane okno...a.k.a. kliknem nanho, tak skontrolujem directory csv-cka, tortoise gitu a aj projektu, popripade upozornim uzivatela na to ze sa zmenili direktory, ze si to musi upravit..
+  - taktiez pri commitovani kontrolujem, ci sa mi nezmenil udaj o poslednom commite
 - dokym niesu vsetky adresare spravne nastavene, nenecham ho stlacit ziadne trackovacie tlacidlo
 - zaznamenavat aj fazu programovania, faza sa moze menit iba pocas pauznutia/stopnutia - faza sa zaznamenava v dalsom stlpci v csv-cku
 
@@ -83,8 +80,10 @@
 1. *From_dateTimePicker/To_dateTimePicker* - zoberiem interval,medzi korym mam zobrazit dni/7dni/mesiace,
     - vzdy nastavim v *from* maximalny date z *to* a symetricky minimalny v *to* z *from*
     - minimalny v *from* je datum prveho zaznamu a maximalny v *to* je datum posledneho zaznamu v csv-cku
-2. *Commit_dateTimePicker* podobne ako v mainu
-
+2. *Commit_dateTimePicker* - ukaze commit vybraneho datumu v richTextBox-e
+    - budem si vazne vyberat len datum a ukaze mi to prvy commit tohto datumu
+    - nasledne tam budem mat scrollbar, ktorym budem moct listovat medzi commitmi tohto datumu
+    - ak sme v local mode, je v richTextBoxe napisana prislusna hlaska
 
 - **vsetky nastavenia si ukladam tiez do config textaku**
 
@@ -140,3 +139,10 @@ git rev-parse --is-inside-work-tree
 
 - ci sa mozem pocas nahravania vratit do main formularu - mozem
 - jak sakra zobrazovat tie commity a tie celkove casy celkovo
+
+## Uzitocne veci
+
+- ziskanie id posledneho commitu, textu posledneho commitu, textu commitov v intervale
+git log --format="%H" -n 1
+git log -1 --pretty=%B
+git log --oneline --since="2022-04-22" --until="2022-04-24" --pretty=%B

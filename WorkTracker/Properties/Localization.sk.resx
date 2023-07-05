@@ -117,100 +117,121 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Commit_NoCommit_button_text" xml:space="preserve">
+  <data name="No" xml:space="preserve">
     <value>Nie</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Áno</value>
   </data>
   <data name="Commit_WantCommit_label_text" xml:space="preserve">
     <value>Chceš komitnúť zmeny?</value>
   </data>
-  <data name="Commit_YesCommit_button_text" xml:space="preserve">
-    <value>Áno</value>
-  </data>
   <data name="Config_BackToPrevForm_button_text" xml:space="preserve">
     <value>Vráť sa naspäť</value>
   </data>
-  <data name="Config_ChooseLanguge_Label_text" xml:space="preserve">
+  <data name="Config_ChooseLanguge_label_text" xml:space="preserve">
     <value>Nastav jazyk</value>
   </data>
   <data name="Config_ChooseProjDir_label_text" xml:space="preserve">
     <value>Vyber adresár s projektom</value>
   </data>
-  <data name="Config_ChooseTGitDir_button_text" xml:space="preserve">
+  <data name="Select" xml:space="preserve">
     <value>Vyber</value>
   </data>
   <data name="Config_ChooseTGitDir_label_text" xml:space="preserve">
-    <value>Vyber adresár s tortois git programom.</value>
+    <value>Vyber adresár s tortois git programom</value>
   </data>
   <data name="Config_Mode1_label_text" xml:space="preserve">
     <value>Vyber mód</value>
   </data>
   <data name="Config_Mode2_label_text" xml:space="preserve">
-    <value>repo     local</value>
-  </data>
-  <data name="Config_ProjectSelection_Button_text" xml:space="preserve">
-    <value>Vyber</value>
+    <value>repo     lokál</value>
   </data>
   <data name="Main_Commit_label_text" xml:space="preserve">
-    <value>Zobraz commit-y projektu</value>
+    <value>Posledný commit projektu</value>
   </data>
   <data name="Main_ConfigFormOpening_button_text" xml:space="preserve">
     <value>Otvor nastavnia</value>
   </data>
-  <data name="Main_CurrTrackState_label_pause_text" xml:space="preserve">
+  <data name="CurrTrackState_label_pause_text" xml:space="preserve">
     <value>Nahrávanie je pozastavené</value>
   </data>
-  <data name="Main_CurrTrackState_label_play_text" xml:space="preserve">
+  <data name="CurrTrackState_label_play_text" xml:space="preserve">
     <value>Nahráva sa</value>
   </data>
-  <data name="Main_CurrTrackState_label_stop_text" xml:space="preserve">
+  <data name="CurrTrackState_label_stop_text" xml:space="preserve">
     <value>Nahrávanie je zastavené</value>
   </data>
-  <data name="Main_Mode_label_local_text" xml:space="preserve">
-    <value>Mód: lokálny</value>
+  <data name="CurrTrackState_label_none_text" xml:space="preserve">
+    <value>Žiadne nahrávanie</value>
   </data>
-  <data name="Main_Mode_label_repo_text" xml:space="preserve">
-    <value>Mód: repozitár</value>
+  <data name="Main_ProgressFormOpening_button_text" xml:space="preserve">
+    <value>Pozri postup práce</value>
   </data>
-  <data name="Main_ProjNotSelected_label_text" xml:space="preserve">
-    <value>Nie je vybraný žiadny projekt</value>
+  <data name="WantCreateRepo_YesNoDialog_label_text" xml:space="preserve">
+    <value>Vo vybranom adresáry sa nenachádza žiadny repozitár. Chceš vytvoriť nový?</value>
   </data>
-  <data name="Main_RecordingFormOpening_Button_text" xml:space="preserve">
-    <value>Začni nahrávať</value>
-  </data>
-  <data name="Main_TortoiseFileNotSelected_label_text" xml:space="preserve">
-    <value>Nie je vyraný žiadny adresár s Tortois Git-om.</value>
-  </data>
-  <data name="NotCommiting_No_button_text" xml:space="preserve">
-    <value>Nie</value>
-  </data>
-  <data name="NotCommiting_YesNoDialog_label_text" xml:space="preserve">
-    <value>Naozaj nechceš komitnúť?</value>
-  </data>
-  <data name="NotCommiting_Yes_button_text" xml:space="preserve">
-    <value>Áno</value>
-  </data>
-  <data name="NotStopedExit_No_button_text" xml:space="preserve">
-    <value>Nie</value>
-  </data>
-  <data name="NotStopedExit_YesNoDialog_label_text" xml:space="preserve">
-    <value>Tvoje nahrávanie nieje zastavené. Naozaj chceš odísť?</value>
-  </data>
-  <data name="NotStopedExit_Yes_button_text" xml:space="preserve">
-    <value>Áno</value>
+  <data name="ReturnToMain_button_text" xml:space="preserve">
+    <value>Vráť sa do hlavného menu</value>
   </data>
   <data name="Recording_ConfigFormOpening_button_text" xml:space="preserve">
     <value>Otvor nastavenia</value>
   </data>
-  <data name="Recording_ReturnToMain_button_text" xml:space="preserve">
-    <value>Vráť sa do\nhlavného menu.</value>
+  <data name="NotStopedExit_YesNoDialog_label_text" xml:space="preserve">
+    <value>Tvoje nahrávanie nieje zastavené. Naozaj chceš odísť?</value>
   </data>
-  <data name="WantCreateRepo_No_button_text" xml:space="preserve">
-    <value>Nie</value>
+  <data name="NotCommiting_YesNoDialog_label_text" xml:space="preserve">
+    <value>Naozaj nechceš komitnúť?</value>
   </data>
-  <data name="WantCreateRepo_YesNoDialog_label_text" xml:space="preserve">
-    <value>Vo vybranom adresáry sa nenachádza žiadny repozitár.\nChceš vytvoriť nový?</value>
+  <data name="Main_TortoiseFileNotSelected_label_text" xml:space="preserve">
+    <value>Nie je vybraný žiadny adresár s Tortois Git-om</value>
   </data>
-  <data name="WantCreateRepo_Yes_button_text" xml:space="preserve">
-    <value>Áno</value>
+  <data name="Main_RecordingFormOpening_Button_text" xml:space="preserve">
+    <value>Začni nahrávať</value>
+  </data>
+  <data name="Main_ProjNotSelected_label_text" xml:space="preserve">
+    <value>Nie je vybraný žiadny projekt</value>
+  </data>
+  <data name="Mode_repo_text" xml:space="preserve">
+    <value>Mód: repozitár</value>
+  </data>
+  <data name="Mode_local_text" xml:space="preserve">
+    <value>Mód: lokálny</value>
+  </data>
+  <data name="Recording_Faze_label_text" xml:space="preserve">
+    <value>Fáza práce</value>
+  </data>
+  <data name="PhaseCreate_label_text" xml:space="preserve">
+    <value>Vytváranie</value>
+  </data>
+  <data name="PhaseProgr_label_text" xml:space="preserve">
+    <value>Programovanie</value>
+  </data>
+  <data name="PhaseDebug_label_text" xml:space="preserve">
+    <value>Debugovanie</value>
+  </data>
+  <data name="Progress_From_label_text" xml:space="preserve">
+    <value>Od dňa</value>
+  </data>
+  <data name="Progress_To_label_text" xml:space="preserve">
+    <value>Do dňa</value>
+  </data>
+  <data name="Progress_Days7_label_text" xml:space="preserve">
+    <value>7 dní</value>
+  </data>
+  <data name="Progress_Month_label_text" xml:space="preserve">
+    <value>Mesiace</value>
+  </data>
+  <data name="Progress_DayMean_label_text" xml:space="preserve">
+    <value>Množstvo práce spravenej v jednotlivých hodinách dňa</value>
+  </data>
+  <data name="Progress_CompDuration_label_text" xml:space="preserve">
+    <value>Doba práce:</value>
+  </data>
+  <data name="Progress_CompDurationWithStop_label_text" xml:space="preserve">
+    <value>Doba práce (zahrňujúc pozastavené úseky):</value>
+  </data>
+  <data name="Progress_Day_label_text" xml:space="preserve">
+    <value>Dni</value>
   </data>
 </root>

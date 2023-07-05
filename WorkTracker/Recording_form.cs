@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WorkTracker.Properties;
 
 namespace WorkTracker
 {
@@ -27,9 +28,9 @@ namespace WorkTracker
 
         private void Stop_roundButton_Click(object sender, EventArgs e)
         {
-            Commit_form commit_form = new Commit_form();
-            commit_form.Show();
+            Program.commit_form.Show();
             this.Hide();
+
         }
 
         private void ConfigFormOpening_button_Click(object sender, EventArgs e)
@@ -50,6 +51,31 @@ namespace WorkTracker
             Program.main_form.Show();
             this.Hide();
         }
+        public void Relabel()
+        {
+            ConfigFormOpening_button.Text = Localization.Recording_ConfigFormOpening_button_text;
+            ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
+            Phase_label.Text = Localization.Recording_Faze_label_text;
+            PhaseCreat_label.Text = Localization.PhaseCreate_label_text;
+            PhaseProgr_label.Text = Localization.PhaseProgr_label_text;
+            PhaseDebug_label.Text = Localization.PhaseDebug_label_text;
+
+            switch (RecordingMan.recState)
+            {
+                case RecordingMan.RecStates.started:
+                    CurrTrackState_label.Text = Localization.CurrTrackState_label_play_text;
+                    break;
+                case RecordingMan.RecStates.paused:
+                    CurrTrackState_label.Text = Localization.CurrTrackState_label_pause_text;
+                    break;
+                case RecordingMan.RecStates.stoped:
+                    CurrTrackState_label.Text = Localization.CurrTrackState_label_stop_text;
+                    break;
+                default:
+                    CurrTrackState_label.Text = Localization.CurrTrackState_label_none_text;
+                    break;
+            }
+        }
     }
 
     public class RoundButton : Button
@@ -62,4 +88,15 @@ namespace WorkTracker
             base.OnPaint(e);
         }
     }
+
+    static internal class RecordingMan 
+    {
+        public enum RecStates { started, paused, stoped }
+        public enum WorkPhase { creating, programing, debuging }
+        static public RecStates? recState { get; private set; }
+        static public WorkPhase? workPhase { get; private set; }
+
+        //TODO: dodelat funkcionality
+    }
+
 }

@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace Testovanie_funkcionalit
 {
-    internal static class Program
+    internal static partial class Program
     {
         /// <summary>
         ///  The main entry point for the application.

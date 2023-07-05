@@ -29,6 +29,5 @@ namespace WorkTracker
         {
             this.DialogResult = DialogResult.No;
         }
-
     }
 }
