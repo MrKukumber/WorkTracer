@@ -7,6 +7,7 @@ namespace Testovanie_funkcionalit
         public Form1()
         {
             InitializeComponent();
+            label1.Text = Loc.Commit_WantCommit_label_text;
         }
         int a = 0;
         private void OpenTGitButton_Click(object sender, EventArgs e)
@@ -51,6 +52,15 @@ namespace Testovanie_funkcionalit
             string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program");
             //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker
             richTextBox1.Text = exit;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Thread.CurrentThread.CurrentUICulture == System.Globalization.CultureInfo.GetCultureInfo("en")) 
+                Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("sk");
+            else Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en");
+            label1.Text = Loc.Commit_WantCommit_label_text;
+
         }
     }
 }
