@@ -18,8 +18,10 @@
       - tortois kontrolujem iba ak som v repo mode
 2. *ConfigFormOpening_button* - otvori configuracny formular
     - dva labely pod buttonnom sluzia na upozornenie, ze nieje vybrany source projekt a source tortoise-git-u
-4. *ProgressFormOpening_button* - ak je vybrany validny projekt, otvori formular s nahliadnutim progressu v danom projekte, neda sa zmacknut, ak nieje vybrany projekt
+3. *ProgressFormOpening_button* - ak je vybrany validny projekt, otvori formular s nahliadnutim progressu v danom projekte, neda sa zmacknut, ak nieje vybrany projekt
 
+- v richtext boxe je zobrazeny posledny commit projektu
+  - v pripade nevybraneho projektu, prazdneho repozitara alebo lokalneho modu vypisem prislusnu hlasku
 - pridam label, ktory mi bude vraviet v akom stave recordingu akurat som, nakolko pocas recordingu budem moct vyjst z record formulara
 - zaroven este pridam Mode_label, ktory mi hovori v ktorom mode som - ci local alebo repo
 
@@ -36,8 +38,8 @@
       - ak chcem commitnut, tak otvorim Tortoise git,
         - po jeho zavreti pozriem, ci sa vazne commitlo:
         - ak nie, tak znova otvorim okno s tym ci chcem commitnut
-        - ak ano, zapisem zaznam do csv-cka a dam mu indikator commitu, vratim sa do **recordingu**
-    - pri nie repo mode - proste zapisem do csv suboru a zostavam **recordingu**
+        - ak ano, zapisem zaznam do csv-cka a priradim mu id commitu, vratim sa do **recordingu**
+    - pri nie repo mode - proste zapisem do csv suboru a zostavam v **recordingu**
     - zmenim sa vnutorny stav na stop-stav
 4. *ReturnToMain_button* - vrati ma do main manu, moze ma vratit kedykolvek, teda za akehokolvek stavu trackovania
 5. *ConfigFormOpening_button* - otvori configuracny formular
@@ -51,17 +53,15 @@
 ### v configuracii
 
 1. *ChooseTGitDir_button* - otvori mi file manager, kde si mozem najst folder s tortoisom
-    - nejakym sposobom musim skontrolovat, ci to je vazne subor s tortosiom...
-    #TODO
+    - kontrolujem tym, ze sa pozriem, ci sa v nom nachadza *TortoiseGitProc.exe* subor
 2. *ProjectSelection_Button* - otvori mi file manager, v ktorom si vyberiem folder s projektom, bud:
     1. vyuzivam repo
-        - to ze dany projekt vyuziva git repozitar zistim tak, ze sa pozriem ci obsahuje .git folder
+        - to ze dany projekt vyuziva git repozitar zistim tak, ze zavolam funkciu *git rev-parse --is-inside-work-tree*
           - ak sa tam nenachadza, tak sa opytam uzivatela, ci z toho chce spravit repozitar - pytam sa uz vtedy, ked uzivatel vybera dany projekt - napisem aj radu, ze ak neche vyuzivat repo, tak nech si to ide prestavit do nastaveni, ak si ho tam nevytvori, stale bude napisane ze si nevybral repo
           - pytam sa otvorenim CreateRepo_form-u.cs
     2. nevyuzivam repo
         - nemusim kontrolovat git, cize sa ani nepytam ci chcem vytvorit adresar, proste ten subor ktory vyberie, tam potom ulozim to moje csv-cko
-    - skontrolujem ci na prisluchajucom mieste je csv-cko, ked tak upozornim na to v NoCSVAttention_label, ale inak neriesim
-    - nastavim stav nahravania podla posledneho zanzmu v csv-cku, ak sa tam ziadne csv-cko nenachadza, nastavim ho na noTrackingTable stav
+    - nastavim stav nahravania podla posledneho zanzmu v csv-cku, ak sa tam ziadne csv-cko nenachadza, nastavim ho na noTrackingTable stav(pre uzivatela vypisem ze je v zastavenom stave)
 3. *checkBoxy sk,en* - na menenie jazyka, vzdy len jeden zakliknuty, lokalizaciu skusim aplikovat instantne po zakliknuti...
 4. trackBar - menenie medzi repo a local modom
     - kotrolujem projekt, csv-cko a popripade tortoise git ulozisko
@@ -72,8 +72,9 @@
 - moznost zmenenia lokalizacie
 - moznost zmeny trackovacieho modu
 - vsetko co nieje platne vybrane sfarbim na cerveno
-- skontrolovat ci uz sa tam csv nachadza v danom projekte a popripade dat prec upozornenie, ak tam 
-- vypisovat v labeloch iba meno projektu, nie celu path k nemu..., ak nevalidny projekt, tak vypisovat No valid project cervene napriklad.
+- vypisovat v labeloch iba meno projektu, nie celu path k nemu..., ak nevalidny projekt, tak vypisovat No valid project cervene napriklad
+- vytvaram csv az pri prvom zapocati nahravania
+- ak nieje vybrany subor validny(ci uz tortoisegit alebo projekt), vypisem ho pod button cervene
 
 ## v Progresse
 
@@ -85,6 +86,9 @@
     - nasledne tam budem mat scrollbar, ktorym budem moct listovat medzi commitmi tohto datumu
     - ak sme v local mode, je v richTextBoxe napisana prislusna hlaska
 
+- davame pozor, lebo projekt nemusi obsahovat to csv-cko, ak ho neobsahuje, vsade budu nuly a grafy nebudu nic ukazovat
+- treba vyriesti problem s prechodnymi rokmi a tak..
+
 - **vsetky nastavenia si ukladam tiez do config textaku**
 
 ## Myslienky
@@ -93,6 +97,7 @@
 - prvotne nastavenia spravim priamo v aplikacii, nebudem sa zatazovat ziadnymi config vecmi
 
 - vytvorit triedu na kontrolovanie zdrojov, ktora bude mat nejake funkcie, ktore budu vracat error kody v zavislosti na tom co sa pokazilo, co uz neplati, alebo naopak ci je vsetko v pohode
+- kontrolovat zdroje budem vzdy, ked je moznost, ze by uzivatel nieco pokazil, teda ked sa vratim spat do aplikacie po tom co sa z nej vykliklo
 
 - formulare si inicializovat v programe a ulozit si ich a otvarat stale tie iste, nevytvarat nove stale
 
@@ -139,6 +144,8 @@ git rev-parse --is-inside-work-tree
 
 - ci sa mozem pocas nahravania vratit do main formularu - mozem
 - jak sakra zobrazovat tie commity a tie celkove casy celkovo
+
+- teraz som si uvedomil, ze budem vyuzivat vlastne este dalsie externe procedury a to git-ove - to by sa asi malo uviest tiez potom v specifikacii alebo dokumentacii
 
 ## Uzitocne veci
 

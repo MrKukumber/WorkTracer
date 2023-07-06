@@ -30,6 +30,7 @@ namespace WorkTracker
         }
         public void Relabel()
         {
+            this.Text = Localization.Progress_form_text;
             From_label.Text = Localization.Progress_From_label_text;
             To_label.Text = Localization.Progress_To_label_text;
             Day_label.Text = Localization.Progress_Day_label_text;
@@ -39,6 +40,15 @@ namespace WorkTracker
             CompDuration_label.Text = Localization.Progress_CompDuration_label_text;
             CompDurationWithStop_label.Text = Localization.Progress_CompDurationWithStop_label_text;
             ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
+            if (ModesMan.mode is ModesMan.Modes.local) Commit_richTextBox.Text = Localization.Progress_Commit_richTextBox_local_mode_text;
+
+        }
+        public void WriteToCommit_richTextBox(string what) => Commit_richTextBox.Text = what;
+        public void SetCommit_dateTimePickerEnabled(bool indicator) => Commit_dateTimePicker.Enabled = indicator;
+        
+        public void ShowCommit_richTextBox()
+        {
+            //TODO:
         }
     }
 }

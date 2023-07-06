@@ -74,7 +74,6 @@
             this.Controls.Add(this.No_button);
             this.Controls.Add(this.Yes_button);
             this.Name = "YesNoDialog_form";
-            this.Text = "Form1";
             this.ResumeLayout(false);
 
         }

@@ -49,7 +49,7 @@ namespace Testovanie_funkcionalit
 
         private void IsHereRepo_button_Click(object sender, EventArgs e)
         {
-            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program");
+            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker");
             //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker
             richTextBox1.Text = exit;
         }

@@ -145,7 +145,7 @@
     <value>Vyber mód</value>
   </data>
   <data name="Config_Mode2_label_text" xml:space="preserve">
-    <value>repo     lokál</value>
+    <value>lokál     repo</value>
   </data>
   <data name="Main_Commit_label_text" xml:space="preserve">
     <value>Posledný commit projektu</value>
@@ -233,5 +233,34 @@
   </data>
   <data name="Progress_Day_label_text" xml:space="preserve">
     <value>Dni</value>
+  </data>
+  <data name="Recording_form_text" xml:space="preserve">
+    <value>Nahrávanie</value>
+  </data>
+  <data name="Main_form_text" xml:space="preserve">
+    <value>Hlavné menu</value>
+  </data>
+  <data name="Configure_form_text" xml:space="preserve">
+    <value>Nastavenia</value>
+  </data>
+  <data name="Commit_form_text" xml:space="preserve">
+    <value>Commit</value>
+  </data>
+  <data name="Progress_form_text" xml:space="preserve">
+    <value>Postup práce</value>
+  </data>
+  <data name="Main_Commit_richTextBox_local_mode_text" xml:space="preserve">
+    <value>
+
+
+
+   Aktívny lokálny mód</value>
+  </data>
+  <data name="Progress_Commit_richTextBox_local_mode_text" xml:space="preserve">
+    <value>
+
+
+
+        Aktívny lokálny mód</value>
   </data>
 </root>

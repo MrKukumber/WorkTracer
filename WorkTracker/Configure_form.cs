@@ -22,12 +22,6 @@ namespace WorkTracker
             InitializeComponent();
         }
 
-
-        private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
-        {
-
-        }
-
         private void Configure_form_Load(object sender, EventArgs e)
         {
 
@@ -51,11 +45,17 @@ namespace WorkTracker
 
         private void Localization_trackBar_Scroll(object sender, EventArgs e)
         {
-            LocalizationMan.ChangeLocalization(Localization_trackBar.Value);
+            LocalizationMan.ChangeLocalization((LocalizationMan.Langs)Localization_trackBar.Value);
         }
 
+        private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
+        {
+            ModesMan.ChangeMode((ModesMan.Modes) ChooseMode_trackBar.Value);
+            //TODO: treba skontrolovat vsetky tie veci ked prechadzam do daneho modu
+        }
         public void Relabel()
         {
+            this.Text = Localization.Configure_form_text;
             ChooseTGitDir_button.Text = Localization.Select;
             ProjectSelection_button.Text = Localization.Select;
             ChooseProjDir_label.Text = Localization.Config_ChooseProjDir_label_text;
@@ -69,6 +69,14 @@ namespace WorkTracker
         public void SetLocalization_trackBar(int value)
         {
             Localization_trackBar.Value = value;
+        }
+
+        public void SetChooseMode_trackBar(int value) => ChooseMode_trackBar.Value = value;
+        public void SetForeColor_TGitLabelsButtons(System.Drawing.Color color)
+        {
+            TGitDir_label.ForeColor = color;
+            ChooseTGitDir_label.ForeColor = color;
+            ChooseTGitDir_button.ForeColor = color;
         }
     }
 
@@ -88,22 +96,19 @@ namespace WorkTracker
                     break;
             }
             Program.configure_form.SetLocalization_trackBar((int)lang);
-            Relabel();
+            ChangeLocalization(lang);
 
         }
-        static public void ChangeLocalization(int new_lang)
+        static public void ChangeLocalization(Langs new_lang)
         {
-            lang = (Langs)new_lang;
+            lang = new_lang;
             switch (lang)
             {
-                case Langs.en_GB:
-                    Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-GB");
-                    break;
                 case Langs.sk:
                     Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("sk-SK");
                     break;
                 default:
-                    Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+                    Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-GB");
                     break;
 
             }
@@ -111,6 +116,8 @@ namespace WorkTracker
         }
         static public void Relabel()
         {
+            ModesMan.Relabel();//je dolezite aby zostalo pre Relable funkciami formularov
+            //TODO: to iste budeme musiet spravit aj pre tie fazy a  typy nahravania
             Program.configure_form.Relabel();
             Program.main_form.Relabel();
             Program.recording_form.Relabel();
@@ -121,9 +128,10 @@ namespace WorkTracker
 
     internal static class ModesMan
     {
-        public enum Modes { repos, local };
-
+        public enum Modes {local = 0, repos = 1};
         static public Modes mode { get; private set; }
+        static public string[] localizations = { Localization.Mode_local_text, Localization.Mode_repo_text };
+        static private Mode[] modes = { new LocalMode(), new ReposMode() };
 
         //TODO: dodelat managera modov
         static public void Initialize(string init_mode)
@@ -137,7 +145,67 @@ namespace WorkTracker
                     mode = Modes.local;
                     break;
             }
-            //TODO:
+            Program.configure_form.SetChooseMode_trackBar((int)mode);
+            modes[(int)mode].SetMode();
+        }
+        static public void Relabel() => localizations = new string[] { Localization.Mode_local_text, Localization.Mode_repo_text };
+        static public void ChangeMode(Modes new_mode)
+        {
+            mode = new_mode;
+            modes[(int)mode].SetMode();
+        }
+
+        private abstract class Mode
+        {
+            public abstract void SetMode();
+        }
+
+        private class LocalMode : Mode
+        {
+            public override void SetMode()
+            {
+                Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                if (ProjectMan.IsProjValid())
+                {
+                    Program.main_form.SetProjNotSelected_labelVisible(false);
+                    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
+                }
+                else
+                {
+                    Program.main_form.SetProjNotSelected_labelVisible(true);
+                    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
+                }
+                Program.main_form.SetMode_label();
+
+                Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Olive);
+
+                Program.progress_form.SetCommit_dateTimePickerEnabled(false);
+            }
+        }
+        private class ReposMode : Mode
+        {
+            public override void SetMode()
+            {
+                if (TortoiseGitMan.IsTGitValid()) Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                else Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
+                if (ProjectMan.IsProjValid())
+                {
+                    Program.main_form.SetProjNotSelected_labelVisible(false);
+                    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
+                }
+                else
+                {
+                    Program.main_form.SetProjNotSelected_labelVisible(true);
+                    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
+                }
+                Program.main_form.WriteToCommit_richTextBox("");//TODO: write last commit
+                Program.main_form.SetMode_label();
+
+                Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Black);
+
+                Program.progress_form.WriteToCommit_richTextBox(""); //TODO:write commit of date in dateTimePicker
+                Program.progress_form.SetCommit_dateTimePickerEnabled(true);
+            }
         }
     }
 }

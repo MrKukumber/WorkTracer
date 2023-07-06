@@ -18,19 +18,21 @@ namespace WorkTracker
         public Recording_form()
         {
             InitializeComponent();
-            Console.WriteLine();
         }
 
         private void Play_roundButton_Click(object sender, EventArgs e)
         {
-
+            //TODO:
         }
 
         private void Stop_roundButton_Click(object sender, EventArgs e)
         {
-            Program.commit_form.Show();
-            this.Hide();
-
+            if (ModesMan.mode == ModesMan.Modes.repos)
+            {
+                Program.commit_form.Show();
+                this.Hide();
+            }
+            //TODO:
         }
 
         private void ConfigFormOpening_button_Click(object sender, EventArgs e)
@@ -53,13 +55,13 @@ namespace WorkTracker
         }
         public void Relabel()
         {
+            this.Text = Localization.Recording_form_text;
             ConfigFormOpening_button.Text = Localization.Recording_ConfigFormOpening_button_text;
             ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
             Phase_label.Text = Localization.Recording_Faze_label_text;
             PhaseCreat_label.Text = Localization.PhaseCreate_label_text;
             PhaseProgr_label.Text = Localization.PhaseProgr_label_text;
             PhaseDebug_label.Text = Localization.PhaseDebug_label_text;
-
             switch (RecordingMan.recState)
             {
                 case RecordingMan.RecStates.started:

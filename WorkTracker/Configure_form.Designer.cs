@@ -51,6 +51,7 @@
             // ChooseTGitDir_button
             // 
             this.ChooseTGitDir_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ChooseTGitDir_button.ForeColor = System.Drawing.Color.Black;
             this.ChooseTGitDir_button.Location = new System.Drawing.Point(222, 50);
             this.ChooseTGitDir_button.Name = "ChooseTGitDir_button";
             this.ChooseTGitDir_button.Size = new System.Drawing.Size(100, 30);
@@ -61,6 +62,7 @@
             // ChooseTGitDir_label
             // 
             this.ChooseTGitDir_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ChooseTGitDir_label.ForeColor = System.Drawing.Color.Black;
             this.ChooseTGitDir_label.Location = new System.Drawing.Point(223, 27);
             this.ChooseTGitDir_label.Name = "ChooseTGitDir_label";
             this.ChooseTGitDir_label.Size = new System.Drawing.Size(240, 20);
@@ -71,6 +73,7 @@
             // 
             this.TGitDir_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TGitDir_label.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TGitDir_label.ForeColor = System.Drawing.Color.Black;
             this.TGitDir_label.Location = new System.Drawing.Point(223, 82);
             this.TGitDir_label.Name = "TGitDir_label";
             this.TGitDir_label.Size = new System.Drawing.Size(240, 69);
@@ -110,6 +113,7 @@
             // ProjectSelection_button
             // 
             this.ProjectSelection_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ProjectSelection_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ProjectSelection_button.Location = new System.Drawing.Point(222, 174);
             this.ProjectSelection_button.Name = "ProjectSelection_button";
             this.ProjectSelection_button.Size = new System.Drawing.Size(100, 30);

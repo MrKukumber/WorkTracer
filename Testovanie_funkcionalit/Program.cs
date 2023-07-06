@@ -45,6 +45,7 @@ namespace Testovanie_funkcionalit
                 p.StartInfo.FileName = "git";
                 p.StartInfo.Arguments = $"rev-parse --is-inside-work-tree";
                 p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
                 p.Start();
 
                 var output = p.StandardOutput.ReadToEnd();

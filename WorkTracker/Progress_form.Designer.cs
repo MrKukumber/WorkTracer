@@ -113,11 +113,13 @@
             // Commit_richTextBox
             // 
             this.Commit_richTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Commit_richTextBox.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.Commit_richTextBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Commit_richTextBox.Location = new System.Drawing.Point(12, 312);
             this.Commit_richTextBox.Name = "Commit_richTextBox";
-            this.Commit_richTextBox.Size = new System.Drawing.Size(305, 348);
+            this.Commit_richTextBox.Size = new System.Drawing.Size(290, 350);
             this.Commit_richTextBox.TabIndex = 6;
-            this.Commit_richTextBox.Text = "";
+            this.Commit_richTextBox.Text = "1234567890123456789012345678901234567890";
             // 
             // Commit_dateTimePicker
             // 

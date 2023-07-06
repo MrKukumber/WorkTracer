@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic.Devices;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -69,31 +70,68 @@ namespace WorkTracker
 
         static private void Initialize (Dictionary<string,string> init_params)
         {
-            ModesMan.Initialize(init_params["mode"]);
-            LocalizationMan.Initialize(init_params["lang"]);
             TortoiseGitMan.Initialize(init_params["tgit_dir"]);
             ProjectMan.Initialize(init_params["last_proj_dir"]);
+            ModesMan.Initialize(init_params["mode"]);
+            LocalizationMan.Initialize(init_params["lang"]);
             CommitMan.Initialize();
         }
     }
 
     internal static class TortoiseGitMan
     {
-        static private string tgit_dir = "";
-        static public void Initialize(string init_tgit_dir)
+        static private string tGit_dir = "";
+        static public bool IsTGitValid() => ExistsTG();
+        static public void Initialize(string init_tGit_dir)
         {
-            tgit_dir = init_tgit_dir;
-            //TODO: ak je zapnuty repo mod, skontrolovat, ci sa tam vazne tgit nachadza
+            tGit_dir = init_tGit_dir;
         }
+
+        static private bool ExistsTG() => File.Exists(tGit_dir + "TortoiseGitProc.exe");
+        
+        //static public void CheckAndProcessTGExistence()
+        //{
+        //    if (ExistsTG())
+        //    {
+
+        //    }
+        //}
+
+
     }
     internal static class ProjectMan
     {
         static private string proj_dir = "";
+
         static public void Initialize(string init_proj_dir)
         {
             proj_dir = init_proj_dir;
             //TODO: ak je zapnuty repo, skontrolovat ci sa tam nachadza repo...            
         }
+        static public bool IsProjValid()
+        {
+            if (ModesMan.mode is ModesMan.Modes.local) return File.Exists(proj_dir);
+            else return File.Exists(proj_dir) && IsThereRepo();
+        }
+
+        public static bool IsThereRepo()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo.WorkingDirectory = proj_dir;
+                p.StartInfo.FileName = "git";
+                p.StartInfo.Arguments = "rev-parse --is-inside-work-tree";
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                var output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+
+                return output == "true";
+            }
+        }
+
     }
 
     internal static class CommitMan

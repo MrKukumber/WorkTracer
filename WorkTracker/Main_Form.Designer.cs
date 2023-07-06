@@ -65,12 +65,13 @@
             // Commit_richTextBox
             // 
             this.Commit_richTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Commit_richTextBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Commit_richTextBox.Location = new System.Drawing.Point(287, 249);
             this.Commit_richTextBox.Name = "Commit_richTextBox";
             this.Commit_richTextBox.ReadOnly = true;
-            this.Commit_richTextBox.Size = new System.Drawing.Size(204, 441);
+            this.Commit_richTextBox.Size = new System.Drawing.Size(210, 441);
             this.Commit_richTextBox.TabIndex = 3;
-            this.Commit_richTextBox.Text = "";
+            this.Commit_richTextBox.Text = "12345678901234567890123456789";
             // 
             // TortoiseFileNotSelected_label
             // 
@@ -88,7 +89,7 @@
             this.ProjNotSelected_label.Name = "ProjNotSelected_label";
             this.ProjNotSelected_label.Size = new System.Drawing.Size(224, 20);
             this.ProjNotSelected_label.TabIndex = 8;
-            this.ProjNotSelected_label.Text = "label1";
+            this.ProjNotSelected_label.Text = "ProjNotSelected_label";
             // 
             // CurrTrackState_label
             // 
@@ -107,7 +108,6 @@
             this.Mode_label.Size = new System.Drawing.Size(108, 20);
             this.Mode_label.TabIndex = 10;
             this.Mode_label.Text = "Mode_label";
-            this.Mode_label.Click += new System.EventHandler(this.Mode_label_Click);
             // 
             // Name_label
             // 
@@ -133,6 +133,7 @@
             // ProgressFormOpening_button
             // 
             this.ProgressFormOpening_button.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ProgressFormOpening_button.Enabled = false;
             this.ProgressFormOpening_button.Location = new System.Drawing.Point(57, 423);
             this.ProgressFormOpening_button.Name = "ProgressFormOpening_button";
             this.ProgressFormOpening_button.Size = new System.Drawing.Size(110, 70);
