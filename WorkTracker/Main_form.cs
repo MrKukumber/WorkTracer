@@ -11,6 +11,10 @@ namespace WorkTracker
 
         private void RecordingFormOpening_Button_Click(object sender, EventArgs e)
         {
+            if (!ProjectMan.LastProjValidity)
+                if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidProjectDirSelected + "\n" + Localization.NotValidTGitDirChosen);
+                else MessageBox.Show(Localization.NotValidProjectDirSelected);
+            else if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
             Program.recording_form.Show();
             this.Hide();
 

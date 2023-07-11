@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using WorkTracker.Properties;
 
 namespace WorkTracker
 {
@@ -26,6 +27,7 @@ namespace WorkTracker
             ApplicationConfiguration.Initialize();
             Initializer.Execute();
             Application.Run(main_form);
+
         }
 
         public static Main_form main_form = new Main_form();
@@ -74,28 +76,84 @@ namespace WorkTracker
             ProjectMan.Initialize(init_params["last_proj_dir"]);
             ModesMan.Initialize(init_params["mode"]);
             LocalizationMan.Initialize(init_params["lang"]);
+            RecordingMan.Initialize();
             CommitMan.Initialize();
         }
     }
 
+
+
     internal static class TortoiseGitMan
     {
         static private string tGit_dir = "";
-        static public bool IsTGitValid() => ExistsTG();
+        static public bool LastTGitValidity { get; private set; }
+        static public bool IsTGitValid()
+        {
+            LastTGitValidity = ExistsTG();
+            return LastTGitValidity;
+        }
         static public void Initialize(string init_tGit_dir)
         {
             tGit_dir = init_tGit_dir;
         }
 
-        static private bool ExistsTG() => File.Exists(tGit_dir + "TortoiseGitProc.exe");
-        
-        //static public void CheckAndProcessTGExistence()
-        //{
-        //    if (ExistsTG())
-        //    {
+        static private bool ExistsTG() => File.Exists(tGit_dir + "\\TortoiseGitProc.exe");
 
-        //    }
-        //}
+        static public void ChooseTGitFromDialog()
+        {
+            using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    tGit_dir = openFileDialog.SelectedPath;
+                    TortoiseGitMan.CheckAndSetTGit_dir();
+                }
+                else
+                {
+                    MessageBox.Show(Localization.SomethingWentWrongTGitDialog);
+                }
+            }
+        }
+        static public void CheckAndSetTGit_dir()
+        {
+            if (IsTGitValid()) SetRightTGit_dir();
+            else SetFalseTGit_dir();
+        }
+        static private void SetRightTGit_dir()
+        {
+            switch (ModesMan.mode)
+            {
+                case ModesMan.Modes.repos:
+                    Program.configure_form.SetTGitDir_label(tGit_dir);
+                    Program.configure_form.SetTGitDir_labelColor(Color.Black);
+                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                    break;
+                default:
+                    Program.configure_form.SetTGitDir_label(tGit_dir);
+                    Program.configure_form.SetTGitDir_labelColor(Color.Olive);
+                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                    break;
+            }
+        }
+
+        static private void SetFalseTGit_dir()
+        {
+            switch (ModesMan.mode)
+            {
+                case ModesMan.Modes.repos:
+                    Program.configure_form.SetTGitDir_label(tGit_dir);
+                    Program.configure_form.SetTGitDir_labelColor(Color.Red);
+                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
+                    break;
+                default:
+                    Program.configure_form.SetTGitDir_label(tGit_dir);
+                    Program.configure_form.SetTGitDir_labelColor(Color.Olive);
+                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                    break;
+            }
+            
+        }
+    
 
 
     }
@@ -106,12 +164,63 @@ namespace WorkTracker
         static public void Initialize(string init_proj_dir)
         {
             proj_dir = init_proj_dir;
-            //TODO: ak je zapnuty repo, skontrolovat ci sa tam nachadza repo...            
         }
+        static public bool LastProjValidity { get; private set; }
         static public bool IsProjValid()
         {
-            if (ModesMan.mode is ModesMan.Modes.local) return File.Exists(proj_dir);
-            else return File.Exists(proj_dir) && IsThereRepo();
+            switch (ModesMan.mode)
+            {
+                case ModesMan.Modes.repos:
+                    LastProjValidity = Directory.Exists(proj_dir) && IsThereRepo();
+                    break;
+                default:
+                    LastProjValidity = Directory.Exists(proj_dir);
+                    break;
+            }
+            return LastProjValidity;
+
+        }
+        static public void ChooseProjectFromDialog()
+        {
+            using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    proj_dir = openFileDialog.SelectedPath;
+                    if (ModesMan.mode is ModesMan.Modes.repos && Directory.Exists(proj_dir) && !IsThereRepo())
+                    {
+                        YesNoDialog_form wantToCreateRepoDialog_form = new YesNoDialog_form(Localization.Configure_WantToCreateRepoDialog, Localization.Yes, Localization.No);
+                        wantToCreateRepoDialog_form.ShowDialog();
+                        if (wantToCreateRepoDialog_form.DialogResult is DialogResult.Yes) CreateRepo();
+                    }
+                    ProjectMan.CheckAndSetProj_dir();
+                }
+                else MessageBox.Show(Localization.SomethingWentWrongProjectDialog);
+            }
+        }
+
+        static public void CheckAndSetProj_dir()
+        {
+            if (IsProjValid()) SetRightProj_dir();
+            else SetFalseProj_dir();
+        }
+
+        static private void SetRightProj_dir()
+        {
+            Program.configure_form.SetProjDir_label(proj_dir);
+            Program.configure_form.SetProjDir_labelColor(Color.Black);
+
+            Program.main_form.SetProjNotSelected_labelVisible(false);
+            Program.main_form.SetProgressFormOpening_buttonEnabled(true);
+        }
+
+        static private void SetFalseProj_dir()
+        {
+            Program.configure_form.SetProjDir_label(proj_dir);
+            Program.configure_form.SetProjDir_labelColor(Color.Red);
+
+            Program.main_form.SetProjNotSelected_labelVisible(true);
+            Program.main_form.SetProgressFormOpening_buttonEnabled(false);
         }
 
         public static bool IsThereRepo()
@@ -128,11 +237,28 @@ namespace WorkTracker
                 var output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
 
-                return output == "true";
+                return output == "true\n";
+            }
+        }
+
+        private static void CreateRepo()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo.WorkingDirectory = proj_dir;
+                p.StartInfo.FileName = "git";
+                p.StartInfo.Arguments = "init";
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                p.WaitForExit();
             }
         }
 
     }
+
+
 
     internal static class CommitMan
     {
@@ -141,6 +267,44 @@ namespace WorkTracker
         {
             //TODO:
         }
+
+        static public string MakeCommit() { return ""; }//TODO: funkcia bude vracat kod commitu recording manageru, ktory ju bude volat
+    }
+
+    static internal class RecordingMan
+    {
+        public enum RecStates { unknown, started, paused, stoped }
+        public enum WorkPhase { creating, programing, debuging }
+        static public RecStates? recState { get; private set; }
+        static public WorkPhase? workPhase { get; private set; }
+
+        static public void Initialize()
+        {
+
+        }
+        static public void SetStartedRecState()
+        {
+
+        }
+        static public void SetPausedRecState()
+        {
+
+        }
+        static public void SetStopedRecState()
+        {
+
+        }
+
+        static private void WriteRecordToCsv()
+        {
+
+        }
+        static private void WriteRecordToCsv(string commit_id)
+        {
+
+        }
+
+
     }
 
 }

@@ -184,13 +184,13 @@
     <value>Naozaj nechceš komitnúť?</value>
   </data>
   <data name="Main_TortoiseFileNotSelected_label_text" xml:space="preserve">
-    <value>Nie je vybraný žiadny adresár s Tortois Git-om</value>
+    <value>Nie je vybraný žiadny platný adresár s Tortois Git-om</value>
   </data>
   <data name="Main_RecordingFormOpening_Button_text" xml:space="preserve">
     <value>Začni nahrávať</value>
   </data>
   <data name="Main_ProjNotSelected_label_text" xml:space="preserve">
-    <value>Nie je vybraný žiadny projekt</value>
+    <value>Nie je vybraný žiadny platný projekt</value>
   </data>
   <data name="Mode_repo_text" xml:space="preserve">
     <value>Mód: repozitár</value>
@@ -262,5 +262,23 @@
 
 
         Aktívny lokálny mód</value>
+  </data>
+  <data name="NotValidProjectDirSelected" xml:space="preserve">
+    <value>Vybraný priečinok projektu nieje platný</value>
+  </data>
+  <data name="NotValidTGitDirChosen" xml:space="preserve">
+    <value>Nebol vybraný platný priečinok s Tortoise Git-om</value>
+  </data>
+  <data name="SomethingWentWrongProjectDialog" xml:space="preserve">
+    <value>Niečo nevyšlo pri výbere priečinku projektu
+Skúste to znova</value>
+  </data>
+  <data name="SomethingWentWrongTGitDialog" xml:space="preserve">
+    <value>Niečo nevyšlo pri výbere priečinku Tortoise Git-u
+Skúste to znova</value>
+  </data>
+  <data name="Configure_WantToCreateRepoDialog" xml:space="preserve">
+    <value>V danom priečinku nieje žiadny git-ový repozitár.
+Chcete tam vytvoriť nový?</value>
   </data>
 </root>

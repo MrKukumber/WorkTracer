@@ -58,6 +58,7 @@
             this.ChooseTGitDir_button.TabIndex = 0;
             this.ChooseTGitDir_button.Text = "ChooseTGitDir_button";
             this.ChooseTGitDir_button.UseVisualStyleBackColor = true;
+            this.ChooseTGitDir_button.Click += new System.EventHandler(this.ChooseTGitDir_button_Click);
             // 
             // ChooseTGitDir_label
             // 
@@ -216,7 +217,6 @@
             this.Name = "Configure_form";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configure_form_FormClosing);
-            this.Load += new System.EventHandler(this.Configure_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SK_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EN_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChooseMode_trackBar)).EndInit();

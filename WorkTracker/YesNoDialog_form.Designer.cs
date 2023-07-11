@@ -36,7 +36,7 @@
             // Yes_button
             // 
             this.Yes_button.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Yes_button.Location = new System.Drawing.Point(54, 102);
+            this.Yes_button.Location = new System.Drawing.Point(66, 117);
             this.Yes_button.Name = "Yes_button";
             this.Yes_button.Size = new System.Drawing.Size(94, 29);
             this.Yes_button.TabIndex = 0;
@@ -47,7 +47,7 @@
             // No_button
             // 
             this.No_button.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.No_button.Location = new System.Drawing.Point(259, 102);
+            this.No_button.Location = new System.Drawing.Point(271, 117);
             this.No_button.Name = "No_button";
             this.No_button.Size = new System.Drawing.Size(94, 29);
             this.No_button.TabIndex = 1;
@@ -58,9 +58,9 @@
             // YesNoDialog_label
             // 
             this.YesNoDialog_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.YesNoDialog_label.Location = new System.Drawing.Point(54, 23);
+            this.YesNoDialog_label.Location = new System.Drawing.Point(24, 23);
             this.YesNoDialog_label.Name = "YesNoDialog_label";
-            this.YesNoDialog_label.Size = new System.Drawing.Size(299, 50);
+            this.YesNoDialog_label.Size = new System.Drawing.Size(377, 91);
             this.YesNoDialog_label.TabIndex = 2;
             this.YesNoDialog_label.Text = "YesNoDialog_label";
             this.YesNoDialog_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 158);
+            this.ClientSize = new System.Drawing.Size(425, 159);
             this.Controls.Add(this.YesNoDialog_label);
             this.Controls.Add(this.No_button);
             this.Controls.Add(this.Yes_button);

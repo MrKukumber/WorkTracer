@@ -76,18 +76,18 @@
             // TortoiseFileNotSelected_label
             // 
             this.TortoiseFileNotSelected_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.TortoiseFileNotSelected_label.Location = new System.Drawing.Point(57, 648);
+            this.TortoiseFileNotSelected_label.Location = new System.Drawing.Point(28, 648);
             this.TortoiseFileNotSelected_label.Name = "TortoiseFileNotSelected_label";
-            this.TortoiseFileNotSelected_label.Size = new System.Drawing.Size(224, 45);
+            this.TortoiseFileNotSelected_label.Size = new System.Drawing.Size(253, 45);
             this.TortoiseFileNotSelected_label.TabIndex = 7;
             this.TortoiseFileNotSelected_label.Text = "label2";
             // 
             // ProjNotSelected_label
             // 
             this.ProjNotSelected_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ProjNotSelected_label.Location = new System.Drawing.Point(57, 625);
+            this.ProjNotSelected_label.Location = new System.Drawing.Point(28, 625);
             this.ProjNotSelected_label.Name = "ProjNotSelected_label";
-            this.ProjNotSelected_label.Size = new System.Drawing.Size(224, 20);
+            this.ProjNotSelected_label.Size = new System.Drawing.Size(253, 20);
             this.ProjNotSelected_label.TabIndex = 8;
             this.ProjNotSelected_label.Text = "ProjNotSelected_label";
             // 

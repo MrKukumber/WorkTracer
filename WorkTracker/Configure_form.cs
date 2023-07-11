@@ -22,11 +22,6 @@ namespace WorkTracker
             InitializeComponent();
         }
 
-        private void Configure_form_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Configure_form_FormClosing(object sender, FormClosingEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
@@ -40,6 +35,8 @@ namespace WorkTracker
 
         private void ProjectSelection_button_Click(object sender, EventArgs e)
         {
+            ProjectMan.ChooseProjectFromDialog();
+            if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
 
         }
 
@@ -51,7 +48,13 @@ namespace WorkTracker
         private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
         {
             ModesMan.ChangeMode((ModesMan.Modes) ChooseMode_trackBar.Value);
-            //TODO: treba skontrolovat vsetky tie veci ked prechadzam do daneho modu
+        }
+
+        private void ChooseTGitDir_button_Click(object sender, EventArgs e)
+        {
+            TortoiseGitMan.ChooseTGitFromDialog();
+            if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+
         }
         public void Relabel()
         {
@@ -72,12 +75,18 @@ namespace WorkTracker
         }
 
         public void SetChooseMode_trackBar(int value) => ChooseMode_trackBar.Value = value;
+        public void SetProjDir_label(string dir) =>ProjDir_label.Text = dir;
+        public void SetProjDir_labelColor(System.Drawing.Color color) => ProjDir_label.ForeColor = color;
+        public void SetTGitDir_label(string dir) => TGitDir_label.Text = dir;
+        public void SetTGitDir_labelColor(System.Drawing.Color color) => TGitDir_label.ForeColor = color;
         public void SetForeColor_TGitLabelsButtons(System.Drawing.Color color)
         {
             TGitDir_label.ForeColor = color;
             ChooseTGitDir_label.ForeColor = color;
             ChooseTGitDir_button.ForeColor = color;
         }
+
+
     }
 
     internal static class LocalizationMan
@@ -116,7 +125,7 @@ namespace WorkTracker
         }
         static public void Relabel()
         {
-            ModesMan.Relabel();//je dolezite aby zostalo pre Relable funkciami formularov
+            ModesMan.Relabel();//je dolezite aby zostalo pred Relable funkciami formularov
             //TODO: to iste budeme musiet spravit aj pre tie fazy a  typy nahravania
             Program.configure_form.Relabel();
             Program.main_form.Relabel();
@@ -164,40 +173,45 @@ namespace WorkTracker
         {
             public override void SetMode()
             {
-                Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                if (ProjectMan.IsProjValid())
-                {
-                    Program.main_form.SetProjNotSelected_labelVisible(false);
-                    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
-                }
-                else
-                {
-                    Program.main_form.SetProjNotSelected_labelVisible(true);
-                    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
-                }
+                //Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                //if (ProjectMan.IsProjValid())
+                //{
+                //    Program.main_form.SetProjNotSelected_labelVisible(false);
+                //    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
+                //}
+                //else
+                //{
+                //    Program.main_form.SetProjNotSelected_labelVisible(true);
+                //    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
+                //}
                 Program.main_form.SetMode_label();
+                Program.main_form.WriteToCommit_richTextBox(Localization.Main_Commit_richTextBox_local_mode_text);
 
                 Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Olive);
 
                 Program.progress_form.SetCommit_dateTimePickerEnabled(false);
+                Program.progress_form.WriteToCommit_richTextBox(Localization.Progress_Commit_richTextBox_local_mode_text);
+
+                TortoiseGitMan.CheckAndSetTGit_dir();
+                ProjectMan.CheckAndSetProj_dir();
             }
         }
         private class ReposMode : Mode
         {
             public override void SetMode()
             {
-                if (TortoiseGitMan.IsTGitValid()) Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                else Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
-                if (ProjectMan.IsProjValid())
-                {
-                    Program.main_form.SetProjNotSelected_labelVisible(false);
-                    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
-                }
-                else
-                {
-                    Program.main_form.SetProjNotSelected_labelVisible(true);
-                    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
-                }
+                //if (TortoiseGitMan.IsTGitValid()) Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+                //else Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
+                //if (ProjectMan.IsProjValid())
+                //{
+                //    Program.main_form.SetProjNotSelected_labelVisible(false);
+                //    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
+                //}
+                //else
+                //{
+                //    Program.main_form.SetProjNotSelected_labelVisible(true);
+                //    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
+                //}
                 Program.main_form.WriteToCommit_richTextBox("");//TODO: write last commit
                 Program.main_form.SetMode_label();
 
@@ -205,6 +219,9 @@ namespace WorkTracker
 
                 Program.progress_form.WriteToCommit_richTextBox(""); //TODO:write commit of date in dateTimePicker
                 Program.progress_form.SetCommit_dateTimePickerEnabled(true);
+
+                TortoiseGitMan.CheckAndSetTGit_dir();
+                ProjectMan.CheckAndSetProj_dir();
             }
         }
     }

@@ -91,14 +91,4 @@ namespace WorkTracker
         }
     }
 
-    static internal class RecordingMan 
-    {
-        public enum RecStates { started, paused, stoped }
-        public enum WorkPhase { creating, programing, debuging }
-        static public RecStates? recState { get; private set; }
-        static public WorkPhase? workPhase { get; private set; }
-
-        //TODO: dodelat funkcionality
-    }
-
 }
