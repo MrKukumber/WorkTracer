@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -72,9 +73,9 @@ namespace WorkTracker
 
         static private void Initialize (Dictionary<string,string> init_params)
         {
+            ModesMan.Initialize(init_params["mode"]);
             TortoiseGitMan.Initialize(init_params["tgit_dir"]);
             ProjectMan.Initialize(init_params["last_proj_dir"]);
-            ModesMan.Initialize(init_params["mode"]);
             LocalizationMan.Initialize(init_params["lang"]);
             RecordingMan.Initialize();
             CommitMan.Initialize();
@@ -85,9 +86,19 @@ namespace WorkTracker
 
     internal static class TortoiseGitMan
     {
+        //static public string TGit_dir { get => tGit_dir; }
         static private string tGit_dir = "";
         static public bool LastTGitValidity { get; private set; }
-        static public bool IsTGitValid()
+        static private bool IsTGitValid()
+        {
+            return ModesMan.mode.VisitForIsTGitValid();
+        }
+        static public bool IsTGitValid(ModesMan.LocalMode mode)
+        {
+            LastTGitValidity = true;
+            return LastTGitValidity;
+        }
+        static public bool IsTGitValid(ModesMan.ReposMode mode)
         {
             LastTGitValidity = ExistsTG();
             return LastTGitValidity;
@@ -95,6 +106,7 @@ namespace WorkTracker
         static public void Initialize(string init_tGit_dir)
         {
             tGit_dir = init_tGit_dir;
+            CheckAndSetTGit_dir();
         }
 
         static private bool ExistsTG() => File.Exists(tGit_dir + "\\TortoiseGitProc.exe");
@@ -106,7 +118,9 @@ namespace WorkTracker
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     tGit_dir = openFileDialog.SelectedPath;
-                    TortoiseGitMan.CheckAndSetTGit_dir();
+                    CheckAndSetTGit_dir();
+                    if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+                    RecordingMan.AdaptToEnviroment(false);
                 }
                 else
                 {
@@ -119,39 +133,31 @@ namespace WorkTracker
             if (IsTGitValid()) SetRightTGit_dir();
             else SetFalseTGit_dir();
         }
-        static private void SetRightTGit_dir()
+        static private void SetRightTGit_dir() => ModesMan.mode.VisitForSetRightTGit_dir();
+        static public void SetRightTGit_dir(ModesMan.LocalMode mode)
         {
-            switch (ModesMan.mode)
-            {
-                case ModesMan.Modes.repos:
-                    Program.configure_form.SetTGitDir_label(tGit_dir);
-                    Program.configure_form.SetTGitDir_labelColor(Color.Black);
-                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                    break;
-                default:
-                    Program.configure_form.SetTGitDir_label(tGit_dir);
-                    Program.configure_form.SetTGitDir_labelColor(Color.Olive);
-                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                    break;
-            }
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Olive);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
         }
-
-        static private void SetFalseTGit_dir()
+        static public void SetRightTGit_dir(ModesMan.ReposMode mode)
         {
-            switch (ModesMan.mode)
-            {
-                case ModesMan.Modes.repos:
-                    Program.configure_form.SetTGitDir_label(tGit_dir);
-                    Program.configure_form.SetTGitDir_labelColor(Color.Red);
-                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
-                    break;
-                default:
-                    Program.configure_form.SetTGitDir_label(tGit_dir);
-                    Program.configure_form.SetTGitDir_labelColor(Color.Olive);
-                    Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                    break;
-            }
-            
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Black);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+        }
+        static private void SetFalseTGit_dir() => ModesMan.mode.VisitForSetFalseTGit_dir();
+        static public void SetFalseTGit_dir(ModesMan.LocalMode mode)
+        {
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Olive);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+        }
+        static public void SetFalseTGit_dir(ModesMan.ReposMode mode)
+        {
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Red);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
         }
     
 
@@ -159,26 +165,25 @@ namespace WorkTracker
     }
     internal static class ProjectMan
     {
+        static public string Proj_dir { get => proj_dir; }
         static private string proj_dir = "";
-
         static public void Initialize(string init_proj_dir)
         {
             proj_dir = init_proj_dir;
+            CheckAndSetProj_dir();
         }
         static public bool LastProjValidity { get; private set; }
-        static public bool IsProjValid()
+        static public bool ExistsProjDirectory() => Directory.Exists(proj_dir);
+        static private bool IsProjValid() => ModesMan.mode.VisitForIsProjectValid();
+        static public bool IsProjValid(ModesMan.LocalMode mode)
         {
-            switch (ModesMan.mode)
-            {
-                case ModesMan.Modes.repos:
-                    LastProjValidity = Directory.Exists(proj_dir) && IsThereRepo();
-                    break;
-                default:
-                    LastProjValidity = Directory.Exists(proj_dir);
-                    break;
-            }
+            LastProjValidity = Directory.Exists(proj_dir);
             return LastProjValidity;
-
+        }
+        static public bool IsProjValid(ModesMan.ReposMode mode)
+        {
+            LastProjValidity = Directory.Exists(proj_dir) && IsThereRepo();
+            return LastProjValidity;
         }
         static public void ChooseProjectFromDialog()
         {
@@ -187,13 +192,15 @@ namespace WorkTracker
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     proj_dir = openFileDialog.SelectedPath;
-                    if (ModesMan.mode is ModesMan.Modes.repos && Directory.Exists(proj_dir) && !IsThereRepo())
+                    if (ModesMan.modeI is ModesMan.ModesI.repos && Directory.Exists(proj_dir) && !IsThereRepo())
                     {
                         YesNoDialog_form wantToCreateRepoDialog_form = new YesNoDialog_form(Localization.Configure_WantToCreateRepoDialog, Localization.Yes, Localization.No);
                         wantToCreateRepoDialog_form.ShowDialog();
                         if (wantToCreateRepoDialog_form.DialogResult is DialogResult.Yes) CreateRepo();
                     }
-                    ProjectMan.CheckAndSetProj_dir();
+                    CheckAndSetProj_dir();
+                    if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
+                    RecordingMan.AdaptToEnviroment(true);
                 }
                 else MessageBox.Show(Localization.SomethingWentWrongProjectDialog);
             }
@@ -203,6 +210,7 @@ namespace WorkTracker
         {
             if (IsProjValid()) SetRightProj_dir();
             else SetFalseProj_dir();
+
         }
 
         static private void SetRightProj_dir()
@@ -271,40 +279,6 @@ namespace WorkTracker
         static public string MakeCommit() { return ""; }//TODO: funkcia bude vracat kod commitu recording manageru, ktory ju bude volat
     }
 
-    static internal class RecordingMan
-    {
-        public enum RecStates { unknown, started, paused, stoped }
-        public enum WorkPhase { creating, programing, debuging }
-        static public RecStates? recState { get; private set; }
-        static public WorkPhase? workPhase { get; private set; }
 
-        static public void Initialize()
-        {
-
-        }
-        static public void SetStartedRecState()
-        {
-
-        }
-        static public void SetPausedRecState()
-        {
-
-        }
-        static public void SetStopedRecState()
-        {
-
-        }
-
-        static private void WriteRecordToCsv()
-        {
-
-        }
-        static private void WriteRecordToCsv(string commit_id)
-        {
-
-        }
-
-
-    }
 
 }

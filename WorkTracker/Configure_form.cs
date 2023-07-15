@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,8 +37,6 @@ namespace WorkTracker
         private void ProjectSelection_button_Click(object sender, EventArgs e)
         {
             ProjectMan.ChooseProjectFromDialog();
-            if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
-
         }
 
         private void Localization_trackBar_Scroll(object sender, EventArgs e)
@@ -47,17 +46,18 @@ namespace WorkTracker
 
         private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
         {
-            ModesMan.ChangeMode((ModesMan.Modes) ChooseMode_trackBar.Value);
+            ModesMan.ChangeMode((ModesMan.ModesI) ChooseMode_trackBar.Value);
+            if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+            if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
         }
 
         private void ChooseTGitDir_button_Click(object sender, EventArgs e)
         {
             TortoiseGitMan.ChooseTGitFromDialog();
-            if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
-
         }
         public void Relabel()
         {
+            //DONE
             this.Text = Localization.Configure_form_text;
             ChooseTGitDir_button.Text = Localization.Select;
             ProjectSelection_button.Text = Localization.Select;
@@ -125,8 +125,6 @@ namespace WorkTracker
         }
         static public void Relabel()
         {
-            ModesMan.Relabel();//je dolezite aby zostalo pred Relable funkciami formularov
-            //TODO: to iste budeme musiet spravit aj pre tie fazy a  typy nahravania
             Program.configure_form.Relabel();
             Program.main_form.Relabel();
             Program.recording_form.Relabel();
@@ -137,53 +135,54 @@ namespace WorkTracker
 
     internal static class ModesMan
     {
-        public enum Modes {local = 0, repos = 1};
-        static public Modes mode { get; private set; }
-        static public string[] localizations = { Localization.Mode_local_text, Localization.Mode_repo_text };
+        public enum ModesI {local = 0, repos = 1};
+        static public ModesI modeI { get; private set; }
+        static public string[] localizations 
+        { get => new string[2] { 
+            Localization.Mode_local_text, 
+            Localization.Mode_repo_text }; 
+        }
         static private Mode[] modes = { new LocalMode(), new ReposMode() };
-
-        //TODO: dodelat managera modov
+        static public Mode mode;
         static public void Initialize(string init_mode)
         {
             switch (init_mode)
             {
                 case "repos":
-                    mode = Modes.repos;
+                    modeI = ModesI.repos;
                     break;
                 default:
-                    mode = Modes.local;
+                    modeI = ModesI.local;
                     break;
             }
-            Program.configure_form.SetChooseMode_trackBar((int)mode);
-            modes[(int)mode].SetMode();
+            mode = modes[(int)modeI];
+            Program.configure_form.SetChooseMode_trackBar((int)modeI);
+            mode.SetMode();
         }
-        static public void Relabel() => localizations = new string[] { Localization.Mode_local_text, Localization.Mode_repo_text };
-        static public void ChangeMode(Modes new_mode)
+        static public void ChangeMode(ModesI new_mode)
         {
-            mode = new_mode;
-            modes[(int)mode].SetMode();
+            modeI = new_mode;
+            mode = modes[(int)modeI];
+            mode.SetMode();
+            TortoiseGitMan.CheckAndSetTGit_dir();
+            ProjectMan.CheckAndSetProj_dir();
+            RecordingMan.AdaptToEnviroment(false);
         }
 
-        private abstract class Mode
+        public abstract class Mode
         {
             public abstract void SetMode();
+            public abstract bool VisitForIsProjectValid();
+            public abstract bool VisitForIsTGitValid();
+            public abstract void VisitForSetRightTGit_dir();
+            public abstract void VisitForSetFalseTGit_dir();
+            public abstract void VisitForAdaptToEnviroment(bool isNewProj);
         }
 
-        private class LocalMode : Mode
+        public class LocalMode : Mode
         {
             public override void SetMode()
             {
-                //Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                //if (ProjectMan.IsProjValid())
-                //{
-                //    Program.main_form.SetProjNotSelected_labelVisible(false);
-                //    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
-                //}
-                //else
-                //{
-                //    Program.main_form.SetProjNotSelected_labelVisible(true);
-                //    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
-                //}
                 Program.main_form.SetMode_label();
                 Program.main_form.WriteToCommit_richTextBox(Localization.Main_Commit_richTextBox_local_mode_text);
 
@@ -191,27 +190,19 @@ namespace WorkTracker
 
                 Program.progress_form.SetCommit_dateTimePickerEnabled(false);
                 Program.progress_form.WriteToCommit_richTextBox(Localization.Progress_Commit_richTextBox_local_mode_text);
-
-                TortoiseGitMan.CheckAndSetTGit_dir();
-                ProjectMan.CheckAndSetProj_dir();
             }
+            public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
+            public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
+            public override void VisitForAdaptToEnviroment(bool isNewProj) => RecordingMan.AdaptToEnviroment(this, isNewProj);
+            public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
+            public override bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
+
+
         }
-        private class ReposMode : Mode
+        public class ReposMode : Mode
         {
             public override void SetMode()
             {
-                //if (TortoiseGitMan.IsTGitValid()) Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
-                //else Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
-                //if (ProjectMan.IsProjValid())
-                //{
-                //    Program.main_form.SetProjNotSelected_labelVisible(false);
-                //    Program.main_form.SetProgressFormOpening_buttonEnabled(true);
-                //}
-                //else
-                //{
-                //    Program.main_form.SetProjNotSelected_labelVisible(true);
-                //    Program.main_form.SetProgressFormOpening_buttonEnabled(false);
-                //}
                 Program.main_form.WriteToCommit_richTextBox("");//TODO: write last commit
                 Program.main_form.SetMode_label();
 
@@ -219,10 +210,14 @@ namespace WorkTracker
 
                 Program.progress_form.WriteToCommit_richTextBox(""); //TODO:write commit of date in dateTimePicker
                 Program.progress_form.SetCommit_dateTimePickerEnabled(true);
-
-                TortoiseGitMan.CheckAndSetTGit_dir();
-                ProjectMan.CheckAndSetProj_dir();
             }
+            //public override bool IsProjectValid() => ProjectMan.ExistsProjDirectory() && ProjectMan.IsThereRepo();
+            public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
+            public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
+            public override void VisitForAdaptToEnviroment(bool isNewProj) => RecordingMan.AdaptToEnviroment(this, isNewProj);
+            public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
+            public override bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
+
         }
     }
 }

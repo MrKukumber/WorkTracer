@@ -40,7 +40,7 @@ namespace WorkTracker
             CompDuration_label.Text = Localization.Progress_CompDuration_label_text;
             CompDurationWithStop_label.Text = Localization.Progress_CompDurationWithStop_label_text;
             ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
-            if (ModesMan.mode is ModesMan.Modes.local) Commit_richTextBox.Text = Localization.Progress_Commit_richTextBox_local_mode_text;
+            if (ModesMan.modeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Progress_Commit_richTextBox_local_mode_text;
 
         }
         public void WriteToCommit_richTextBox(string what) => Commit_richTextBox.Text = what;

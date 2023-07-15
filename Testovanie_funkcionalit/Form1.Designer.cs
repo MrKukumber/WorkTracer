@@ -34,6 +34,8 @@
             this.IsHereRepo_button = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.readFromCsv_button = new System.Windows.Forms.Button();
+            this.writeToCsv_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpenTGitButton
@@ -93,11 +95,33 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "label1";
             // 
+            // readFromCsv_button
+            // 
+            this.readFromCsv_button.Location = new System.Drawing.Point(416, 35);
+            this.readFromCsv_button.Name = "readFromCsv_button";
+            this.readFromCsv_button.Size = new System.Drawing.Size(94, 29);
+            this.readFromCsv_button.TabIndex = 6;
+            this.readFromCsv_button.Text = "readFromCsv";
+            this.readFromCsv_button.UseVisualStyleBackColor = true;
+            this.readFromCsv_button.Click += new System.EventHandler(this.readFromCsv_button_Click);
+            // 
+            // writeToCsv_button
+            // 
+            this.writeToCsv_button.Location = new System.Drawing.Point(254, 51);
+            this.writeToCsv_button.Name = "writeToCsv_button";
+            this.writeToCsv_button.Size = new System.Drawing.Size(94, 29);
+            this.writeToCsv_button.TabIndex = 7;
+            this.writeToCsv_button.Text = "writeToCsv";
+            this.writeToCsv_button.UseVisualStyleBackColor = true;
+            this.writeToCsv_button.Click += new System.EventHandler(this.writeToCsv_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 641);
+            this.Controls.Add(this.writeToCsv_button);
+            this.Controls.Add(this.readFromCsv_button);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.IsHereRepo_button);
@@ -122,5 +146,7 @@
         private Button IsHereRepo_button;
         private Button button1;
         private Label label1;
+        private Button readFromCsv_button;
+        private Button writeToCsv_button;
     }
 }

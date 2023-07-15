@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Play_roundButton = new WorkTracker.RoundButton();
+            this.Start_roundButton = new WorkTracker.RoundButton();
             this.Pause_roundButton = new WorkTracker.RoundButton();
             this.Stop_roundButton = new WorkTracker.RoundButton();
             this.ReturnToMain_button = new System.Windows.Forms.Button();
@@ -42,16 +42,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.Faze_trackBar)).BeginInit();
             this.SuspendLayout();
             // 
-            // Play_roundButton
+            // Start_roundButton
             // 
-            this.Play_roundButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Play_roundButton.BackgroundImage = global::WorkTracker.Properties.Resources.play_icon;
-            this.Play_roundButton.Location = new System.Drawing.Point(33, 24);
-            this.Play_roundButton.Name = "Play_roundButton";
-            this.Play_roundButton.Size = new System.Drawing.Size(67, 66);
-            this.Play_roundButton.TabIndex = 0;
-            this.Play_roundButton.UseVisualStyleBackColor = true;
-            this.Play_roundButton.Click += new System.EventHandler(this.Play_roundButton_Click);
+            this.Start_roundButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Start_roundButton.BackgroundImage = global::WorkTracker.Properties.Resources.play_icon;
+            this.Start_roundButton.Location = new System.Drawing.Point(33, 24);
+            this.Start_roundButton.Name = "Start_roundButton";
+            this.Start_roundButton.Size = new System.Drawing.Size(67, 66);
+            this.Start_roundButton.TabIndex = 0;
+            this.Start_roundButton.UseVisualStyleBackColor = true;
+            this.Start_roundButton.Click += new System.EventHandler(this.Start_roundButton_Click);
             // 
             // Pause_roundButton
             // 
@@ -62,6 +62,7 @@
             this.Pause_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Pause_roundButton.TabIndex = 1;
             this.Pause_roundButton.UseVisualStyleBackColor = true;
+            this.Pause_roundButton.Click += new System.EventHandler(this.Pause_roundButton_Click);
             // 
             // Stop_roundButton
             // 
@@ -169,7 +170,7 @@
             this.Controls.Add(this.ReturnToMain_button);
             this.Controls.Add(this.Stop_roundButton);
             this.Controls.Add(this.Pause_roundButton);
-            this.Controls.Add(this.Play_roundButton);
+            this.Controls.Add(this.Start_roundButton);
             this.Name = "Recording_form";
             this.Text = "Form2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Recording_form_FormClosing);
@@ -181,7 +182,7 @@
 
         #endregion
 
-        private RoundButton Play_roundButton;
+        private RoundButton Start_roundButton;
         private RoundButton Pause_roundButton;
         private RoundButton Stop_roundButton;
         private Button ReturnToMain_button;

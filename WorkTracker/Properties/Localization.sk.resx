@@ -156,7 +156,7 @@
   <data name="CurrTrackState_label_pause_text" xml:space="preserve">
     <value>Nahrávanie je pozastavené</value>
   </data>
-  <data name="CurrTrackState_label_play_text" xml:space="preserve">
+  <data name="CurrTrackState_label_start_text" xml:space="preserve">
     <value>Nahráva sa</value>
   </data>
   <data name="CurrTrackState_label_stop_text" xml:space="preserve">

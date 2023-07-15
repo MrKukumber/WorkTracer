@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Loc.Designer.cs">
       <DependentUpon>Loc.resx</DependentUpon>
       <DesignTime>True</DesignTime>

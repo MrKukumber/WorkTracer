@@ -94,7 +94,7 @@
             // CurrTrackState_label
             // 
             this.CurrTrackState_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CurrTrackState_label.Location = new System.Drawing.Point(57, 360);
+            this.CurrTrackState_label.Location = new System.Drawing.Point(57, 362);
             this.CurrTrackState_label.Name = "CurrTrackState_label";
             this.CurrTrackState_label.Size = new System.Drawing.Size(224, 20);
             this.CurrTrackState_label.TabIndex = 9;
@@ -103,9 +103,9 @@
             // Mode_label
             // 
             this.Mode_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Mode_label.Location = new System.Drawing.Point(173, 577);
+            this.Mode_label.Location = new System.Drawing.Point(173, 568);
             this.Mode_label.Name = "Mode_label";
-            this.Mode_label.Size = new System.Drawing.Size(108, 20);
+            this.Mode_label.Size = new System.Drawing.Size(108, 43);
             this.Mode_label.TabIndex = 10;
             this.Mode_label.Text = "Mode_label";
             // 
