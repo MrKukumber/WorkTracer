@@ -24,7 +24,6 @@ namespace WorkTracker
             Program.configure_form.Show();
             Program.configure_form.previousForm = this;
             this.Hide();
-
         }
 
 

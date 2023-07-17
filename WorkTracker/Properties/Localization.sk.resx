@@ -281,4 +281,15 @@ Skúste to znova</value>
     <value>V danom priečinku nieje žiadny git-ový repozitár.
 Chcete tam vytvoriť nový?</value>
   </data>
+  <data name="Recording_UnableToAccessCSV" xml:space="preserve">
+    <value>Nebolo možné spraviť záznam do súboru záznamov, pretože je využívaný iným procesom.
+Pokúste sa zatovriť všetky procesy znemožňujúce prístup k tomuto súboru.
+Stav nahrávania bude nastavený na predošlí a po zprístupnení súboru ho môžete skúsiť znova zmeniť.</value>
+  </data>
+  <data name="Config_UnableToAccessCSV" xml:space="preserve">
+    <value>Nebolo možné čítať zo súboru záznamov, pretože je využívaný iným procesom.
+Pokúste sa zatovriť všetky procesy znemožňujúce prístup k tomuto súboru.
+Nebude možné nahrávať, dokým sa tento problém nevyrieši.
+Po opätovnom zprístupnení súboru môžete opäť vybrať projekt.</value>
+  </data>
 </root>

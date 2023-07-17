@@ -37,9 +37,9 @@
             this.PhaseProgr_label = new System.Windows.Forms.Label();
             this.PhaseDebug_label = new System.Windows.Forms.Label();
             this.Phase_label = new System.Windows.Forms.Label();
-            this.Faze_trackBar = new System.Windows.Forms.TrackBar();
+            this.Phase_trackBar = new System.Windows.Forms.TrackBar();
             this.CurrTrackState_label = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Faze_trackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Phase_trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // Start_roundButton
@@ -51,6 +51,7 @@
             this.Start_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Start_roundButton.TabIndex = 0;
             this.Start_roundButton.UseVisualStyleBackColor = true;
+            this.Start_roundButton.EnabledChanged += new System.EventHandler(this.Start_roundButton_EnabledChanged);
             this.Start_roundButton.Click += new System.EventHandler(this.Start_roundButton_Click);
             // 
             // Pause_roundButton
@@ -62,6 +63,7 @@
             this.Pause_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Pause_roundButton.TabIndex = 1;
             this.Pause_roundButton.UseVisualStyleBackColor = true;
+            this.Pause_roundButton.EnabledChanged += new System.EventHandler(this.Pause_roundButton_EnabledChanged);
             this.Pause_roundButton.Click += new System.EventHandler(this.Pause_roundButton_Click);
             // 
             // Stop_roundButton
@@ -73,6 +75,7 @@
             this.Stop_roundButton.Size = new System.Drawing.Size(67, 66);
             this.Stop_roundButton.TabIndex = 2;
             this.Stop_roundButton.UseVisualStyleBackColor = true;
+            this.Stop_roundButton.EnabledChanged += new System.EventHandler(this.Stop_roundButton_EnabledChanged);
             this.Stop_roundButton.Click += new System.EventHandler(this.Stop_roundButton_Click);
             // 
             // ReturnToMain_button
@@ -134,16 +137,17 @@
             this.Phase_label.TabIndex = 9;
             this.Phase_label.Text = "Phase_label";
             // 
-            // Faze_trackBar
+            // Phase_trackBar
             // 
-            this.Faze_trackBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Faze_trackBar.LargeChange = 1;
-            this.Faze_trackBar.Location = new System.Drawing.Point(9, 175);
-            this.Faze_trackBar.Maximum = 2;
-            this.Faze_trackBar.Name = "Faze_trackBar";
-            this.Faze_trackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.Faze_trackBar.Size = new System.Drawing.Size(56, 101);
-            this.Faze_trackBar.TabIndex = 5;
+            this.Phase_trackBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Phase_trackBar.LargeChange = 1;
+            this.Phase_trackBar.Location = new System.Drawing.Point(9, 175);
+            this.Phase_trackBar.Maximum = 2;
+            this.Phase_trackBar.Name = "Phase_trackBar";
+            this.Phase_trackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.Phase_trackBar.Size = new System.Drawing.Size(56, 101);
+            this.Phase_trackBar.TabIndex = 5;
+            this.Phase_trackBar.Scroll += new System.EventHandler(this.Phase_trackBar_Scroll);
             // 
             // CurrTrackState_label
             // 
@@ -165,7 +169,7 @@
             this.Controls.Add(this.PhaseDebug_label);
             this.Controls.Add(this.PhaseProgr_label);
             this.Controls.Add(this.PhaseCreat_label);
-            this.Controls.Add(this.Faze_trackBar);
+            this.Controls.Add(this.Phase_trackBar);
             this.Controls.Add(this.ConfigFormOpening_button);
             this.Controls.Add(this.ReturnToMain_button);
             this.Controls.Add(this.Stop_roundButton);
@@ -174,7 +178,7 @@
             this.Name = "Recording_form";
             this.Text = "Form2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Recording_form_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.Faze_trackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Phase_trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,7 +195,7 @@
         private Label PhaseProgr_label;
         private Label PhaseDebug_label;
         private Label Phase_label;
-        private TrackBar Faze_trackBar;
+        private TrackBar Phase_trackBar;
         private Label CurrTrackState_label;
     }
 }

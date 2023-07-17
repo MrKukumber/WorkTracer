@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,7 +134,7 @@ namespace WorkTracker
         }
     }
 
-    internal static class ModesMan
+    public static class ModesMan
     {
         public enum ModesI {local = 0, repos = 1};
         static public ModesI modeI { get; private set; }
@@ -176,7 +177,9 @@ namespace WorkTracker
             public abstract bool VisitForIsTGitValid();
             public abstract void VisitForSetRightTGit_dir();
             public abstract void VisitForSetFalseTGit_dir();
-            public abstract void VisitForAdaptToEnviroment(bool isNewProj);
+            public abstract RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state);
+            public abstract void VisitForStop_roundButton_Click(object sender, EventArgs e);
+
         }
 
         public class LocalMode : Mode
@@ -193,11 +196,10 @@ namespace WorkTracker
             }
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
-            public override void VisitForAdaptToEnviroment(bool isNewProj) => RecordingMan.AdaptToEnviroment(this, isNewProj);
             public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
             public override bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
-
-
+            public override RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state) => state.CreateRecord(this);
+            public override void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
         }
         public class ReposMode : Mode
         {
@@ -214,9 +216,10 @@ namespace WorkTracker
             //public override bool IsProjectValid() => ProjectMan.ExistsProjDirectory() && ProjectMan.IsThereRepo();
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
-            public override void VisitForAdaptToEnviroment(bool isNewProj) => RecordingMan.AdaptToEnviroment(this, isNewProj);
             public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
             public override bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
+            public override RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state) => state.CreateRecord(this);
+            public override void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
 
         }
     }

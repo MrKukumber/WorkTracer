@@ -268,16 +268,7 @@ namespace WorkTracker
 
 
 
-    internal static class CommitMan
-    {
-        static public string lastCommitCode;
-        static public void Initialize()
-        {
-            //TODO:
-        }
 
-        static public string MakeCommit() { return ""; }//TODO: funkcia bude vracat kod commitu recording manageru, ktory ju bude volat
-    }
 
 
 
