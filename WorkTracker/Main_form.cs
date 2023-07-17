@@ -29,7 +29,7 @@ namespace WorkTracker
 
         private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            AppExitMan.ExitApp(e);
         }
 
         private void ProgressFormOpening_button_Click(object sender, EventArgs e)

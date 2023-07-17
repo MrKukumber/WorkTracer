@@ -83,7 +83,7 @@ namespace WorkTracker
 
         private void Recording_form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            AppExitMan.ExitApp(e);
         }
 
         private void ReturnToMain_button_Click(object sender, EventArgs e)
@@ -229,7 +229,9 @@ namespace WorkTracker
         static public void AdaptToEnviroment(bool isNewProj)
         {
             if (isNewProj)
+            {
                 if (ProjectMan.LastProjValidity)
+                {
                     try
                     {
                         LastRecord = GetLastRecordFromCSV();
@@ -255,7 +257,10 @@ namespace WorkTracker
                         Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
                         return;
                     }
+                }
+            }
             else
+            {
                 if (ProjectMan.LastProjValidity && TortoiseGitMan.LastTGitValidity)
                 {
                     if (LastRecord is not null)
@@ -270,6 +275,7 @@ namespace WorkTracker
                     }
                     return;
                 }
+            }
             ChangeAndSetRecState(RecStates.unknown);
             Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
         }
@@ -304,8 +310,7 @@ namespace WorkTracker
         }
         static private void AppendRecordToCsv(string proj_dir, Record record)
         {
-            using (var stream = File.Open(proj_dir + "\\" + csvRecordFileName, FileMode.Append))
-            using (var writer = new StreamWriter(stream))
+            using (var writer = new StreamWriter(proj_dir + "\\" + csvRecordFileName, true))
             using (var csv = new CsvWriter(writer, withoutHeaderConfig))
             {
                 csv.WriteRecord(record);
@@ -422,7 +427,7 @@ namespace WorkTracker
             };
         }
     }
-    internal static class CommitMan
+    public static class CommitMan
     {
         static public string lastCommitCode;
         static public void Initialize()
@@ -432,7 +437,40 @@ namespace WorkTracker
 
         static public string MakeCommit() { return ""; }//TODO: funkcia bude vracat kod commitu recording manageru, ktory ju bude volat
     }
+
+    public static class AppExitMan 
+    {
+        public static void ExitApp(FormClosingEventArgs e)
+        {
+
+            if (e.CloseReason is CloseReason.UserClosing && RecordingMan.recState is (RecordingMan.RecStates.started or RecordingMan.RecStates.paused))
+            {
+                YesNoDialog_form areYouSureYouWantToExit_form = new YesNoDialog_form(Localization.NotStopedExit_YesNoDialog_label_text, Localization.Yes, Localization.No);
+                areYouSureYouWantToExit_form.ShowDialog();
+                if(areYouSureYouWantToExit_form.DialogResult is DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            SaveParameters();
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private static void SaveParameters()
+        {
+            using(StreamWriter paramFile = new StreamWriter("init_params.txt"))
+            {
+                paramFile.WriteLine("lang " + LocalizationMan.lang);
+                paramFile.WriteLine("mode " + ModesMan.modeI);
+                paramFile.WriteLine("tgit_dir " + TortoiseGitMan.TGit_dir);
+                paramFile.WriteLine("last_proj_dir " + ProjectMan.Proj_dir);
+            }
+        }
+    }
+
 }
+
 
 
 

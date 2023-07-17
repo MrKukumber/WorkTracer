@@ -86,7 +86,7 @@ namespace WorkTracker
 
     internal static class TortoiseGitMan
     {
-        //static public string TGit_dir { get => tGit_dir; }
+        static public string TGit_dir { get => tGit_dir; }
         static private string tGit_dir = "";
         static public bool LastTGitValidity { get; private set; }
         static private bool IsTGitValid()

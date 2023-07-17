@@ -26,7 +26,7 @@ namespace WorkTracker
 
         private void Progress_form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            AppExitMan.ExitApp(e);
         }
         public void Relabel()
         {

@@ -1,8 +1,10 @@
-﻿using Microsoft.VisualBasic.Logging;
+﻿using CsvHelper;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
@@ -26,7 +28,7 @@ namespace WorkTracker
 
         private void Configure_form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            AppExitMan.ExitApp(e);
         }
 
         private void BackToPrevForm_button_Click(object sender, EventArgs e)
@@ -147,6 +149,7 @@ namespace WorkTracker
         static public Mode mode;
         static public void Initialize(string init_mode)
         {
+            var a = ModesI.repos.ToString();
             switch (init_mode)
             {
                 case "repos":
@@ -213,7 +216,6 @@ namespace WorkTracker
                 Program.progress_form.WriteToCommit_richTextBox(""); //TODO:write commit of date in dateTimePicker
                 Program.progress_form.SetCommit_dateTimePickerEnabled(true);
             }
-            //public override bool IsProjectValid() => ProjectMan.ExistsProjDirectory() && ProjectMan.IsThereRepo();
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
             public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
