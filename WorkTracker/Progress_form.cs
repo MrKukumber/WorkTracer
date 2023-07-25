@@ -13,6 +13,19 @@ namespace WorkTracker
 {
     public partial class Progress_form : Form
     {
+        const int WM_ACTIVATEAPP = 0x1C;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_ACTIVATEAPP && Form.ActiveForm == this)
+            {
+                if (m.WParam != IntPtr.Zero)
+                {
+                    // the application is getting activated
+                    Program.CheckAfterActivatingApp();
+                }
+            }
+            base.WndProc(ref m);
+        }
         public Progress_form()
         {
             InitializeComponent();
@@ -28,6 +41,7 @@ namespace WorkTracker
         {
             AppExitMan.ExitApp(e);
         }
+
         public void Relabel()
         {
             this.Text = Localization.Progress_form_text;
@@ -50,5 +64,6 @@ namespace WorkTracker
         {
             //TODO:
         }
+
     }
 }

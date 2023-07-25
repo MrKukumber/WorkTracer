@@ -43,14 +43,14 @@ namespace Testovanie_funkcionalit
             {
                 p.StartInfo.WorkingDirectory = $"{directory}";
                 p.StartInfo.FileName = "git";
-                p.StartInfo.Arguments = $"rev-parse --is-inside-work-tree";
+                p.StartInfo.Arguments = $"log -1 --pretty=%B";
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.CreateNoWindow = true;
                 p.Start();
 
                 var output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
-
+                var e = p.ExitCode;
                 return output;
             }
         }

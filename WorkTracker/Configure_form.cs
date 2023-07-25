@@ -20,6 +20,20 @@ namespace WorkTracker
 {
     public partial class Configure_form : Form
     {
+        const int WM_ACTIVATEAPP = 0x1C;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_ACTIVATEAPP && Form.ActiveForm == this)
+            {
+                if (m.WParam != IntPtr.Zero)
+                {
+                    // the application is getting activated
+                    Program.CheckAfterActivatingApp();
+                }
+            }
+            base.WndProc(ref m);
+        }
+
         public Form previousForm = new Form();
         public Configure_form()
         {
@@ -50,14 +64,15 @@ namespace WorkTracker
         private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
         {
             ModesMan.ChangeMode((ModesMan.ModesI) ChooseMode_trackBar.Value);
-            if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
-            if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
+            if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+            if (!ResourceControlMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
         }
 
         private void ChooseTGitDir_button_Click(object sender, EventArgs e)
         {
             TortoiseGitMan.ChooseTGitFromDialog();
         }
+
         public void Relabel()
         {
             //DONE
@@ -88,7 +103,6 @@ namespace WorkTracker
             ChooseTGitDir_label.ForeColor = color;
             ChooseTGitDir_button.ForeColor = color;
         }
-
 
     }
 
@@ -170,7 +184,8 @@ namespace WorkTracker
             mode.SetMode();
             TortoiseGitMan.CheckAndSetTGit_dir();
             ProjectMan.CheckAndSetProj_dir();
-            RecordingMan.AdaptToEnviroment(false);
+            RecordingMan.AdaptToEnviromentWithOldProj();
+            CommitMan.CheckAndSetCommitTexts();
         }
 
         public abstract class Mode
@@ -182,6 +197,7 @@ namespace WorkTracker
             public abstract void VisitForSetFalseTGit_dir();
             public abstract RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state);
             public abstract void VisitForStop_roundButton_Click(object sender, EventArgs e);
+            public abstract void VisitForCheckAndSetLastCommitInMain();
 
         }
 
@@ -199,16 +215,18 @@ namespace WorkTracker
             }
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
-            public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
-            public override bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
+            public override bool VisitForIsProjectValid() => ResourceControlMan.IsProjValid(this);
+            public override bool VisitForIsTGitValid() => ResourceControlMan.IsTGitValid(this);
             public override RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state) => state.CreateRecord(this);
             public override void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
+            public override void VisitForCheckAndSetLastCommitInMain() => CommitMan.CheckAndSetLastCommitInMain(this);
+
         }
         public class ReposMode : Mode
         {
             public override void SetMode()
             {
-                Program.main_form.WriteToCommit_richTextBox("");//TODO: write last commit
+                CommitMan.CommitViewer.ShowCommitInMain();              
                 Program.main_form.SetMode_label();
 
                 Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Black);
@@ -218,10 +236,11 @@ namespace WorkTracker
             }
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
-            public override bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
-            public override bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
+            public override bool VisitForIsProjectValid() => ResourceControlMan.IsProjValid(this);
+            public override bool VisitForIsTGitValid() => ResourceControlMan.IsTGitValid(this);
             public override RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state) => state.CreateRecord(this);
             public override void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
+            public override void VisitForCheckAndSetLastCommitInMain() => CommitMan.CheckAndSetLastCommitInMain(this);
 
         }
     }

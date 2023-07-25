@@ -11,6 +11,28 @@ namespace Testovanie_funkcionalit
 {
     public partial class Form1 : Form
     {
+        const int WM_ACTIVATEAPP = 0x1C;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_ACTIVATEAPP && Form.ActiveForm == this)
+            {
+                if (m.WParam != IntPtr.Zero)
+                {
+                    // the application is getting activated
+
+
+                    //Program.activationCount++;
+                    //a++;
+                    //richTextBox1.Text = $"aktivoval som sa {Program.activationCount}-krat";
+                    //MessageBox.Show("muhahahah");
+                    //bool b = Form.ActiveForm == this;
+                    //this.Activate();
+                    //b = Form.ActiveForm == this;
+
+                }
+            }
+            base.WndProc(ref m);
+        }
         public Form1()
         {
             InitializeComponent();
@@ -26,9 +48,9 @@ namespace Testovanie_funkcionalit
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            Program.activationCount++;
-            a++;
-            richTextBox1.Text = $"aktivoval som sa {Program.activationCount}-krat";
+            //Program.activationCount++;
+            //a++;
+            //richTextBox1.Text = $"aktivoval som sa {Program.activationCount}-krat";
         }
 
         private void GoTOOtherForm_button_Click(object sender, EventArgs e)
@@ -56,7 +78,7 @@ namespace Testovanie_funkcionalit
 
         private void IsHereRepo_button_Click(object sender, EventArgs e)
         {
-            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker");
+            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\skusam tortoise");
             //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker
             richTextBox1.Text = exit;
         }
@@ -72,7 +94,7 @@ namespace Testovanie_funkcionalit
 
         private void readFromCsv_button_Click(object sender, EventArgs e)
         {
-            Record? lastRecord = null;
+            Record? lastRecord;
             using (var reader = new StreamReader("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\skusam tortoise" + "\\" + ".workTracer_recordings.csv"))
             using (var csv = new CsvReader(reader, basicConfig))
             {

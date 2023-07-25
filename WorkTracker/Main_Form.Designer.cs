@@ -69,7 +69,7 @@
             this.Commit_richTextBox.Location = new System.Drawing.Point(287, 249);
             this.Commit_richTextBox.Name = "Commit_richTextBox";
             this.Commit_richTextBox.ReadOnly = true;
-            this.Commit_richTextBox.Size = new System.Drawing.Size(210, 441);
+            this.Commit_richTextBox.Size = new System.Drawing.Size(206, 441);
             this.Commit_richTextBox.TabIndex = 3;
             this.Commit_richTextBox.Text = "12345678901234567890123456789";
             // 

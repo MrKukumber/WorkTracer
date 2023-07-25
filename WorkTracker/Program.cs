@@ -4,7 +4,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -28,7 +30,6 @@ namespace WorkTracker
             ApplicationConfiguration.Initialize();
             Initializer.Execute();
             Application.Run(main_form);
-
         }
 
         public static Main_form main_form = new Main_form();
@@ -36,6 +37,12 @@ namespace WorkTracker
         public static Recording_form recording_form = new Recording_form();
         public static Progress_form progress_form = new Progress_form();
         public static Commit_form commit_form = new Commit_form();
+
+        static public void CheckAfterActivatingApp()
+        {
+            ResourceControlMan.CheckAndSetResources();
+            CommitMan.CheckAndSetCommitTexts();
+        }
     }
     
     /// <summary>
@@ -58,15 +65,24 @@ namespace WorkTracker
                 {"tgit_dir",""},
                 {"last_proj_dir",""}
             };
-            using (StreamReader paramFile = new StreamReader("init_params.txt"))
+            try
             {
-
-                while (paramFile.ReadLine() is string line)
+                using (StreamReader paramFile = new StreamReader("init_params.txt"))
                 {
-                    string[] line_parts = line.Split(" ");
-                    if (line_parts.Length == 1) continue;
-                    parameters[line_parts[0]] = string.Join(" ", line_parts.Skip(1).ToArray());
+                    while (paramFile.ReadLine() is string line)
+                    {
+                        string[] line_parts = line.Split(" ");
+                        if (line_parts.Length == 1) continue;
+                        parameters[line_parts[0]] = string.Join(" ", line_parts.Skip(1).ToArray());
+                    }
                 }
+            }
+            catch (System.IO.IOException)
+            {
+                parameters["lang"] = "en_GB";
+                parameters["mode"] = "local";
+                parameters["tgit_dir"] = "";
+                parameters["last_proj_dir"] = "";
             }
             return parameters;
         }
@@ -80,6 +96,8 @@ namespace WorkTracker
             RecordingMan.Initialize();
             CommitMan.Initialize();
         }
+
+ 
     }
 
 
@@ -88,29 +106,11 @@ namespace WorkTracker
     {
         static public string TGit_dir { get => tGit_dir; }
         static private string tGit_dir = "";
-        static public bool LastTGitValidity { get; private set; }
-        static private bool IsTGitValid()
-        {
-            return ModesMan.mode.VisitForIsTGitValid();
-        }
-        static public bool IsTGitValid(ModesMan.LocalMode mode)
-        {
-            LastTGitValidity = true;
-            return LastTGitValidity;
-        }
-        static public bool IsTGitValid(ModesMan.ReposMode mode)
-        {
-            LastTGitValidity = ExistsTG();
-            return LastTGitValidity;
-        }
         static public void Initialize(string init_tGit_dir)
         {
             tGit_dir = init_tGit_dir;
             CheckAndSetTGit_dir();
         }
-
-        static private bool ExistsTG() => File.Exists(tGit_dir + "\\TortoiseGitProc.exe");
-
         static public void ChooseTGitFromDialog()
         {
             using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
@@ -119,8 +119,8 @@ namespace WorkTracker
                 {
                     tGit_dir = openFileDialog.SelectedPath;
                     CheckAndSetTGit_dir();
-                    if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
-                    RecordingMan.AdaptToEnviroment(false);
+                    if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+                    RecordingMan.AdaptToEnviromentWithOldProj();
                 }
                 else
                 {
@@ -128,9 +128,10 @@ namespace WorkTracker
                 }
             }
         }
+        static public bool ExistsTG() => File.Exists(tGit_dir + "\\TortoiseGitProc.exe");
         static public void CheckAndSetTGit_dir()
         {
-            if (IsTGitValid()) SetRightTGit_dir();
+            if (ResourceControlMan.IsTGitValid()) SetRightTGit_dir();
             else SetFalseTGit_dir();
         }
         static private void SetRightTGit_dir() => ModesMan.mode.VisitForSetRightTGit_dir();
@@ -159,12 +160,15 @@ namespace WorkTracker
             Program.configure_form.SetTGitDir_labelColor(Color.Red);
             Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
         }
-    
+        
+        static public void WriteTGit_dirTo(StreamWriter file) => file.WriteLine("tgit_dir " + tGit_dir);
+
 
 
     }
     internal static class ProjectMan
     {
+        private const string csvRecordFileName = ".workTracer_recordings.csv";
         static public string Proj_dir { get => proj_dir; }
         static private string proj_dir = "";
         static public void Initialize(string init_proj_dir)
@@ -172,19 +176,8 @@ namespace WorkTracker
             proj_dir = init_proj_dir;
             CheckAndSetProj_dir();
         }
-        static public bool LastProjValidity { get; private set; }
-        static public bool ExistsProjDirectory() => Directory.Exists(proj_dir);
-        static private bool IsProjValid() => ModesMan.mode.VisitForIsProjectValid();
-        static public bool IsProjValid(ModesMan.LocalMode mode)
-        {
-            LastProjValidity = Directory.Exists(proj_dir);
-            return LastProjValidity;
-        }
-        static public bool IsProjValid(ModesMan.ReposMode mode)
-        {
-            LastProjValidity = Directory.Exists(proj_dir) && IsThereRepo();
-            return LastProjValidity;
-        }
+        static public string PathToCSVRecordFile { get => proj_dir + "\\" + csvRecordFileName; }
+        static public bool ExistsRecordCSV() => File.Exists(proj_dir + "\\" + csvRecordFileName);
         static public void ChooseProjectFromDialog()
         {
             using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
@@ -199,16 +192,37 @@ namespace WorkTracker
                         if (wantToCreateRepoDialog_form.DialogResult is DialogResult.Yes) CreateRepo();
                     }
                     CheckAndSetProj_dir();
-                    if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
-                    RecordingMan.AdaptToEnviroment(true);
+                    if (!ResourceControlMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
+                    RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
+                    CommitMan.CheckAndSetCommitTexts();
+                    if(!ableToAccessCSV) MessageBox.Show(Localization.Config_UnableToAccessCSV);
                 }
                 else MessageBox.Show(Localization.SomethingWentWrongProjectDialog);
             }
         }
+        public static bool ExistsProjDir() => Directory.Exists(proj_dir);
+        public static bool IsThereRepo()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo.WorkingDirectory = proj_dir;
+                p.StartInfo.FileName = "git";
+                p.StartInfo.Arguments = "rev-parse --is-inside-work-tree";
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                var output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+
+                return output == "true\n";
+            }
+        }
+        public static void WriteProj_dirTo(StreamWriter file) => file.WriteLine("last_proj_dir " + proj_dir);
 
         static public void CheckAndSetProj_dir()
         {
-            if (IsProjValid()) SetRightProj_dir();
+            if (ResourceControlMan.IsProjValid()) SetRightProj_dir();
             else SetFalseProj_dir();
 
         }
@@ -231,24 +245,6 @@ namespace WorkTracker
             Program.main_form.SetProgressFormOpening_buttonEnabled(false);
         }
 
-        public static bool IsThereRepo()
-        {
-            using (Process p = new Process())
-            {
-                p.StartInfo.WorkingDirectory = proj_dir;
-                p.StartInfo.FileName = "git";
-                p.StartInfo.Arguments = "rev-parse --is-inside-work-tree";
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.CreateNoWindow = true;
-                p.Start();
-
-                var output = p.StandardOutput.ReadToEnd();
-                p.WaitForExit();
-
-                return output == "true\n";
-            }
-        }
-
         private static void CreateRepo()
         {
             using (Process p = new Process())
@@ -264,12 +260,64 @@ namespace WorkTracker
             }
         }
 
+
     }
 
+    public static class ResourceControlMan
+    {
+        static public bool LastProjValidity { get; private set; }
+        static public bool LastTGitValidity { get; private set; }
+        static public bool IsProjValid() => ModesMan.mode.VisitForIsProjectValid();
+        static public bool IsTGitValid() => ModesMan.mode.VisitForIsTGitValid();
+        private static bool messageAlreadyShown = false;
+        public static void CheckAndSetResources()
+        {
+            bool projValidityBeforeCheck = LastProjValidity;
+            bool tGitValidityBeforeCheck = LastTGitValidity;
+            TortoiseGitMan.CheckAndSetTGit_dir();
+
+            ProjectMan.CheckAndSetProj_dir();
+
+            if (!LastProjValidity && projValidityBeforeCheck)
+                if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfProject_dir + "\n" + Localization.NonValidChangeOfTGit_dir);
+                else MessageBox.Show(Localization.NonValidChangeOfProject_dir);
+            else if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfTGit_dir);
+
+            RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
+
+            if (!ableToAccessCSV && !messageAlreadyShown)
+            {
+                MessageBox.Show(Localization.Config_UnableToAccessCSV);
+                messageAlreadyShown = true;
+            }
+            else
+            {
+                messageAlreadyShown = false;
+            }
+        }
+        static public bool IsProjValid(ModesMan.LocalMode mode)
+        {
+            LastProjValidity = ProjectMan.ExistsProjDir();
+            return LastProjValidity;
+        }
+        static public bool IsProjValid(ModesMan.ReposMode mode)
+        {
+            LastProjValidity = ProjectMan.ExistsProjDir() && ProjectMan.IsThereRepo();
+            return LastProjValidity;
+        }
+        static public bool IsTGitValid(ModesMan.LocalMode mode)
+        {
+            LastTGitValidity = true;
+            return LastTGitValidity;
+        }
+        static public bool IsTGitValid(ModesMan.ReposMode mode)
+        {
+            LastTGitValidity = TortoiseGitMan.ExistsTG();
+            return LastTGitValidity;
+        }
 
 
-
-
+    }
 
 
 }

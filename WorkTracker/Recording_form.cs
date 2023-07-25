@@ -22,9 +22,21 @@ using System.Linq.Expressions;
 
 namespace WorkTracker
 {
-
     public partial class Recording_form : Form
     {
+        const int WM_ACTIVATEAPP = 0x1C;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_ACTIVATEAPP && Form.ActiveForm == this)
+            {
+                if (m.WParam != IntPtr.Zero)
+                {
+                    // the application is getting activated
+                    Program.CheckAfterActivatingApp();
+                }
+            }
+            base.WndProc(ref m);
+        }
         public Recording_form()
         {
             InitializeComponent();
@@ -48,7 +60,6 @@ namespace WorkTracker
             {
                 Program.commit_form.Show();
                 this.Hide();
-                RecordingMan.ProcessNewRecord(RecordingMan.RecStates.stoped);
             }
             else MessageBox.Show(Localization.Recording_UnableToAccessCSV);
         }
@@ -116,7 +127,6 @@ namespace WorkTracker
             RecordingMan.ChangeWorkPhase((RecordingMan.WorkPhase)Phase_trackBar.Value);
         }
 
-
     }
 
     public class RoundButton : Button
@@ -131,7 +141,6 @@ namespace WorkTracker
     }
     static public class RecordingMan
     {
-        private const string csvRecordFileName = ".workTracer_recordings.csv";
         public enum RecStates { unknown =  0, started, paused, stoped }
         public enum WorkPhase { creating, programing, debuging }
         static public RecStates recState { get; private set; }
@@ -181,7 +190,8 @@ namespace WorkTracker
         };
         static public void Initialize()
         {
-            AdaptToEnviroment(true);
+            AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
+            //if (!ableToAccessCSV) MessageBox.Show(Localization.Config_UnableToAccessCSV);
         }
 
         static public void ProcessNewRecord(RecStates new_recState)
@@ -206,7 +216,7 @@ namespace WorkTracker
         {
             try
             {
-                using (var reader = new StreamReader(ProjectMan.Proj_dir + "\\" + csvRecordFileName))
+                using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
                 {
                     reader.Close();
                 }
@@ -226,80 +236,82 @@ namespace WorkTracker
             recState = new_recState;
             recStates[(int)recState].SetState();
         }
-        static public void AdaptToEnviroment(bool isNewProj)
+        static public void AdaptToEnviromentWithNewProj(out bool ableToAccessCSV)
         {
-            if (isNewProj)
+            ableToAccessCSV = true;
+            if (ResourceControlMan.LastProjValidity)
             {
-                if (ProjectMan.LastProjValidity)
+                try
                 {
-                    try
+                    LastRecord = GetLastRecordFromCSV();
+                    if (ResourceControlMan.LastTGitValidity)
                     {
-                        LastRecord = GetLastRecordFromCSV();
-                        if (TortoiseGitMan.LastTGitValidity)
+                        if (LastRecord is not null)
                         {
-                            if (LastRecord is not null)
-                            {
-                                ChangeAndSetRecState(LastRecord.State);
-                                Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
-                            }
-                            else
-                            {
-                                ChangeAndSetRecState(RecStates.stoped);
-                                Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
-                            }
-                            return;
+                            ChangeAndSetRecState(LastRecord.State);
+                            Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
                         }
-                    }
-                    catch (System.IO.IOException)
-                    {
-                        MessageBox.Show(Localization.Config_UnableToAccessCSV);
-                        ChangeAndSetRecState(RecStates.unknown);
-                        Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                        else
+                        {
+                            ChangeAndSetRecState(RecStates.stoped);
+                            Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                        }
                         return;
                     }
                 }
-            }
-            else
-            {
-                if (ProjectMan.LastProjValidity && TortoiseGitMan.LastTGitValidity)
+                catch (System.IO.IOException)
                 {
-                    if (LastRecord is not null)
-                    {
-                        ChangeAndSetRecState(LastRecord.State);
-                        Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
-                    }
-                    else
-                    {
-                        ChangeAndSetRecState(RecStates.stoped);
-                        Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
-                    }
+                    ableToAccessCSV = false;
+                    ChangeAndSetRecState(RecStates.unknown);
+                    Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
                     return;
                 }
             }
             ChangeAndSetRecState(RecStates.unknown);
             Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
         }
-        static private void SaveRecord(Record record)
+        static public void AdaptToEnviromentWithOldProj()
         {
-            if (ExistsRecordCSV(ProjectMan.Proj_dir))
+            if (ResourceControlMan.LastProjValidity && ResourceControlMan.LastTGitValidity)
             {
-                AppendRecordToCsv(ProjectMan.Proj_dir, record);
+                if (LastRecord is not null)
+                {
+                    ChangeAndSetRecState(LastRecord.State);
+                    Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
+                }
+                else
+                {
+                    ChangeAndSetRecState(RecStates.stoped);
+                    Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                }
             }
             else
             {
-                WriteRecordToCsv(ProjectMan.Proj_dir, record);
+                ChangeAndSetRecState(RecStates.unknown);
+                Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+            }
+        }
+
+        static private void SaveRecord(Record record)
+        {
+            if (ProjectMan.ExistsRecordCSV())
+            {
+                AppendRecordToCsv(record);
+            }
+            else
+            {
+                WriteRecordToCsv(record);
             }
         }
 
         static private Record? GetLastRecordFromCSV()
         {   
-            if(!ExistsRecordCSV(ProjectMan.Proj_dir)) return null;
-            return ReadLastRecordFromCsv(ProjectMan.Proj_dir);
+            if(!ProjectMan.ExistsRecordCSV()) return null;
+            return ReadLastRecordFromCsv();
         }
-        static private bool ExistsRecordCSV(string proj_dir) => File.Exists(proj_dir + "\\" + csvRecordFileName);
-        static private void WriteRecordToCsv(string proj_dir, Record record)
+        static private void WriteRecordToCsv(Record record)
         {
-            using (var writer = new StreamWriter(proj_dir + "\\" + csvRecordFileName))
+            using (var writer = new StreamWriter(ProjectMan.PathToCSVRecordFile))
             using (var csv = new CsvWriter(writer, basicConfig))
             {
                 csv.WriteHeader<Record>();
@@ -308,19 +320,19 @@ namespace WorkTracker
                 csv.NextRecord();
             }
         }
-        static private void AppendRecordToCsv(string proj_dir, Record record)
+        static private void AppendRecordToCsv(Record record)
         {
-            using (var writer = new StreamWriter(proj_dir + "\\" + csvRecordFileName, true))
+            using (var writer = new StreamWriter(ProjectMan.PathToCSVRecordFile, true))
             using (var csv = new CsvWriter(writer, withoutHeaderConfig))
             {
                 csv.WriteRecord(record);
                 csv.NextRecord();
             }
         }
-        static private Record? ReadLastRecordFromCsv(string proj_dir)
+        static private Record? ReadLastRecordFromCsv()
         {
             Record? lastRecord = null;
-            using (var reader = new StreamReader(proj_dir + "\\" + csvRecordFileName))
+            using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
             using (var csv = new CsvReader(reader, basicConfig))
             {
                 while (csv.Read())
@@ -404,7 +416,7 @@ namespace WorkTracker
                 Time = TimeOnly.FromDateTime(DateTime.Now),
                 State = RecStates.stoped,
                 Phase = workPhase,
-                Git = CommitMan.lastCommitCode
+                Git = CommitMan.hasBeenCommited ? CommitMan.lastCommitCode : null
             };
         }
         public class UnknownRecState : RecState
@@ -427,16 +439,7 @@ namespace WorkTracker
             };
         }
     }
-    public static class CommitMan
-    {
-        static public string lastCommitCode;
-        static public void Initialize()
-        {
-            //TODO:
-        }
 
-        static public string MakeCommit() { return ""; }//TODO: funkcia bude vracat kod commitu recording manageru, ktory ju bude volat
-    }
 
     public static class AppExitMan 
     {
@@ -463,8 +466,8 @@ namespace WorkTracker
             {
                 paramFile.WriteLine("lang " + LocalizationMan.lang);
                 paramFile.WriteLine("mode " + ModesMan.modeI);
-                paramFile.WriteLine("tgit_dir " + TortoiseGitMan.TGit_dir);
-                paramFile.WriteLine("last_proj_dir " + ProjectMan.Proj_dir);
+                TortoiseGitMan.WriteTGit_dirTo(paramFile);
+                ProjectMan.WriteProj_dirTo(paramFile);
             }
         }
     }
@@ -527,6 +530,65 @@ namespace WorkTracker
 //}
 //else
 //{
+//    ChangeAndSetRecState(RecStates.unknown);
+//    Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+//}
+
+
+
+
+
+//static public void AdaptToEnviroment(bool isNewProj, out bool ableToAccessCSV)
+//{
+//    ableToAccessCSV = true;
+//    if (isNewProj)
+//    {
+//        if (ProjectMan.LastProjValidity)
+//        {
+//            try
+//            {
+//                LastRecord = GetLastRecordFromCSV();
+//                if (TortoiseGitMan.LastTGitValidity)
+//                {
+//                    if (LastRecord is not null)
+//                    {
+//                        ChangeAndSetRecState(LastRecord.State);
+//                        Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
+//                    }
+//                    else
+//                    {
+//                        ChangeAndSetRecState(RecStates.stoped);
+//                        Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+//                    }
+//                    return;
+//                }
+//            }
+//            catch (System.IO.IOException)
+//            {
+//                ableToAccessCSV = false;
+//                ChangeAndSetRecState(RecStates.unknown);
+//                Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+//                return;
+//            }
+//        }
+//    }
+//    else
+//    {
+//        if (ProjectMan.LastProjValidity && TortoiseGitMan.LastTGitValidity)
+//        {
+//            if (LastRecord is not null)
+//            {
+//                ChangeAndSetRecState(LastRecord.State);
+//                Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
+//            }
+//            else
+//            {
+//                ChangeAndSetRecState(RecStates.stoped);
+//                Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+//            }
+//            return;
+//        }
+//    }
 //    ChangeAndSetRecState(RecStates.unknown);
 //    Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
 //}

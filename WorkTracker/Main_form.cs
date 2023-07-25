@@ -4,6 +4,19 @@ namespace WorkTracker
 {
     public partial class Main_form : Form
     {
+        const int WM_ACTIVATEAPP = 0x1C;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_ACTIVATEAPP && Form.ActiveForm == this)
+            {
+                if (m.WParam != IntPtr.Zero)
+                {
+                    // the application is getting activated
+                    Program.CheckAfterActivatingApp();
+                }
+            }
+            base.WndProc(ref m);
+        }
         public Main_form()
         {
             InitializeComponent();
@@ -11,10 +24,10 @@ namespace WorkTracker
 
         private void RecordingFormOpening_Button_Click(object sender, EventArgs e)
         {
-            if (!ProjectMan.LastProjValidity)
-                if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidProjectDirSelected + "\n" + Localization.NotValidTGitDirChosen);
+            if (!ResourceControlMan.LastProjValidity)
+                if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidProjectDirSelected + "\n" + Localization.NotValidTGitDirChosen);
                 else MessageBox.Show(Localization.NotValidProjectDirSelected);
-            else if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+            else if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
             Program.recording_form.Show();
             this.Hide();
 
@@ -47,9 +60,10 @@ namespace WorkTracker
             ProgressFormOpening_button.Text = Localization.Main_ProgressFormOpening_button_text;
             ProjNotSelected_label.Text = Localization.Main_ProjNotSelected_label_text;
             TortoiseFileNotSelected_label.Text = Localization.Main_TortoiseFileNotSelected_label_text;
-            Mode_label.Text = ModesMan.localizations[(int)ModesMan.modeI];
             if (ModesMan.modeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Main_Commit_richTextBox_local_mode_text;
             CurrTrackState_label.Text = RecordingMan.StatesLocalizations[(int)RecordingMan.recState];
+            CommitMan.CommitViewer.ShowCommitInMain();
+            
         }
 
         public void SetTortoiseFileNotSelected_labelVisible(bool indicator) => TortoiseFileNotSelected_label.Visible = indicator;
@@ -58,9 +72,6 @@ namespace WorkTracker
         public void SetProgressFormOpening_buttonEnabled(bool indicator) => ProgressFormOpening_button.Enabled = indicator;
         public void WriteToCommit_richTextBox(string what) => Commit_richTextBox.Text = what;
         public void SetCurrTrackState_label() => CurrTrackState_label.Text = RecordingMan.StatesLocalizations[(int)RecordingMan.recState];
-        public void ShowLastCommit_richTextBox()
-        {
-            //TODO:
-        }
+        public int GetCommit_richTextBoxWidth() => Commit_richTextBox.Width;
     }
 }
