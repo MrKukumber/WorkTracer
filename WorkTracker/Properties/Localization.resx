@@ -223,27 +223,15 @@ Are you sure, you want to exit?</value>
     <value>Debuging</value>
   </data>
   <data name="Progress_From_label_text" xml:space="preserve">
-    <value>From day</value>
+    <value>Since day</value>
   </data>
   <data name="Progress_To_label_text" xml:space="preserve">
-    <value>To day</value>
+    <value>Until day</value>
   </data>
-  <data name="Progress_Day_label_text" xml:space="preserve">
-    <value>Days</value>
-  </data>
-  <data name="Progress_Days7_label_text" xml:space="preserve">
-    <value>7 days</value>
-  </data>
-  <data name="Progress_Month_label_text" xml:space="preserve">
-    <value>Months</value>
-  </data>
-  <data name="Progress_DayMean_label_text" xml:space="preserve">
-    <value>Amount of work made during individual hours of day</value>
-  </data>
-  <data name="Progress_CompDuration_label_text" xml:space="preserve">
+  <data name="Progress_CompDurationText_label_text" xml:space="preserve">
     <value>Work duration:</value>
   </data>
-  <data name="Progress_CompDurationWithStop_label_text" xml:space="preserve">
+  <data name="Progress_CompDurationWithStopText_label_text" xml:space="preserve">
     <value>Work duration (including paused intervals):</value>
   </data>
   <data name="Recording_form_text" xml:space="preserve">
@@ -342,5 +330,31 @@ Invalid project selected</value>
 
 
      Invalid project selected</value>
+  </data>
+  <data name="Progress_RecordingTime_label_text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Progress_RecordingTimeWithPause_label_text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Progress_CreatTime_label_text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Progress_ProgrTime_label_text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Progress_DebugTime_label_text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Progress_RangeCommit_label_text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Progress_NoCommitFound_richTextBox_text" xml:space="preserve">
+    <value>
+
+
+          No commit found
+          in given range
+</value>
   </data>
 </root>

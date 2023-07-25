@@ -437,45 +437,36 @@ namespace WorkTracker.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Work duration:.
         /// </summary>
-        internal static string Progress_CompDuration_label_text {
+        internal static string Progress_CompDurationText_label_text {
             get {
-                return ResourceManager.GetString("Progress_CompDuration_label_text", resourceCulture);
+                return ResourceManager.GetString("Progress_CompDurationText_label_text", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Work duration (including paused intervals):.
         /// </summary>
-        internal static string Progress_CompDurationWithStop_label_text {
+        internal static string Progress_CompDurationWithStopText_label_text {
             get {
-                return ResourceManager.GetString("Progress_CompDurationWithStop_label_text", resourceCulture);
+                return ResourceManager.GetString("Progress_CompDurationWithStopText_label_text", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Days.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Progress_Day_label_text {
+        internal static string Progress_CreatTime_label_text {
             get {
-                return ResourceManager.GetString("Progress_Day_label_text", resourceCulture);
+                return ResourceManager.GetString("Progress_CreatTime_label_text", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amount of work made during individual hours of day.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Progress_DayMean_label_text {
+        internal static string Progress_DebugTime_label_text {
             get {
-                return ResourceManager.GetString("Progress_DayMean_label_text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 7 days.
-        /// </summary>
-        internal static string Progress_Days7_label_text {
-            get {
-                return ResourceManager.GetString("Progress_Days7_label_text", resourceCulture);
+                return ResourceManager.GetString("Progress_DebugTime_label_text", resourceCulture);
             }
         }
         
@@ -489,7 +480,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to From day.
+        ///   Looks up a localized string similar to Since day.
         /// </summary>
         internal static string Progress_From_label_text {
             get {
@@ -511,16 +502,57 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Months.
+        ///   Looks up a localized string similar to 
+        ///
+        ///
+        ///          No commit found
+        ///          in given range
+        ///.
         /// </summary>
-        internal static string Progress_Month_label_text {
+        internal static string Progress_NoCommitFound_richTextBox_text {
             get {
-                return ResourceManager.GetString("Progress_Month_label_text", resourceCulture);
+                return ResourceManager.GetString("Progress_NoCommitFound_richTextBox_text", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To day.
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Progress_ProgrTime_label_text {
+            get {
+                return ResourceManager.GetString("Progress_ProgrTime_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Progress_RangeCommit_label_text {
+            get {
+                return ResourceManager.GetString("Progress_RangeCommit_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Progress_RecordingTime_label_text {
+            get {
+                return ResourceManager.GetString("Progress_RecordingTime_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Progress_RecordingTimeWithPause_label_text {
+            get {
+                return ResourceManager.GetString("Progress_RecordingTimeWithPause_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Until day.
         /// </summary>
         internal static string Progress_To_label_text {
             get {

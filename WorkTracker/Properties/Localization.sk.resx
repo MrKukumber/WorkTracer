@@ -214,23 +214,11 @@ Naozaj chceš odísť?</value>
   <data name="Progress_To_label_text" xml:space="preserve">
     <value>Do dňa</value>
   </data>
-  <data name="Progress_Days7_label_text" xml:space="preserve">
-    <value>7 dní</value>
-  </data>
-  <data name="Progress_Month_label_text" xml:space="preserve">
-    <value>Mesiace</value>
-  </data>
-  <data name="Progress_DayMean_label_text" xml:space="preserve">
-    <value>Množstvo práce spravenej v jednotlivých hodinách dňa</value>
-  </data>
-  <data name="Progress_CompDuration_label_text" xml:space="preserve">
+  <data name="Progress_CompDurationText_label_text" xml:space="preserve">
     <value>Doba práce:</value>
   </data>
-  <data name="Progress_CompDurationWithStop_label_text" xml:space="preserve">
+  <data name="Progress_CompDurationWithStopText_label_text" xml:space="preserve">
     <value>Doba práce (zahrňujúc pozastavené úseky):</value>
-  </data>
-  <data name="Progress_Day_label_text" xml:space="preserve">
-    <value>Dni</value>
   </data>
   <data name="Recording_form_text" xml:space="preserve">
     <value>Nahrávanie</value>
@@ -329,5 +317,13 @@ Vybraný neplatný projekt</value>
 
 
      Vybraný neplatný projekt</value>
+  </data>
+  <data name="Progress_NoCommitFound_richTextBox_text" xml:space="preserve">
+    <value>
+
+
+
+       V danom rozpätí nieje
+           žiadny commit</value>
   </data>
 </root>

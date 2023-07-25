@@ -61,9 +61,7 @@ namespace WorkTracker
             ProjNotSelected_label.Text = Localization.Main_ProjNotSelected_label_text;
             TortoiseFileNotSelected_label.Text = Localization.Main_TortoiseFileNotSelected_label_text;
             if (ModesMan.modeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Main_Commit_richTextBox_local_mode_text;
-            CurrTrackState_label.Text = RecordingMan.StatesLocalizations[(int)RecordingMan.recState];
-            CommitMan.CommitViewer.ShowCommitInMain();
-            
+            CurrTrackState_label.Text = RecordingMan.StatesLocalizations[(int)RecordingMan.recState];            
         }
 
         public void SetTortoiseFileNotSelected_labelVisible(bool indicator) => TortoiseFileNotSelected_label.Visible = indicator;

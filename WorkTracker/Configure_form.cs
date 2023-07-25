@@ -147,6 +147,7 @@ namespace WorkTracker
             Program.recording_form.Relabel();
             Program.commit_form.Relabel();
             Program.progress_form.Relabel();
+            CommitMan.CheckAndSetCommit_richTextBoxes();
         }
     }
 
@@ -185,7 +186,7 @@ namespace WorkTracker
             TortoiseGitMan.CheckAndSetTGit_dir();
             ProjectMan.CheckAndSetProj_dir();
             RecordingMan.AdaptToEnviromentWithOldProj();
-            CommitMan.CheckAndSetCommitTexts();
+            CommitMan.CheckAndSetCommit_richTextBoxes(0);
         }
 
         public abstract class Mode
@@ -197,8 +198,8 @@ namespace WorkTracker
             public abstract void VisitForSetFalseTGit_dir();
             public abstract RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state);
             public abstract void VisitForStop_roundButton_Click(object sender, EventArgs e);
-            public abstract void VisitForCheckAndSetLastCommitInMain();
-
+            public abstract void VisitForCheckAndSetCommitInProgress(int? commitIndex);
+            public abstract void VisitForCheckAndSetCommitInMain();
         }
 
         public class LocalMode : Mode
@@ -210,7 +211,6 @@ namespace WorkTracker
 
                 Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Olive);
 
-                Program.progress_form.SetCommit_dateTimePickerEnabled(false);
                 Program.progress_form.WriteToCommit_richTextBox(Localization.Progress_Commit_richTextBox_local_mode_text);
             }
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
@@ -219,20 +219,19 @@ namespace WorkTracker
             public override bool VisitForIsTGitValid() => ResourceControlMan.IsTGitValid(this);
             public override RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state) => state.CreateRecord(this);
             public override void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
-            public override void VisitForCheckAndSetLastCommitInMain() => CommitMan.CheckAndSetLastCommitInMain(this);
+            public override void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.CheckAndSetCommitInProgress(this, commitIndex);
+            public override void VisitForCheckAndSetCommitInMain() => CommitMan.CheckAndSetCommitInMain(this);
 
         }
         public class ReposMode : Mode
         {
             public override void SetMode()
             {
-                CommitMan.CommitViewer.ShowCommitInMain();              
                 Program.main_form.SetMode_label();
 
                 Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Black);
 
                 Program.progress_form.WriteToCommit_richTextBox(""); //TODO:write commit of date in dateTimePicker
-                Program.progress_form.SetCommit_dateTimePickerEnabled(true);
             }
             public override void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public override void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
@@ -240,8 +239,8 @@ namespace WorkTracker
             public override bool VisitForIsTGitValid() => ResourceControlMan.IsTGitValid(this);
             public override RecordingMan.Record VisitForCreateRecord(RecordingMan.StopedRecState state) => state.CreateRecord(this);
             public override void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
-            public override void VisitForCheckAndSetLastCommitInMain() => CommitMan.CheckAndSetLastCommitInMain(this);
-
+            public override void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.CheckAndSetCommitInProgress(this, commitIndex);
+            public override void VisitForCheckAndSetCommitInMain() => CommitMan.CheckAndSetCommitInMain(this);
         }
     }
 }
