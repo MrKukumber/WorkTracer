@@ -39,18 +39,26 @@ namespace Testovanie_funkcionalit
 
         public static string IsHereRepo(string directory)
         {
+            var since = new DateTime(2023, 7, 15);
+            var until = new DateTime(2023, 7, 30);
             using (Process p = new Process())
             {
                 p.StartInfo.WorkingDirectory = $"{directory}";
                 p.StartInfo.FileName = "git";
-                p.StartInfo.Arguments = $"log -1 --pretty=%B";
+                p.StartInfo.Arguments = $"log --oneline " +
+                    $"--since=\"{since.ToString("yyyy-MM-dd")}\" " +
+                    $"--until=\"{until.ToString("yyyy-MM-dd")}\" " +
+                     "--pretty=format:\"%C(auto)(%cr)%Creset\n\n%B\u0003\"";
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.CreateNoWindow = true;
                 p.Start();
 
-                var output = p.StandardOutput.ReadToEnd();
+                var output = p.StandardOutput.ReadToEnd() + "\n";
                 p.WaitForExit();
                 var e = p.ExitCode;
+                string[] commitTexts = output.Split("\n\u0003\n");
+                commitTexts = commitTexts[0..(commitTexts.Length - 1)];
+                Array.Reverse(commitTexts);
                 return output;
             }
         }

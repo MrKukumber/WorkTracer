@@ -38,7 +38,6 @@ namespace Testovanie_funkcionalit
             InitializeComponent();
             label1.Text = Loc.Commit_WantCommit_label_text;
         }
-        int a = 0;
         private void OpenTGitButton_Click(object sender, EventArgs e)
         {
             int exitCode = Program.OpenTGitCommitForm("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\skusam tortoise");
@@ -78,7 +77,7 @@ namespace Testovanie_funkcionalit
 
         private void IsHereRepo_button_Click(object sender, EventArgs e)
         {
-            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\skusam tortoise");
+            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker");
             //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker
             richTextBox1.Text = exit;
         }
@@ -94,7 +93,7 @@ namespace Testovanie_funkcionalit
 
         private void readFromCsv_button_Click(object sender, EventArgs e)
         {
-            Record? lastRecord;
+            //Record? lastRecord;
             using (var reader = new StreamReader("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\skusam tortoise" + "\\" + ".workTracer_recordings.csv"))
             using (var csv = new CsvReader(reader, basicConfig))
             {

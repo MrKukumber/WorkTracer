@@ -32,7 +32,6 @@
             this.Commit_richTextBox = new System.Windows.Forms.RichTextBox();
             this.Commit_vScrollBar = new System.Windows.Forms.VScrollBar();
             this.CompDurationText_label = new System.Windows.Forms.Label();
-            this.Since_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.Until_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.Since_label = new System.Windows.Forms.Label();
             this.Until_label = new System.Windows.Forms.Label();
@@ -52,6 +51,9 @@
             this.CompDuration_label = new System.Windows.Forms.Label();
             this.CompDurationwithPause_label = new System.Windows.Forms.Label();
             this.RangeCommit_label = new System.Windows.Forms.Label();
+            this.SameDate_label = new System.Windows.Forms.Label();
+            this.SameDate_checkBox = new System.Windows.Forms.CheckBox();
+            this.Since_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,15 +99,6 @@
             this.CompDurationText_label.Size = new System.Drawing.Size(495, 32);
             this.CompDurationText_label.TabIndex = 11;
             this.CompDurationText_label.Text = "CompDurationText_label";
-            // 
-            // Since_dateTimePicker
-            // 
-            this.Since_dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Since_dateTimePicker.Location = new System.Drawing.Point(413, 32);
-            this.Since_dateTimePicker.Name = "Since_dateTimePicker";
-            this.Since_dateTimePicker.Size = new System.Drawing.Size(248, 27);
-            this.Since_dateTimePicker.TabIndex = 12;
-            this.Since_dateTimePicker.ValueChanged += new System.EventHandler(this.Since_dateTimePicker_ValueChanged);
             // 
             // Until_dateTimePicker
             // 
@@ -311,11 +304,41 @@
             this.RangeCommit_label.Text = "RangeCommit_label";
             this.RangeCommit_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // SameDate_label
+            // 
+            this.SameDate_label.Location = new System.Drawing.Point(655, 9);
+            this.SameDate_label.Name = "SameDate_label";
+            this.SameDate_label.Size = new System.Drawing.Size(141, 20);
+            this.SameDate_label.TabIndex = 32;
+            this.SameDate_label.Text = "SameDate_label";
+            this.SameDate_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // SameDate_checkBox
+            // 
+            this.SameDate_checkBox.AutoSize = true;
+            this.SameDate_checkBox.Location = new System.Drawing.Point(715, 37);
+            this.SameDate_checkBox.Name = "SameDate_checkBox";
+            this.SameDate_checkBox.Size = new System.Drawing.Size(18, 17);
+            this.SameDate_checkBox.TabIndex = 33;
+            this.SameDate_checkBox.UseVisualStyleBackColor = true;
+            this.SameDate_checkBox.CheckedChanged += new System.EventHandler(this.SameDate_checkBox_CheckedChanged);
+            // 
+            // Since_dateTimePicker
+            // 
+            this.Since_dateTimePicker.Location = new System.Drawing.Point(413, 37);
+            this.Since_dateTimePicker.Name = "Since_dateTimePicker";
+            this.Since_dateTimePicker.Size = new System.Drawing.Size(250, 27);
+            this.Since_dateTimePicker.TabIndex = 34;
+            this.Since_dateTimePicker.ValueChanged += new System.EventHandler(this.Since_dateTimePicker_ValueChanged);
+            // 
             // Progress_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 495);
+            this.Controls.Add(this.Since_dateTimePicker);
+            this.Controls.Add(this.SameDate_checkBox);
+            this.Controls.Add(this.SameDate_label);
             this.Controls.Add(this.RangeCommit_label);
             this.Controls.Add(this.CompDurationwithPause_label);
             this.Controls.Add(this.CompDuration_label);
@@ -329,7 +352,6 @@
             this.Controls.Add(this.Until_label);
             this.Controls.Add(this.Since_label);
             this.Controls.Add(this.Until_dateTimePicker);
-            this.Controls.Add(this.Since_dateTimePicker);
             this.Controls.Add(this.CompDurationText_label);
             this.Controls.Add(this.Commit_vScrollBar);
             this.Controls.Add(this.Commit_richTextBox);
@@ -349,7 +371,6 @@
         private RichTextBox Commit_richTextBox;
         private VScrollBar Commit_vScrollBar;
         private Label CompDurationText_label;
-        private DateTimePicker Since_dateTimePicker;
         private DateTimePicker Until_dateTimePicker;
         private Label Since_label;
         private Label Until_label;
@@ -369,5 +390,8 @@
         private Label CompDuration_label;
         private Label CompDurationwithPause_label;
         private Label RangeCommit_label;
+        private Label SameDate_label;
+        private CheckBox SameDate_checkBox;
+        private DateTimePicker Since_dateTimePicker;
     }
 }

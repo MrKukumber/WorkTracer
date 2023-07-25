@@ -238,6 +238,8 @@ namespace WorkTracker
             {
                 DateTime since = Program.progress_form.GetSince_dateTimePickerDate();
                 DateTime until = Program.progress_form.GetUntil_dateTimePickerDate();
+                since = since.Date.Add(new TimeSpan(0, 0, 0));
+                until = until.Date.Add(new TimeSpan(23, 59, 59));
                 return TryGetCommitTextsFromRange(since, until, out commitsFromRangeInProgress);
             }
 
@@ -294,8 +296,8 @@ namespace WorkTracker
                     p.StartInfo.WorkingDirectory = ProjectMan.Proj_dir;
                     p.StartInfo.FileName = "git";
                     p.StartInfo.Arguments = "log --oneline " +
-                        $"--since=\"{since.ToString("yyyy-MM-dd")}\" " +
-                        $"--until=\"{until.ToString("yyyy-MM-dd")}\" " +
+                        $"--since=\"{since.ToString("yyyy-MM-dd HH:mm")}\" " +
+                        $"--until=\"{until.ToString("yyyy-MM-dd HH:mm")}\" " +
                          "--pretty=format:\"%C(auto)(%cr)%Creset\n\n%B\u0003\"";
                     p.StartInfo.RedirectStandardOutput = true;
                     p.StartInfo.CreateNoWindow = true;

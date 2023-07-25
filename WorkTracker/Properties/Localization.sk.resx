@@ -326,4 +326,7 @@ Vybraný neplatný projekt</value>
        V danom rozpätí nieje
            žiadny commit</value>
   </data>
+  <data name="Progress_SameDate_label_text" xml:space="preserve">
+    <value>Rovnaký dátum</value>
+  </data>
 </root>

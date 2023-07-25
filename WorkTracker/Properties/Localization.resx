@@ -357,4 +357,7 @@ Invalid project selected</value>
           in given range
 </value>
   </data>
+  <data name="Progress_SameDate_label_text" xml:space="preserve">
+    <value>Same date</value>
+  </data>
 </root>

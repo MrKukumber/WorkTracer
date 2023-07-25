@@ -54,6 +54,7 @@ namespace WorkTracker
             this.Text = Localization.Progress_form_text;
             Since_label.Text = Localization.Progress_From_label_text;
             Until_label.Text = Localization.Progress_To_label_text;
+            SameDate_label.Text = Localization.Progress_SameDate_label_text;
             //TODO: doplnit vysledne hodnoty doby prace 
             CompDurationText_label.Text = Localization.Progress_CompDurationText_label_text;
             CompDurationWithPauseText_label.Text = Localization.Progress_CompDurationWithStopText_label_text;
@@ -71,13 +72,36 @@ namespace WorkTracker
 
         private void Since_dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
+            if (SameDate_checkBox.Checked) Until_dateTimePicker.Value = Since_dateTimePicker.Value;
+            else Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
             CommitMan.CheckAndSetCommitInProgress();
         }
 
         private void Until_dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
+            
+            if (SameDate_checkBox.Checked) Since_dateTimePicker.Value = Until_dateTimePicker.Value;
+            else Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
             CommitMan.CheckAndSetCommitInProgress();
         }
+
+        private void SameDate_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SameDate_checkBox.Checked)
+            {
+                Since_dateTimePicker.MaxDate = Until_dateTimePicker.MaxDate;
+                Until_dateTimePicker.MinDate = Since_dateTimePicker.MinDate;
+                Until_dateTimePicker.Value = Since_dateTimePicker.Value;
+                Until_dateTimePicker.Enabled = false;
+            }
+            else
+            {
+                Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
+                Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
+                Until_dateTimePicker.Enabled = true;
+            }
+        }
+
     }
 
     static public class ProgressShowingMan

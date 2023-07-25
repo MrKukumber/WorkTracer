@@ -552,6 +552,15 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Same date.
+        /// </summary>
+        internal static string Progress_SameDate_label_text {
+            get {
+                return ResourceManager.GetString("Progress_SameDate_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Until day.
         /// </summary>
         internal static string Progress_To_label_text {
