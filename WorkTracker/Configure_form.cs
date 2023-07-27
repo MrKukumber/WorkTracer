@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
@@ -263,5 +264,166 @@ namespace WorkTracker
             public void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.CheckAndSetCommitInProgress(this, commitIndex);
             public void VisitForCheckAndSetCommitInMain() => CommitMan.CheckAndSetCommitInMain(this);
         }
+    }
+    internal static class TortoiseGitMan
+    {
+        static public string TGit_dir { get => tGit_dir; }
+        static private string tGit_dir = "";
+        static public void Initialize(string init_tGit_dir)
+        {
+            tGit_dir = init_tGit_dir;
+            CheckAndSetTGit_dir();
+        }
+        static public void ChooseTGitFromDialog()
+        {
+            using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    tGit_dir = openFileDialog.SelectedPath;
+                    CheckAndSetTGit_dir();
+                    if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+                    RecordingMan.AdaptToEnviromentWithOldProj();
+                }
+                else
+                {
+                    MessageBox.Show(Localization.SomethingWentWrongTGitDialog);
+                }
+            }
+        }
+        static public bool ExistsTG() => File.Exists(tGit_dir + "\\TortoiseGitProc.exe");
+        static public void CheckAndSetTGit_dir()
+        {
+            if (ResourceControlMan.IsTGitValid()) SetRightTGit_dir();
+            else SetFalseTGit_dir();
+        }
+        static private void SetRightTGit_dir() => ModesMan.visitMode.VisitForSetRightTGit_dir();
+        static public void SetRightTGit_dir(ModesMan.VisitLocalMode mode)
+        {
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Olive);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+        }
+        static public void SetRightTGit_dir(ModesMan.VisitReposMode mode)
+        {
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Black);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+        }
+        static private void SetFalseTGit_dir() => ModesMan.visitMode.VisitForSetFalseTGit_dir();
+        static public void SetFalseTGit_dir(ModesMan.VisitLocalMode mode)
+        {
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Olive);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
+        }
+        static public void SetFalseTGit_dir(ModesMan.VisitReposMode mode)
+        {
+            Program.configure_form.SetTGitDir_label(tGit_dir);
+            Program.configure_form.SetTGitDir_labelColor(Color.Red);
+            Program.main_form.SetTortoiseFileNotSelected_labelVisible(true);
+        }
+
+        static public void WriteTGit_dirTo(StreamWriter file) => file.WriteLine("tgit_dir " + tGit_dir);
+
+
+
+    }
+    internal static class ProjectMan
+    {
+        private const string csvRecordFileName = ".workTracer_recordings.csv";
+        static public string Proj_dir { get => proj_dir; }
+        static private string proj_dir = "";
+        static public void Initialize(string init_proj_dir)
+        {
+            proj_dir = init_proj_dir;
+            CheckAndSetProj_dir();
+        }
+        static public string PathToCSVRecordFile { get => proj_dir + "\\" + csvRecordFileName; }
+        static public bool ExistsRecordCSV() => File.Exists(proj_dir + "\\" + csvRecordFileName);
+        static public void ChooseProjectFromDialog()
+        {
+            using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    proj_dir = openFileDialog.SelectedPath;
+                    if (ModesMan.modeI is ModesMan.ModesI.repos && Directory.Exists(proj_dir) && !IsThereRepo())
+                    {
+                        YesNoDialog_form wantToCreateRepoDialog_form = new YesNoDialog_form(Localization.Configure_WantToCreateRepoDialog, Localization.Yes, Localization.No);
+                        wantToCreateRepoDialog_form.ShowDialog();
+                        if (wantToCreateRepoDialog_form.DialogResult is DialogResult.Yes) CreateRepo();
+                    }
+                    CheckAndSetProj_dir();
+                    if (!ResourceControlMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
+                    RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
+                    ProgressShowingMan.CheckAndSetDateTimePickersInProgress(true, out _);
+                    CommitMan.CheckAndSetCommit_richTextBoxes(0);
+                    if (!ableToAccessCSV) MessageBox.Show(Localization.Config_UnableToAccessCSV);
+                }
+                else MessageBox.Show(Localization.SomethingWentWrongProjectDialog);
+            }
+        }
+        public static bool ExistsProjDir() => Directory.Exists(proj_dir);
+        public static bool IsThereRepo()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo.WorkingDirectory = proj_dir;
+                p.StartInfo.FileName = "git";
+                p.StartInfo.Arguments = "rev-parse --is-inside-work-tree";
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                var output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+
+                return output == "true\n";
+            }
+        }
+        public static void WriteProj_dirTo(StreamWriter file) => file.WriteLine("last_proj_dir " + proj_dir);
+
+        static public void CheckAndSetProj_dir()
+        {
+            if (ResourceControlMan.IsProjValid()) SetRightProj_dir();
+            else SetFalseProj_dir();
+
+        }
+
+        static private void SetRightProj_dir()
+        {
+            Program.configure_form.SetProjDir_label(proj_dir);
+            Program.configure_form.SetProjDir_labelColor(Color.Black);
+
+            Program.main_form.SetProjNotSelected_labelVisible(false);
+            Program.main_form.SetProgressFormOpening_buttonEnabled(true);
+        }
+
+        static private void SetFalseProj_dir()
+        {
+            Program.configure_form.SetProjDir_label(proj_dir);
+            Program.configure_form.SetProjDir_labelColor(Color.Red);
+
+            Program.main_form.SetProjNotSelected_labelVisible(true);
+            Program.main_form.SetProgressFormOpening_buttonEnabled(false);
+        }
+
+        private static void CreateRepo()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo.WorkingDirectory = proj_dir;
+                p.StartInfo.FileName = "git";
+                p.StartInfo.Arguments = "init";
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                p.WaitForExit();
+            }
+        }
+
+
     }
 }

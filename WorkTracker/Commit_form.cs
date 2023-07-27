@@ -186,7 +186,6 @@ namespace WorkTracker
         static public void CheckAndSetCommitInMain(ModesMan.VisitLocalMode mode)
         {
             Program.main_form.WriteToCommit_richTextBox(Localization.Main_Commit_richTextBox_local_mode_text);
-
         }
 
         static private bool TryGetLastCommitCode(out string commitCode)

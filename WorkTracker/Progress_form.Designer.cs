@@ -54,6 +54,10 @@
             this.SameDate_label = new System.Windows.Forms.Label();
             this.SameDate_checkBox = new System.Windows.Forms.CheckBox();
             this.Since_dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.RecordSinceText_label = new System.Windows.Forms.Label();
+            this.RecordSinceDate_label = new System.Windows.Forms.Label();
+            this.RecordUntilText_label = new System.Windows.Forms.Label();
+            this.RecordUntilDate_label = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +112,6 @@
             this.Until_dateTimePicker.Size = new System.Drawing.Size(250, 27);
             this.Until_dateTimePicker.TabIndex = 13;
             this.Until_dateTimePicker.CloseUp += new System.EventHandler(this.Until_dateTimePicker_CloseUp);
-            this.Until_dateTimePicker.ValueChanged += new System.EventHandler(this.Until_dateTimePicker_ValueChanged);
             // 
             // Since_label
             // 
@@ -220,7 +223,7 @@
             this.tableLayoutPanel1.Controls.Add(this.CreatDurationWithPause_label, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ProgrDurationWithPause_label, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.CreatDuration_label, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(527, 166);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(534, 156);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -231,7 +234,7 @@
             // RecordingTimeWithPause_label
             // 
             this.RecordingTimeWithPause_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RecordingTimeWithPause_label.Location = new System.Drawing.Point(358, 228);
+            this.RecordingTimeWithPause_label.Location = new System.Drawing.Point(365, 218);
             this.RecordingTimeWithPause_label.Name = "RecordingTimeWithPause_label";
             this.RecordingTimeWithPause_label.Size = new System.Drawing.Size(163, 44);
             this.RecordingTimeWithPause_label.TabIndex = 24;
@@ -241,7 +244,7 @@
             // RecordingTime_label
             // 
             this.RecordingTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RecordingTime_label.Location = new System.Drawing.Point(358, 173);
+            this.RecordingTime_label.Location = new System.Drawing.Point(365, 163);
             this.RecordingTime_label.Name = "RecordingTime_label";
             this.RecordingTime_label.Size = new System.Drawing.Size(163, 20);
             this.RecordingTime_label.TabIndex = 25;
@@ -251,7 +254,7 @@
             // CreatTime_label
             // 
             this.CreatTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CreatTime_label.Location = new System.Drawing.Point(530, 130);
+            this.CreatTime_label.Location = new System.Drawing.Point(537, 120);
             this.CreatTime_label.Name = "CreatTime_label";
             this.CreatTime_label.Size = new System.Drawing.Size(163, 33);
             this.CreatTime_label.TabIndex = 26;
@@ -261,7 +264,7 @@
             // ProgrTime_label
             // 
             this.ProgrTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ProgrTime_label.Location = new System.Drawing.Point(699, 130);
+            this.ProgrTime_label.Location = new System.Drawing.Point(706, 120);
             this.ProgrTime_label.Name = "ProgrTime_label";
             this.ProgrTime_label.Size = new System.Drawing.Size(172, 33);
             this.ProgrTime_label.TabIndex = 27;
@@ -271,7 +274,7 @@
             // DebugTime_label
             // 
             this.DebugTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DebugTime_label.Location = new System.Drawing.Point(877, 130);
+            this.DebugTime_label.Location = new System.Drawing.Point(884, 120);
             this.DebugTime_label.Name = "DebugTime_label";
             this.DebugTime_label.Size = new System.Drawing.Size(171, 33);
             this.DebugTime_label.TabIndex = 28;
@@ -331,13 +334,50 @@
             this.Since_dateTimePicker.Size = new System.Drawing.Size(250, 27);
             this.Since_dateTimePicker.TabIndex = 34;
             this.Since_dateTimePicker.CloseUp += new System.EventHandler(this.Since_dateTimePicker_CloseUp);
-            this.Since_dateTimePicker.ValueChanged += new System.EventHandler(this.Since_dateTimePicker_ValueChanged);
+            // 
+            // RecordSinceText_label
+            // 
+            this.RecordSinceText_label.Location = new System.Drawing.Point(413, 67);
+            this.RecordSinceText_label.Name = "RecordSinceText_label";
+            this.RecordSinceText_label.Size = new System.Drawing.Size(132, 20);
+            this.RecordSinceText_label.TabIndex = 35;
+            this.RecordSinceText_label.Text = "RecordSinceText_label";
+            this.RecordSinceText_label.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // RecordSinceDate_label
+            // 
+            this.RecordSinceDate_label.Location = new System.Drawing.Point(551, 67);
+            this.RecordSinceDate_label.Name = "RecordSinceDate_label";
+            this.RecordSinceDate_label.Size = new System.Drawing.Size(110, 20);
+            this.RecordSinceDate_label.TabIndex = 36;
+            this.RecordSinceDate_label.Text = "RecordSinceDate_label";
+            // 
+            // RecordUntilText_label
+            // 
+            this.RecordUntilText_label.Location = new System.Drawing.Point(788, 67);
+            this.RecordUntilText_label.Name = "RecordUntilText_label";
+            this.RecordUntilText_label.Size = new System.Drawing.Size(135, 20);
+            this.RecordUntilText_label.TabIndex = 37;
+            this.RecordUntilText_label.Text = "RecordUntilText_label";
+            this.RecordUntilText_label.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // RecordUntilDate_label
+            // 
+            this.RecordUntilDate_label.Location = new System.Drawing.Point(929, 67);
+            this.RecordUntilDate_label.Name = "RecordUntilDate_label";
+            this.RecordUntilDate_label.Size = new System.Drawing.Size(109, 20);
+            this.RecordUntilDate_label.TabIndex = 38;
+            this.RecordUntilDate_label.Text = "RecordUntilDate_label";
             // 
             // Progress_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 495);
+            this.Controls.Add(this.RecordUntilDate_label);
+            this.Controls.Add(this.RecordUntilText_label);
+            this.Controls.Add(this.RecordSinceDate_label);
+            this.Controls.Add(this.RecordSinceText_label);
             this.Controls.Add(this.Since_dateTimePicker);
             this.Controls.Add(this.SameDate_checkBox);
             this.Controls.Add(this.SameDate_label);
@@ -361,7 +401,6 @@
             this.Name = "Progress_form";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Progress_form_FormClosing);
-            this.Shown += new System.EventHandler(this.Progress_form_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -396,5 +435,9 @@
         private Label SameDate_label;
         private CheckBox SameDate_checkBox;
         private DateTimePicker Since_dateTimePicker;
+        private Label RecordSinceText_label;
+        private Label RecordSinceDate_label;
+        private Label RecordUntilText_label;
+        private Label RecordUntilDate_label;
     }
 }

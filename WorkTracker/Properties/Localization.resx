@@ -294,7 +294,7 @@ It will not be possible to make any record, unless is this problem fixed.
 After recovering of access to record file you can choose project again.</value>
   </data>
   <data name="NonValidChangeOfProject_dir" xml:space="preserve">
-    <value>The directory of Project was changed.
+    <value>The directory of project or access to git repository was changed.
 Please revert changes of project directory or choose another valid project in configuration.</value>
   </data>
   <data name="NonValidChangeOfTGit_dir" xml:space="preserve">
@@ -366,5 +366,11 @@ with pauses</value>
     <value>Application was unable access the record file of project, because it is used by other process.
 Try to close all processes, that make impossible to access this file.
 Until the problem is not solved, it will not be possible to see the results.</value>
+  </data>
+  <data name="Progress_RecordSinceText_label_text" xml:space="preserve">
+    <value>Recorded since:</value>
+  </data>
+  <data name="Progress_RecordUntilText_label_text" xml:space="preserve">
+    <value>Recorded until:</value>
   </data>
 </root>

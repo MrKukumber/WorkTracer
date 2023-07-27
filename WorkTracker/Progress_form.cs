@@ -57,6 +57,7 @@ namespace WorkTracker
         private void Since_dateTimePicker_CloseUp(object sender, EventArgs e)
         {
             if (SameDate_checkBox.Checked) Until_dateTimePicker.Value = Since_dateTimePicker.Value;
+            else Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
             CommitMan.CheckAndSetCommitInProgress();
             ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
             if (!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
@@ -65,18 +66,10 @@ namespace WorkTracker
         private void Until_dateTimePicker_CloseUp(object sender, EventArgs e)
         {
             if (SameDate_checkBox.Checked) Since_dateTimePicker.Value = Until_dateTimePicker.Value;
+            else Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
             CommitMan.CheckAndSetCommitInProgress();
             ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
             if(!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
-        }
-        private void Since_dateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            if (!SameDate_checkBox.Checked) Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
-        }
-
-        private void Until_dateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            if (!SameDate_checkBox.Checked) Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
         }
         private void SameDate_checkBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -93,6 +86,8 @@ namespace WorkTracker
                 Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
                 Until_dateTimePicker.Enabled = true;
             }
+            CommitMan.CheckAndSetCommitInProgress();
+            ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
         }
 
         public void Relabel()
@@ -100,6 +95,8 @@ namespace WorkTracker
             this.Text = Localization.Progress_form_text;
             Since_label.Text = Localization.Progress_From_label_text;
             Until_label.Text = Localization.Progress_To_label_text;
+            RecordSinceText_label.Text = Localization.Progress_RecordSinceText_label_text;
+            RecordUntilText_label.Text = Localization.Progress_RecordUntilText_label_text;
             SameDate_label.Text = Localization.Progress_SameDate_label_text;
             //TODO: doplnit vysledne hodnoty doby prace 
             RecordingTime_label.Text = Localization.Progress_RecordingTime_label_text;
@@ -128,21 +125,19 @@ namespace WorkTracker
         public void EnableCommit_vScrollBar(bool indicator) => Commit_vScrollBar.Enabled = indicator;
         public DateTime GetFullSince_dateTimePickerDate() => Since_dateTimePicker.Value.Date.Add(new TimeSpan(0, 0, 0));
         public DateTime GetFullUntil_dateTimePickerDate() => Until_dateTimePicker.Value.Date.Add(new TimeSpan(23, 59, 59));
-        public void SetSince_dateTimePickerMinDate(DateTime minDate) => Since_dateTimePicker.MinDate = minDate;
         public void SetUntil_dateTimePickerMinDate(DateTime minDate) => Until_dateTimePicker.MinDate = minDate;
         public void SetSince_dateTimePickerMaxDate(DateTime maxDate) => Since_dateTimePicker.MaxDate = maxDate;
-        public void SetUntil_dateTimePickerMaxDate(DateTime maxDate) => Until_dateTimePicker.MaxDate = maxDate;
         public void SetSince_dateTimePickerValue(DateTime value) => Since_dateTimePicker.Value = value;
         public void SetUntil_dateTimePickerValue(DateTime value) => Until_dateTimePicker.Value = value;
+        public void SetRecordSinceDate_labelText(string date) => RecordSinceDate_label.Text = date;
+        public void SetRecordUntilDate_labelText(string date) => RecordUntilDate_label.Text = date;
         public void SetCommit_vScrollBarMaximum(int maximum) => Commit_vScrollBar.Maximum = maximum;
         public int Commit_vScrollValue { get => Commit_vScrollBar.Value; set => Commit_vScrollBar.Value = value; }
 
-        private void Progress_form_Shown(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
-
-
     }
 
     static public class ProgressShowingMan
@@ -182,8 +177,19 @@ namespace WorkTracker
                     {
                         DateTime firstDateTime = first.Date.ToDateTime(first.Time);
                         DateTime lastDateTime = last.Date.ToDateTime(last.Time);
-                        if (ResetValues || Program.progress_form.GetFullSince_dateTimePickerDate() < firstDateTime) Program.progress_form.SetSince_dateTimePickerValue(firstDateTime);
-                        if (ResetValues || Program.progress_form.GetFullUntil_dateTimePickerDate() > lastDateTime) Program.progress_form.SetUntil_dateTimePickerValue(lastDateTime);
+                        if (ResetValues || Program.progress_form.GetFullSince_dateTimePickerDate() < firstDateTime)
+                        {
+                            Program.progress_form.SetSince_dateTimePickerMaxDate(lastDateTime);
+                            Program.progress_form.SetSince_dateTimePickerValue(firstDateTime);
+                            Program.progress_form.SetRecordSinceDate_labelText(firstDateTime.ToString("dd.MM.yyyy"));
+                        }
+                        if (ResetValues || Program.progress_form.GetFullUntil_dateTimePickerDate() > lastDateTime)
+                        {
+                            Program.progress_form.SetUntil_dateTimePickerMinDate(firstDateTime);
+                            Program.progress_form.SetUntil_dateTimePickerValue(lastDateTime);
+                            Program.progress_form.SetRecordUntilDate_labelText(lastDateTime.ToString("dd.MM.yyyy"));
+
+                        }
                     }
                 }
                 catch (System.IO.IOException)

@@ -347,7 +347,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The directory of Project was changed.
+        ///   Looks up a localized string similar to The directory of project or access to git repository was changed.
         ///Please revert changes of project directory or choose another valid project in configuration..
         /// </summary>
         internal static string NonValidChangeOfProject_dir {
@@ -550,6 +550,24 @@ namespace WorkTracker.Properties {
         internal static string Progress_RecordingTimeWithPause_label_text {
             get {
                 return ResourceManager.GetString("Progress_RecordingTimeWithPause_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recorded since:.
+        /// </summary>
+        internal static string Progress_RecordSinceText_label_text {
+            get {
+                return ResourceManager.GetString("Progress_RecordSinceText_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recorded until:.
+        /// </summary>
+        internal static string Progress_RecordUntilText_label_text {
+            get {
+                return ResourceManager.GetString("Progress_RecordUntilText_label_text", resourceCulture);
             }
         }
         
