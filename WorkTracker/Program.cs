@@ -38,10 +38,23 @@ namespace WorkTracker
         public static Progress_form progress_form = new Progress_form();
         public static Commit_form commit_form = new Commit_form();
 
-        static public void CheckAfterActivatingApp()
+        private static bool messageAlreadyShown = false;
+        static public void CheckAfterActivatingApp(Form form)
         {
-            ResourceControlMan.CheckAndSetResources();
+            ResourceControlMan.CheckAndSetResources(out bool ableToAccessCSV);
+            ProgressShowingMan.CheckAndSetDateTimePickersInProgress(false, out _);
             CommitMan.CheckAndSetCommit_richTextBoxes();
+            ProgressShowingMan.SetAndShowProgression(out _);
+            if (!ableToAccessCSV && !messageAlreadyShown)
+            {
+                if (form is Progress_form) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
+                else MessageBox.Show(Localization.Config_UnableToAccessCSV);
+                messageAlreadyShown = true;
+            }
+            else
+            {
+                messageAlreadyShown = false;
+            }
         }
     }
     
@@ -94,8 +107,8 @@ namespace WorkTracker
             ProjectMan.Initialize(init_params["last_proj_dir"]);
             LocalizationMan.Initialize(init_params["lang"]);
             RecordingMan.Initialize();
-            CommitMan.Initialize();
             ProgressShowingMan.Initialize();
+            CommitMan.Initialize();
         }
 
  
@@ -135,27 +148,27 @@ namespace WorkTracker
             if (ResourceControlMan.IsTGitValid()) SetRightTGit_dir();
             else SetFalseTGit_dir();
         }
-        static private void SetRightTGit_dir() => ModesMan.mode.VisitForSetRightTGit_dir();
-        static public void SetRightTGit_dir(ModesMan.LocalMode mode)
+        static private void SetRightTGit_dir() => ModesMan.visitMode.VisitForSetRightTGit_dir();
+        static public void SetRightTGit_dir(ModesMan.VisitLocalMode mode)
         {
             Program.configure_form.SetTGitDir_label(tGit_dir);
             Program.configure_form.SetTGitDir_labelColor(Color.Olive);
             Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
         }
-        static public void SetRightTGit_dir(ModesMan.ReposMode mode)
+        static public void SetRightTGit_dir(ModesMan.VisitReposMode mode)
         {
             Program.configure_form.SetTGitDir_label(tGit_dir);
             Program.configure_form.SetTGitDir_labelColor(Color.Black);
             Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
         }
-        static private void SetFalseTGit_dir() => ModesMan.mode.VisitForSetFalseTGit_dir();
-        static public void SetFalseTGit_dir(ModesMan.LocalMode mode)
+        static private void SetFalseTGit_dir() => ModesMan.visitMode.VisitForSetFalseTGit_dir();
+        static public void SetFalseTGit_dir(ModesMan.VisitLocalMode mode)
         {
             Program.configure_form.SetTGitDir_label(tGit_dir);
             Program.configure_form.SetTGitDir_labelColor(Color.Olive);
             Program.main_form.SetTortoiseFileNotSelected_labelVisible(false);
         }
-        static public void SetFalseTGit_dir(ModesMan.ReposMode mode)
+        static public void SetFalseTGit_dir(ModesMan.VisitReposMode mode)
         {
             Program.configure_form.SetTGitDir_label(tGit_dir);
             Program.configure_form.SetTGitDir_labelColor(Color.Red);
@@ -195,6 +208,7 @@ namespace WorkTracker
                     CheckAndSetProj_dir();
                     if (!ResourceControlMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
                     RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
+                    ProgressShowingMan.CheckAndSetDateTimePickersInProgress(true, out _);
                     CommitMan.CheckAndSetCommit_richTextBoxes(0);
                     if(!ableToAccessCSV) MessageBox.Show(Localization.Config_UnableToAccessCSV);
                 }
@@ -268,10 +282,9 @@ namespace WorkTracker
     {
         static public bool LastProjValidity { get; private set; }
         static public bool LastTGitValidity { get; private set; }
-        static public bool IsProjValid() => ModesMan.mode.VisitForIsProjectValid();
-        static public bool IsTGitValid() => ModesMan.mode.VisitForIsTGitValid();
-        private static bool messageAlreadyShown = false;
-        public static void CheckAndSetResources()
+        static public bool IsProjValid() => ModesMan.visitMode.VisitForIsProjectValid();
+        static public bool IsTGitValid() => ModesMan.visitMode.VisitForIsTGitValid();
+        public static void CheckAndSetResources(out bool ableToAccessCSV)
         {
             bool projValidityBeforeCheck = LastProjValidity;
             bool tGitValidityBeforeCheck = LastTGitValidity;
@@ -284,40 +297,60 @@ namespace WorkTracker
                 else MessageBox.Show(Localization.NonValidChangeOfProject_dir);
             else if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfTGit_dir);
 
-            RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
-
-            if (!ableToAccessCSV && !messageAlreadyShown)
-            {
-                MessageBox.Show(Localization.Config_UnableToAccessCSV);
-                messageAlreadyShown = true;
-            }
-            else
-            {
-                messageAlreadyShown = false;
-            }
+            RecordingMan.AdaptToEnviromentWithNewProj(out ableToAccessCSV);
         }
-        static public bool IsProjValid(ModesMan.LocalMode mode)
+        static public bool IsProjValid(ModesMan.VisitLocalMode mode)
         {
             LastProjValidity = ProjectMan.ExistsProjDir();
             return LastProjValidity;
         }
-        static public bool IsProjValid(ModesMan.ReposMode mode)
+        static public bool IsProjValid(ModesMan.VisitReposMode mode)
         {
             LastProjValidity = ProjectMan.ExistsProjDir() && ProjectMan.IsThereRepo();
             return LastProjValidity;
         }
-        static public bool IsTGitValid(ModesMan.LocalMode mode)
+        static public bool IsTGitValid(ModesMan.VisitLocalMode mode)
         {
             LastTGitValidity = true;
             return LastTGitValidity;
         }
-        static public bool IsTGitValid(ModesMan.ReposMode mode)
+        static public bool IsTGitValid(ModesMan.VisitReposMode mode)
         {
             LastTGitValidity = TortoiseGitMan.ExistsTG();
             return LastTGitValidity;
         }
 
 
+    }
+    public static class AppExitMan
+    {
+        public static void ExitApp(FormClosingEventArgs e)
+        {
+
+            if (e.CloseReason is CloseReason.UserClosing && RecordingMan.recState is (RecordingMan.RecStatesI.started or RecordingMan.RecStatesI.paused))
+            {
+                YesNoDialog_form areYouSureYouWantToExit_form = new YesNoDialog_form(Localization.NotStopedExit_YesNoDialog_label_text, Localization.Yes, Localization.No);
+                areYouSureYouWantToExit_form.ShowDialog();
+                if (areYouSureYouWantToExit_form.DialogResult is DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            SaveParameters();
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private static void SaveParameters()
+        {
+            using (StreamWriter paramFile = new StreamWriter("init_params.txt"))
+            {
+                paramFile.WriteLine("lang " + LocalizationMan.lang);
+                paramFile.WriteLine("mode " + ModesMan.modeI);
+                TortoiseGitMan.WriteTGit_dirTo(paramFile);
+                ProjectMan.WriteProj_dirTo(paramFile);
+            }
+        }
     }
     static internal class TextJustification
     {

@@ -215,10 +215,11 @@ Naozaj chceš odísť?</value>
     <value>Do dňa</value>
   </data>
   <data name="Progress_CompDurationText_label_text" xml:space="preserve">
-    <value>Doba práce:</value>
+    <value>Celková doba práce:</value>
   </data>
   <data name="Progress_CompDurationWithStopText_label_text" xml:space="preserve">
-    <value>Doba práce (zahrňujúc pozastavené úseky):</value>
+    <value>Celková doba práce
+(zahrňujúc pozastavené úseky):</value>
   </data>
   <data name="Recording_form_text" xml:space="preserve">
     <value>Nahrávanie</value>
@@ -328,5 +329,29 @@ Vybraný neplatný projekt</value>
   </data>
   <data name="Progress_SameDate_label_text" xml:space="preserve">
     <value>Rovnaký dátum</value>
+  </data>
+  <data name="Progress_RecordingTime_label_text" xml:space="preserve">
+    <value>Celkový čas</value>
+  </data>
+  <data name="Progress_RecordingTimeWithPause_label_text" xml:space="preserve">
+    <value>Celkový čas 
+s pauzamy</value>
+  </data>
+  <data name="Progress_CreatTime_label_text" xml:space="preserve">
+    <value>Vytváranie</value>
+  </data>
+  <data name="Progress_ProgrTime_label_text" xml:space="preserve">
+    <value>Programovnie</value>
+  </data>
+  <data name="Progress_DebugTime_label_text" xml:space="preserve">
+    <value>Debugovanie</value>
+  </data>
+  <data name="Progress_RangeCommit_label_text" xml:space="preserve">
+    <value>Commit-y z daného rozmedzia</value>
+  </data>
+  <data name="Progress_UnableToAccessCSV" xml:space="preserve">
+    <value>Nebolo možné čítať zo súboru záznamov projektu, pretože je využívaný iným procesom.
+Pokúste sa zatovriť všetky procesy znemožňujúce prístup k tomuto súboru.
+Dokým sa problém nevyrieši, nebude možné prezrieť výsledky.</value>
   </data>
 </root>

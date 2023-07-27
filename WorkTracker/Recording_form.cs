@@ -32,7 +32,7 @@ namespace WorkTracker
                 if (m.WParam != IntPtr.Zero)
                 {
                     // the application is getting activated
-                    Program.CheckAfterActivatingApp();
+                    Program.CheckAfterActivatingApp(this);
                 }
             }
             base.WndProc(ref m);
@@ -43,18 +43,18 @@ namespace WorkTracker
         }
         private void Start_roundButton_Click(object sender, EventArgs e)
         {
-            RecordingMan.ProcessNewRecord(RecordingMan.RecStates.started);
+            RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.started);
         }
 
         private void Stop_roundButton_Click(object sender, EventArgs e)
         {
-            ModesMan.mode.VisitForStop_roundButton_Click(sender, e);
+            ModesMan.visitMode.VisitForStop_roundButton_Click(sender, e);
         }
-        public void Stop_roundButton_Click(ModesMan.LocalMode mode, object sender, EventArgs e)
+        public void Stop_roundButton_Click(ModesMan.VisitLocalMode mode, object sender, EventArgs e)
         {
-            RecordingMan.ProcessNewRecord(RecordingMan.RecStates.stoped);
+            RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.stoped);
         }
-        public void Stop_roundButton_Click(ModesMan.ReposMode mode, object sender, EventArgs e)
+        public void Stop_roundButton_Click(ModesMan.VisitReposMode mode, object sender, EventArgs e)
         {
             if (RecordingMan.IsCSVNotLocked())
             {
@@ -66,7 +66,7 @@ namespace WorkTracker
 
         private void Pause_roundButton_Click(object sender, EventArgs e)
         {
-            RecordingMan.ProcessNewRecord(RecordingMan.RecStates.paused);
+            RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.paused);
         }
         private void Start_roundButton_EnabledChanged(object sender, EventArgs e)
         {
@@ -124,7 +124,7 @@ namespace WorkTracker
 
         private void Phase_trackBar_Scroll(object sender, EventArgs e)
         {
-            RecordingMan.ChangeWorkPhase((RecordingMan.WorkPhase)Phase_trackBar.Value);
+            RecordingMan.ChangeWorkPhase((WorkPhasesI)Phase_trackBar.Value);
         }
 
     }
@@ -141,10 +141,9 @@ namespace WorkTracker
     }
     static public class RecordingMan
     {
-        public enum RecStates { unknown =  0, started, paused, stoped }
-        public enum WorkPhase { creating, programing, debuging }
-        static public RecStates recState { get; private set; }
-        static public WorkPhase workPhase { get; private set; }
+        public enum RecStatesI { unknown =  0, started, paused, stoped }
+        static public RecStatesI recState { get; private set; }
+        static public WorkPhasesI workPhase { get; private set; }
         static public string[] StatesLocalizations
         {
             get => new string[4]{
@@ -160,7 +159,13 @@ namespace WorkTracker
             new PausedRecState(), 
             new StopedRecState() 
         };
-
+        static public VisitRecState[] visitRecStates =
+        {
+            new VisitUnknownRecState(),
+            new VisitStartedRecState(),
+            new VisitPausedRecState(),
+            new VisitStopedRecState()
+        };
         static public Record? LastRecord { get; private set; }
         public class Record
         {    
@@ -171,9 +176,9 @@ namespace WorkTracker
             [Name("time")]
             public TimeOnly Time { get; set; }
             [Name("state")]
-            public RecStates State { get; set; }
+            public RecStatesI State { get; set; }
             [Name("phase")]
-            public WorkPhase Phase { get; set; }
+            public WorkPhasesI Phase { get; set; }
             [Name("git")]
             public string? Git { get; set; }
         }
@@ -194,9 +199,9 @@ namespace WorkTracker
             //if (!ableToAccessCSV) MessageBox.Show(Localization.Config_UnableToAccessCSV);
         }
 
-        static public void ProcessNewRecord(RecStates new_recState)
+        static public void ProcessNewRecord(RecStatesI new_recState)
         {
-            if (new_recState is not RecStates.unknown)
+            if (new_recState is not RecStatesI.unknown)
             {
                 var newRec = recStates[(int)new_recState].CreateRecord();
                 try
@@ -227,11 +232,11 @@ namespace WorkTracker
                 return false;
             }
         }
-        static public void ChangeWorkPhase(WorkPhase new_workPhase)
+        static public void ChangeWorkPhase(WorkPhasesI new_workPhase)
         {
             workPhase = new_workPhase;
         }
-        static private void ChangeAndSetRecState(RecStates new_recState)
+        static private void ChangeAndSetRecState(RecStatesI new_recState)
         {
             recState = new_recState;
             recStates[(int)recState].SetState();
@@ -253,8 +258,8 @@ namespace WorkTracker
                         }
                         else
                         {
-                            ChangeAndSetRecState(RecStates.stoped);
-                            Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                            ChangeAndSetRecState(RecStatesI.stoped);
+                            Program.recording_form.SetPhase_trackBarValue((int)WorkPhasesI.creating);
                         }
                         return;
                     }
@@ -262,13 +267,13 @@ namespace WorkTracker
                 catch (System.IO.IOException)
                 {
                     ableToAccessCSV = false;
-                    ChangeAndSetRecState(RecStates.unknown);
-                    Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                    ChangeAndSetRecState(RecStatesI.unknown);
+                    Program.recording_form.SetPhase_trackBarValue((int)WorkPhasesI.creating);
                     return;
                 }
             }
-            ChangeAndSetRecState(RecStates.unknown);
-            Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+            ChangeAndSetRecState(RecStatesI.unknown);
+            Program.recording_form.SetPhase_trackBarValue((int)WorkPhasesI.creating);
         }
         static public void AdaptToEnviromentWithOldProj()
         {
@@ -281,14 +286,14 @@ namespace WorkTracker
                 }
                 else
                 {
-                    ChangeAndSetRecState(RecStates.stoped);
-                    Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                    ChangeAndSetRecState(RecStatesI.stoped);
+                    Program.recording_form.SetPhase_trackBarValue((int)WorkPhasesI.creating);
                 }
             }
             else
             {
-                ChangeAndSetRecState(RecStates.unknown);
-                Program.recording_form.SetPhase_trackBarValue((int)RecordingMan.WorkPhase.creating);
+                ChangeAndSetRecState(RecStatesI.unknown);
+                Program.recording_form.SetPhase_trackBarValue((int)WorkPhasesI.creating);
             }
         }
 
@@ -341,16 +346,17 @@ namespace WorkTracker
                 }
             }
             return lastRecord;
-
         }
+        static public Record CreateStopRecord(ModesMan.VisitLocalMode mode) => new StopedRecState().CreateRecord(mode);
+        static public Record CreateStopRecord(ModesMan.VisitReposMode mode) => new StopedRecState().CreateRecord(mode);
 
-        public abstract class RecState
+        private abstract class RecState
         {
             public abstract void SetState();
             public abstract Record CreateRecord();
         }
 
-        public class StartedRecState : RecState
+        private class StartedRecState : RecState
         {
             public override void SetState()
             {
@@ -365,11 +371,11 @@ namespace WorkTracker
             {
                 Date = DateOnly.FromDateTime(DateTime.Now),
                 Time = TimeOnly.FromDateTime(DateTime.Now),
-                State = RecStates.started,
+                State = RecStatesI.started,
                 Phase = workPhase,
             };
         }
-        public class PausedRecState : RecState
+        private class PausedRecState : RecState
         {
             public override void SetState()
             {
@@ -378,17 +384,17 @@ namespace WorkTracker
                 Program.recording_form.SetStart_roundButtonEnabled(true);
                 Program.recording_form.SetPause_roundButtonEnabled(false);
                 Program.recording_form.SetStop_roundButtonEnabled(true);
-                Program.recording_form.SetPhase_trackBarEnabled(true);
+                Program.recording_form.SetPhase_trackBarEnabled(false);
             }
             public override Record CreateRecord() => new Record
             {
                 Date = DateOnly.FromDateTime(DateTime.Now),
                 Time = TimeOnly.FromDateTime(DateTime.Now),
-                State = RecStates.paused,
+                State = RecStatesI.paused,
                 Phase = workPhase,
             };
         }
-        public class StopedRecState : RecState
+        private class StopedRecState : RecState
         {
             public override void SetState()
             {
@@ -401,25 +407,25 @@ namespace WorkTracker
             }
             public override Record CreateRecord()
             {
-                return ModesMan.mode.VisitForCreateRecord(this);
+                return ModesMan.visitMode.VisitForCreateRecord();
             }
-            public Record CreateRecord(ModesMan.LocalMode mode) => new Record
+            public Record CreateRecord(ModesMan.VisitLocalMode mode) => new Record
             {
                 Date = DateOnly.FromDateTime(DateTime.Now),
                 Time = TimeOnly.FromDateTime(DateTime.Now),
-                State = RecStates.stoped,
+                State = RecStatesI.stoped,
                 Phase = workPhase,
             };
-            public Record CreateRecord(ModesMan.ReposMode mode) => new Record
+            public Record CreateRecord(ModesMan.VisitReposMode mode) => new Record
             {
                 Date = DateOnly.FromDateTime(DateTime.Now),
                 Time = TimeOnly.FromDateTime(DateTime.Now),
-                State = RecStates.stoped,
+                State = RecStatesI.stoped,
                 Phase = workPhase,
-                Git = CommitMan.hasBeenCommited ? CommitMan.lastCommitCode : null
+                Git = CommitMan.hasBeenCommitted ? CommitMan.lastCommitCode : null
             };
         }
-        public class UnknownRecState : RecState
+        private class UnknownRecState : RecState
         {
             public override void SetState()
             {
@@ -434,44 +440,56 @@ namespace WorkTracker
             {
                 Date = DateOnly.FromDateTime(DateTime.Now),
                 Time = TimeOnly.FromDateTime(DateTime.Now),
-                State = RecStates.unknown,
+                State = RecStatesI.unknown,
                 Phase = workPhase,
             };
         }
+        public interface VisitRecState
+        {
+
+        }
+        public class VisitStartedRecState : VisitRecState
+        {
+
+        }
+        public class VisitPausedRecState : VisitRecState
+        {
+
+        }
+        public class VisitStopedRecState : VisitRecState
+        {
+
+        }
+        public class VisitUnknownRecState : VisitRecState
+        {
+
+        }
     }
-
-
-    public static class AppExitMan 
+    public enum WorkPhasesI { creating, programing, debuging };
+    public abstract class WorkPhase
     {
-        public static void ExitApp(FormClosingEventArgs e)
+        static public WorkPhase[] workPhases =
         {
+            new CreatingWorkPhase(),
+            new ProgramingWorkPhase(),
+            new DebugingWorkPhase()
+        };
 
-            if (e.CloseReason is CloseReason.UserClosing && RecordingMan.recState is (RecordingMan.RecStates.started or RecordingMan.RecStates.paused))
-            {
-                YesNoDialog_form areYouSureYouWantToExit_form = new YesNoDialog_form(Localization.NotStopedExit_YesNoDialog_label_text, Localization.Yes, Localization.No);
-                areYouSureYouWantToExit_form.ShowDialog();
-                if(areYouSureYouWantToExit_form.DialogResult is DialogResult.No)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            SaveParameters();
-            System.Windows.Forms.Application.Exit();
-        }
-
-        private static void SaveParameters()
-        {
-            using(StreamWriter paramFile = new StreamWriter("init_params.txt"))
-            {
-                paramFile.WriteLine("lang " + LocalizationMan.lang);
-                paramFile.WriteLine("mode " + ModesMan.modeI);
-                TortoiseGitMan.WriteTGit_dirTo(paramFile);
-                ProjectMan.WriteProj_dirTo(paramFile);
-            }
-        }
     }
 
+    public class CreatingWorkPhase : WorkPhase
+    {
+
+    }
+
+    public class ProgramingWorkPhase : WorkPhase
+    {
+
+    }
+    public class DebugingWorkPhase : WorkPhase
+    {
+
+    }
 }
 
 

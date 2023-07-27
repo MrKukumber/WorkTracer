@@ -24,7 +24,7 @@ namespace WorkTracker
                 if (m.WParam != IntPtr.Zero)
                 {
                     // the application is getting activated
-                    Program.CheckAfterActivatingApp();
+                    Program.CheckAfterActivatingApp(this);
                 }
             }
             base.WndProc(ref m);
@@ -42,8 +42,8 @@ namespace WorkTracker
             {
                 Program.recording_form.Show();
                 this.Hide();
-                CommitMan.hasBeenCommited = false;
-                RecordingMan.ProcessNewRecord(RecordingMan.RecStates.stoped);
+                CommitMan.hasBeenCommitted = false;
+                RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.stoped);
             }
         }
 
@@ -54,7 +54,7 @@ namespace WorkTracker
                 Program.recording_form.Show();
                 this.Hide();
                 CommitMan.CheckAndSetCommit_richTextBoxes(0);
-                RecordingMan.ProcessNewRecord(RecordingMan.RecStates.stoped);
+                RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.stoped);
             }
         }
 
@@ -69,8 +69,8 @@ namespace WorkTracker
                 {
                     Program.recording_form.Show();
                     this.Hide();
-                    CommitMan.hasBeenCommited = false;
-                    RecordingMan.ProcessNewRecord(RecordingMan.RecStates.stoped);
+                    CommitMan.hasBeenCommitted = false;
+                    RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.stoped);
                 }
             }
             else System.Windows.Forms.Application.Exit();
@@ -87,11 +87,11 @@ namespace WorkTracker
     public static class CommitMan
     {
         static public string? lastCommitCode;
-        static public bool hasBeenCommited;
+        static public bool hasBeenCommitted;
         static public void Initialize()
         {
             CheckAndSetCommit_richTextBoxes(0);
-            hasBeenCommited = false;
+            hasBeenCommitted = false;
         }
 
         //return false, when user should be given oportunity to try to make commit again
@@ -105,18 +105,18 @@ namespace WorkTracker
             catch (Win32Exception)
             {
                 MessageBox.Show(Localization.RunTortoiseGitFailure);
-                hasBeenCommited = false;
+                hasBeenCommitted = false;
                 return false;
             }
             TryGetLastCommitCode(out string newCommitCode);
             if (previousCommitCode != newCommitCode)
             {
-                hasBeenCommited = true;
+                hasBeenCommitted = true;
                 return true;
             }
             else
             {
-                hasBeenCommited = false;
+                hasBeenCommitted = false;
                 YesNoDialog_form noCommitMade_Form = new YesNoDialog_form(Localization.Commit_NoCommitMade_YesNoDialog_text, Localization.Yes, Localization.No);
                 noCommitMade_Form.ShowDialog();
                 if (noCommitMade_Form.DialogResult is DialogResult.Yes)
@@ -141,15 +141,15 @@ namespace WorkTracker
         }
         static public void CheckAndSetCommitInProgress()
         {
-            ModesMan.mode.VisitForCheckAndSetCommitInProgress(null);
+            ModesMan.visitMode.VisitForCheckAndSetCommitInProgress(null);
         }
 
         static public void CheckAndSetCommitInProgress(int commitIndex)
         {
-            ModesMan.mode.VisitForCheckAndSetCommitInProgress(commitIndex);
+            ModesMan.visitMode.VisitForCheckAndSetCommitInProgress(commitIndex);
         }
 
-        static public void CheckAndSetCommitInProgress(ModesMan.ReposMode mode, int? commitIndex)
+        static public void CheckAndSetCommitInProgress(ModesMan.VisitReposMode mode, int? commitIndex)
         {
             if (commitIndex is not null) Program.progress_form.Commit_vScrollValue = (int)commitIndex;
             if (ResourceControlMan.LastProjValidity)
@@ -162,17 +162,17 @@ namespace WorkTracker
                 Program.progress_form.EnableCommit_vScrollBar(false);
             }
         }
-        static public void CheckAndSetCommitInProgress(ModesMan.LocalMode mode, int? commitIndex)
+        static public void CheckAndSetCommitInProgress(ModesMan.VisitLocalMode mode, int? commitIndex)
         {
             Program.progress_form.WriteToCommit_richTextBox(Localization.Progress_Commit_richTextBox_local_mode_text);
             Program.progress_form.EnableCommit_vScrollBar(false);
         }
         static public void CheckAndSetCommitInMain()
         {
-            ModesMan.mode.VisitForCheckAndSetCommitInMain();
+            ModesMan.visitMode.VisitForCheckAndSetCommitInMain();
         }
 
-        static public void CheckAndSetCommitInMain(ModesMan.ReposMode mode)
+        static public void CheckAndSetCommitInMain(ModesMan.VisitReposMode mode)
         {
             if (ResourceControlMan.LastProjValidity)
             {
@@ -183,7 +183,7 @@ namespace WorkTracker
                 Program.main_form.WriteToCommit_richTextBox(Localization.Main_InvalidProjectSelectedCommit_richTextBox);
             }
         }
-        static public void CheckAndSetCommitInMain(ModesMan.LocalMode mode)
+        static public void CheckAndSetCommitInMain(ModesMan.VisitLocalMode mode)
         {
             Program.main_form.WriteToCommit_richTextBox(Localization.Main_Commit_richTextBox_local_mode_text);
 
@@ -236,10 +236,8 @@ namespace WorkTracker
             }
             static public bool TryGetAndSetCommitsFromRangeInProgress()
             {
-                DateTime since = Program.progress_form.GetSince_dateTimePickerDate();
-                DateTime until = Program.progress_form.GetUntil_dateTimePickerDate();
-                since = since.Date.Add(new TimeSpan(0, 0, 0));
-                until = until.Date.Add(new TimeSpan(23, 59, 59));
+                DateTime since = Program.progress_form.GetFullSince_dateTimePickerDate();
+                DateTime until = Program.progress_form.GetFullUntil_dateTimePickerDate();
                 return TryGetCommitTextsFromRange(since, until, out commitsFromRangeInProgress);
             }
 

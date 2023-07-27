@@ -12,7 +12,7 @@ namespace WorkTracker
                 if (m.WParam != IntPtr.Zero)
                 {
                     // the application is getting activated
-                    Program.CheckAfterActivatingApp();
+                    Program.CheckAfterActivatingApp(this);
                 }
             }
             base.WndProc(ref m);
@@ -47,6 +47,8 @@ namespace WorkTracker
 
         private void ProgressFormOpening_button_Click(object sender, EventArgs e)
         {
+            ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
+            if(!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
             Program.progress_form.Show();
             this.Hide();
         }

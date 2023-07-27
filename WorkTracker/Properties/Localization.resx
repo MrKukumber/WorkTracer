@@ -229,10 +229,11 @@ Are you sure, you want to exit?</value>
     <value>Until day</value>
   </data>
   <data name="Progress_CompDurationText_label_text" xml:space="preserve">
-    <value>Work duration:</value>
+    <value>Total work duration:</value>
   </data>
   <data name="Progress_CompDurationWithStopText_label_text" xml:space="preserve">
-    <value>Work duration (including paused intervals):</value>
+    <value>Total work duration
+(including paused intervals):</value>
   </data>
   <data name="Recording_form_text" xml:space="preserve">
     <value>Recording</value>
@@ -332,22 +333,23 @@ Invalid project selected</value>
      Invalid project selected</value>
   </data>
   <data name="Progress_RecordingTime_label_text" xml:space="preserve">
-    <value></value>
+    <value>Total time</value>
   </data>
   <data name="Progress_RecordingTimeWithPause_label_text" xml:space="preserve">
-    <value></value>
+    <value>Total time
+with pauses</value>
   </data>
   <data name="Progress_CreatTime_label_text" xml:space="preserve">
-    <value></value>
+    <value>Creating</value>
   </data>
   <data name="Progress_ProgrTime_label_text" xml:space="preserve">
-    <value></value>
+    <value>Programing</value>
   </data>
   <data name="Progress_DebugTime_label_text" xml:space="preserve">
-    <value></value>
+    <value>Debuging</value>
   </data>
   <data name="Progress_RangeCommit_label_text" xml:space="preserve">
-    <value></value>
+    <value>Commits from given range</value>
   </data>
   <data name="Progress_NoCommitFound_richTextBox_text" xml:space="preserve">
     <value>
@@ -359,5 +361,10 @@ Invalid project selected</value>
   </data>
   <data name="Progress_SameDate_label_text" xml:space="preserve">
     <value>Same date</value>
+  </data>
+  <data name="Progress_UnableToAccessCSV" xml:space="preserve">
+    <value>Application was unable access the record file of project, because it is used by other process.
+Try to close all processes, that make impossible to access this file.
+Until the problem is not solved, it will not be possible to see the results.</value>
   </data>
 </root>

@@ -435,7 +435,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Work duration:.
+        ///   Looks up a localized string similar to Total work duration:.
         /// </summary>
         internal static string Progress_CompDurationText_label_text {
             get {
@@ -444,7 +444,8 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Work duration (including paused intervals):.
+        ///   Looks up a localized string similar to Total work duration
+        ///(including paused intervals):.
         /// </summary>
         internal static string Progress_CompDurationWithStopText_label_text {
             get {
@@ -453,7 +454,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Creating.
         /// </summary>
         internal static string Progress_CreatTime_label_text {
             get {
@@ -462,7 +463,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Debuging.
         /// </summary>
         internal static string Progress_DebugTime_label_text {
             get {
@@ -516,7 +517,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Programing.
         /// </summary>
         internal static string Progress_ProgrTime_label_text {
             get {
@@ -525,7 +526,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Commits from given range.
         /// </summary>
         internal static string Progress_RangeCommit_label_text {
             get {
@@ -534,7 +535,7 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Total time.
         /// </summary>
         internal static string Progress_RecordingTime_label_text {
             get {
@@ -543,7 +544,8 @@ namespace WorkTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Total time
+        ///with pauses.
         /// </summary>
         internal static string Progress_RecordingTimeWithPause_label_text {
             get {
@@ -566,6 +568,17 @@ namespace WorkTracker.Properties {
         internal static string Progress_To_label_text {
             get {
                 return ResourceManager.GetString("Progress_To_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application was unable access the record file of project, because it is used by other process.
+        ///Try to close all processes, that make impossible to access this file.
+        ///Until the problem is not solved, it will not be possible to see the results..
+        /// </summary>
+        internal static string Progress_UnableToAccessCSV {
+            get {
+                return ResourceManager.GetString("Progress_UnableToAccessCSV", resourceCulture);
             }
         }
         
