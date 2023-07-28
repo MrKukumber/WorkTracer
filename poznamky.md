@@ -110,7 +110,6 @@
   - ci sa mi nezmenilo miesto tortoise-git-u
   - ci stale ma cestu ku .git - file-u
 
-- vzdy ked prechadzam z mainu do recording formulara, kontrolujem vsetky spomenute zdroje
 - vzdy ked kliknem enternem akekolvek okno aplikacie, zkontrolujem zdroje a popripade nastavim vhodne indikatory
 - command na testovanie toho, ci sa nachadzam v directory s repozitorom:
 
@@ -144,6 +143,7 @@ git rev-parse --is-inside-work-tree
 - jak sakra zobrazovat tie commity a tie celkove casy celkovo
 
 - teraz som si uvedomil, ze budem vyuzivat vlastne este dalsie externe procedury a to git-ove - to by sa asi malo uviest tiez potom v specifikacii alebo dokumentacii
+- mozno dako riesit nedostupnost git-ovych procesov
 
 ## Uzitocne veci
 
@@ -151,3 +151,165 @@ git rev-parse --is-inside-work-tree
 git log --format="%H" -n 1
 git log -1 --pretty=%B
 git log --oneline --since="2022-04-22" --until="2022-04-24" --pretty=%B
+
+
+## Toto si tu odlozim
+
+### Z progress manageru, keby som chcel presa len to zmenit spat
+
+//public virtual void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitUnknownRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitUnknownRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
+//public virtual void ProcessRecord(RecordingMan.VisitUnknownRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
+
+
+
+
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) 
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+
+//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}
+
+
+
+
+//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
+//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
+//{
+//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
+//    InitialClosure = null;
+//}

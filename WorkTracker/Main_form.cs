@@ -47,14 +47,13 @@ namespace WorkTracker
 
         private void ProgressFormOpening_button_Click(object sender, EventArgs e)
         {
-            ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
+            ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
             if(!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
             Program.progress_form.Show();
             this.Hide();
         }
         public void Relabel()
         {
-            //DONE
             this.Text = Localization.Main_form_text;
             Commit_label.Text = Localization.Main_Commit_label_text;
             ConfigFormOpening_button.Text = Localization.Main_ConfigFormOpening_button_text;
@@ -62,13 +61,13 @@ namespace WorkTracker
             ProgressFormOpening_button.Text = Localization.Main_ProgressFormOpening_button_text;
             ProjNotSelected_label.Text = Localization.Main_ProjNotSelected_label_text;
             TortoiseFileNotSelected_label.Text = Localization.Main_TortoiseFileNotSelected_label_text;
-            if (ModesMan.modeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Main_Commit_richTextBox_local_mode_text;
+            if (ModesMan.ModeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Main_Commit_richTextBox_local_mode_text;
             CurrTrackState_label.Text = RecordingMan.StatesLocalizations[(int)RecordingMan.recState];            
         }
-
+        //functions for accessing forms objects
         public void SetTortoiseFileNotSelected_labelVisible(bool indicator) => TortoiseFileNotSelected_label.Visible = indicator;
         public void SetProjNotSelected_labelVisible(bool indicator) => ProjNotSelected_label.Visible = indicator;
-        public void SetMode_label() => Mode_label.Text = ModesMan.localizations[(int)ModesMan.modeI];
+        public void SetMode_label() => Mode_label.Text = ModesMan.Localizations[(int)ModesMan.ModeI];
         public void SetProgressFormOpening_buttonEnabled(bool indicator) => ProgressFormOpening_button.Enabled = indicator;
         public void WriteToCommit_richTextBox(string what) => Commit_richTextBox.Text = what;
         public void SetCurrTrackState_label() => CurrTrackState_label.Text = RecordingMan.StatesLocalizations[(int)RecordingMan.recState];

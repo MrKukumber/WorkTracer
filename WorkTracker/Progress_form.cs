@@ -54,12 +54,13 @@ namespace WorkTracker
         {
             CommitMan.ChangeCommitInProgressRichTextBox(Commit_vScrollBar.Value);
         }
+        // when user choose new starting or ending date, all result values and commit rich text box are adjusted to new range
         private void Since_dateTimePicker_CloseUp(object sender, EventArgs e)
         {
             if (SameDate_checkBox.Checked) Until_dateTimePicker.Value = Since_dateTimePicker.Value;
             else Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
             CommitMan.CheckAndSetCommitInProgress();
-            ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
+            ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
             if (!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
         }
 
@@ -68,9 +69,10 @@ namespace WorkTracker
             if (SameDate_checkBox.Checked) Since_dateTimePicker.Value = Until_dateTimePicker.Value;
             else Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
             CommitMan.CheckAndSetCommitInProgress();
-            ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
+            ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
             if(!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
         }
+        // when this check box is checked, the date time pickers are functioning as one
         private void SameDate_checkBox_CheckedChanged(object sender, EventArgs e)
         {
             if (SameDate_checkBox.Checked)
@@ -87,7 +89,7 @@ namespace WorkTracker
                 Until_dateTimePicker.Enabled = true;
             }
             CommitMan.CheckAndSetCommitInProgress();
-            ProgressShowingMan.SetAndShowProgression(out bool ableToAccessCSV);
+            ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
         }
 
         public void Relabel()
@@ -98,7 +100,6 @@ namespace WorkTracker
             RecordSinceText_label.Text = Localization.Progress_RecordSinceText_label_text;
             RecordUntilText_label.Text = Localization.Progress_RecordUntilText_label_text;
             SameDate_label.Text = Localization.Progress_SameDate_label_text;
-            //TODO: doplnit vysledne hodnoty doby prace 
             RecordingTime_label.Text = Localization.Progress_RecordingTime_label_text;
             RecordingTimeWithPause_label.Text = Localization.Progress_RecordingTimeWithPause_label_text;
             CreatTime_label.Text = Localization.Progress_CreatTime_label_text;
@@ -108,9 +109,10 @@ namespace WorkTracker
             CompDurationWithPauseText_label.Text = Localization.Progress_CompDurationWithStopText_label_text;
             ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
             RangeCommit_label.Text = Localization.Progress_RangeCommit_label_text;
-            if (ModesMan.modeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Progress_Commit_richTextBox_local_mode_text;
+            if (ModesMan.ModeI is ModesMan.ModesI.local) Commit_richTextBox.Text = Localization.Progress_Commit_richTextBox_local_mode_text;
 
         }
+        //functions for accessing forms objects
         public void SetCompDuration_labelText(string text) => CompDuration_label.Text = text;
         public void SetCompDurationWithPause_labelText(string text) => CompDurationWithPause_label.Text = text;
         public void SetCreatDuration_labelText(string text) => CreatDuration_label.Text = text;
@@ -119,7 +121,6 @@ namespace WorkTracker
         public void SetProgrDurationWithPause_labelText(string text) => ProgrDurationWithPause_label.Text = text;
         public void SetDebugDuration_labelText(string text) => DebugDuration_label.Text = text;
         public void SetDebugDurationWithPause_labelText(string text) => DebugDurationWithPause_label.Text = text;
-
         public void WriteToCommit_richTextBox(string what) => Commit_richTextBox.Text = what;
         public int GetCommit_richTextBoxWidth() => Commit_richTextBox.Width;
         public void EnableCommit_vScrollBar(bool indicator) => Commit_vScrollBar.Enabled = indicator;
@@ -133,15 +134,13 @@ namespace WorkTracker
         public void SetRecordUntilDate_labelText(string date) => RecordUntilDate_label.Text = date;
         public void SetCommit_vScrollBarMaximum(int maximum) => Commit_vScrollBar.Maximum = maximum;
         public int Commit_vScrollValue { get => Commit_vScrollBar.Value; set => Commit_vScrollBar.Value = value; }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
-
-    static public class ProgressShowingMan
+    /// <summary>
+    /// computes resulting progress values and displays them
+    /// </summary>
+    static public class ProgressMan
     {
+        //all values that are computed, initialized in Initialize function
         static private ComputedValue[] computedValues;
         static public void Initialize()
         {
@@ -156,15 +155,18 @@ namespace WorkTracker
                 new DebugingComputedValue(),
                 new DebugingWithStopsComputedValue(),
             };
-            //TODO:
             CheckAndSetDateTimePickersInProgress(true, out _);
         }
-        static private CsvConfiguration basicConfig = new(CultureInfo.InvariantCulture)
-        {
-            Delimiter = ",",
-            Comment = '%',
-        };
 
+        // configurationfor writing into CSV file
+        static private CsvConfiguration basicConfig = new(CultureInfo.InvariantCulture) { Delimiter = ",", Comment = '%' };
+
+        /// <summary>
+        /// sets datetime pickers in progress form
+        /// if current datetimes are out of project recordings bounds, their are adjusted to theese bounds
+        /// </summary>
+        /// <param name="ResetValues">if it is set, datetimes are adjusted to bounderies of range of project recording</param>
+        /// <param name="ableToAccessCSV">false, if csv wasnt accessible</param>
         static public void CheckAndSetDateTimePickersInProgress(bool ResetValues, out bool ableToAccessCSV)
         {
             ableToAccessCSV = true;
@@ -198,7 +200,10 @@ namespace WorkTracker
                 }
             }
         }
-
+        /// <summary>
+        /// gets bounderies of range given by dateTime pickers, computes resulting values of work progression and shows them in progression form
+        /// </summary>
+        /// <param name="ableToAccessCSV"></param>
         static public void SetAndShowProgression(out bool ableToAccessCSV)
         {
             DateTime since = Program.progress_form.GetFullSince_dateTimePickerDate();
@@ -217,7 +222,14 @@ namespace WorkTracker
             Program.progress_form.SetDebugDuration_labelText(computedValues[6].CompleteTime.ToString());
             Program.progress_form.SetDebugDurationWithPause_labelText(computedValues[7].CompleteTime.ToString());
         }
-
+        /// <summary>
+        /// at first resets the computed values, 
+        /// then opens up csv file and computes progress in range record by record
+        /// when last record or last record within boundaries is read, computation is stoped
+        /// </summary>
+        /// <param name="since"></param>
+        /// <param name="until"></param>
+        /// <param name="ableToAccessCSV"></param>
         static public void ComputeProgressFromCsvInRange(DateTime since, DateTime until, out bool ableToAccessCSV)
         {
             ableToAccessCSV = true;
@@ -243,7 +255,14 @@ namespace WorkTracker
         {
             foreach (var cv in computedValues) cv.Reset();
         }
-
+        /// <summary>
+        /// processing of next record from file
+        /// if record is out of boundaries, it is not accounted to the result
+        /// </summary>
+        /// <param name="csv"></param>
+        /// <param name="since"></param>
+        /// <param name="until"></param>
+        /// <returns>false, when last valid record was read</returns>
         private static bool TryProcessNextRecordInRangeFrom(CsvReader csv, DateTime since, DateTime until)
         {
             if (TryReadRecord(csv, out RecordingMan.Record? record) &&
@@ -257,7 +276,12 @@ namespace WorkTracker
             }
             return false;
         }
-
+        /// <summary>
+        /// reads record from csv file
+        /// </summary>
+        /// <param name="csv"></param>
+        /// <param name="record"></param>
+        /// <returns>false, when no other record can be read</returns>
         private static bool TryReadRecord(CsvReader csv, out RecordingMan.Record? record)
         {
             if (csv.Read())
@@ -270,6 +294,10 @@ namespace WorkTracker
             }
             return (record is not null);
         }
+        /// <summary>
+        /// gets and returns first and last record of csv record file
+        /// </summary>
+        /// <returns>first and last record of csv, if there are some </returns>
         static private (RecordingMan.Record?, RecordingMan.Record?) ReadFirstAndLastRecordFromCsv()
         {
             RecordingMan.Record? lastRecord = null;
@@ -288,13 +316,20 @@ namespace WorkTracker
             return (firstRecord, lastRecord);
         }
 
+        /// <summary>
+        /// inner abbstract class, that holds computed values
+        /// its successors compute results based on whtaTodo "grid"
+        /// </summary>
         private abstract class ComputedValue
         {
             public ComputedValue()
             {
                 Reset();
             }
+            // resulting computed time
             public TimeSpan CompleteTime { get; protected set; }
+            //initial date and time of segment of result
+            //after finding ending record, the diference of this record date and time and of InitialClosure is added to Complete Time
             public DateTime? InitialClosure { get; protected set; }
 
             public virtual void Reset()
@@ -302,7 +337,13 @@ namespace WorkTracker
                 CompleteTime = new TimeSpan(0, 0, 0, 0);
                 InitialClosure = null;
             }
-            public abstract void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime);
+            /// <summary>
+            /// every succesor overrides this method and call Process function with appropriate argument to the computed valued
+            /// </summary>
+            /// <param name="recStateI">recording state of record</param>
+            /// <param name="workPhaseI">work phase of record</param>
+            /// <param name="datetime">date and time of the record</param>
+            public abstract void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime);
 
             protected enum Processes { nothing, initialize, add }
             protected Processes[,,] whatTodo =
@@ -351,7 +392,7 @@ namespace WorkTracker
 
         private class CompleteComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 0], datetime);
             }
@@ -359,237 +400,52 @@ namespace WorkTracker
         }
         private class CompleteWithPauseComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 1], datetime);
             }
         }
         private class CreatingComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 2], datetime);
             }
         }
         private class CreatingWithStopsComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 3], datetime);
             }
         }
         private class ProgramingComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 4], datetime);
             }
         }
         private class ProgramingWithStopsComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 5], datetime);
             }
         }
         private class DebugingComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 6], datetime);
             }
         }
         private class DebugingWithStopsComputedValue : ComputedValue
         {
-            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, WorkPhasesI workPhaseI, DateTime datetime)
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 7], datetime);
             }
         }
-
     }
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//public virtual void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitUnknownRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitUnknownRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
-//public virtual void ProcessRecord(RecordingMan.VisitUnknownRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) { }
-
-
-
-
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) 
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-
-//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, CreatingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, ProgramingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitPausedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}
-
-
-
-
-//public override void ProcessRecord(RecordingMan.VisitStartedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime) => InitialClosure = datetime;
-//public override void ProcessRecord(RecordingMan.VisitStopedRecState visitRecState, DebugingWorkPhase workPhase, DateTime datetime)
-//{
-//    if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;
-//    InitialClosure = null;
-//}

@@ -32,19 +32,27 @@ namespace WorkTracker
             Application.Run(main_form);
         }
 
+        // forms used in program
         public static Main_form main_form = new Main_form();
         public static Configure_form configure_form = new Configure_form();
         public static Recording_form recording_form = new Recording_form();
         public static Progress_form progress_form = new Progress_form();
         public static Commit_form commit_form = new Commit_form();
 
+
         private static bool messageAlreadyShown = false;
+        /// <summary>
+        /// after aplication is made active, this function is called to check and set those things, 
+        /// that could be affected by any activity outside of the aplication
+        /// </summary>
+        /// <param name="form">form, which was activated after aplication activation</param>
         static public void CheckAfterActivatingApp(Form form)
         {
-            ResourceControlMan.CheckAndSetResources(out bool ableToAccessCSV);
-            ProgressShowingMan.CheckAndSetDateTimePickersInProgress(false, out _);
+            ResourceControlMan.CheckAndSetResources();
+            RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
+            ProgressMan.CheckAndSetDateTimePickersInProgress(false, out _);
             CommitMan.CheckAndSetCommit_richTextBoxes();
-            ProgressShowingMan.SetAndShowProgression(out _);
+            ProgressMan.SetAndShowProgression(out _);
             if (!ableToAccessCSV && !messageAlreadyShown)
             {
                 if (form is Progress_form) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
@@ -68,7 +76,11 @@ namespace WorkTracker
             Dictionary<string,string> init_params = InitParamsParser();
             Initialize(init_params);
         }
-
+        /// <summary>
+        /// reads fiel with saved parameters
+        /// if file is not accessible, default params are used
+        /// </summary>
+        /// <returns>parameters</returns>
         static private Dictionary<string, string> InitParamsParser()
         {
             Dictionary<string, string> parameters = new()
@@ -99,7 +111,10 @@ namespace WorkTracker
             }
             return parameters;
         }
-
+        /// <summary>
+        /// calls Initialize() methods for all managers
+        /// </summary>
+        /// <param name="init_params">parameters from initialization file</param>
         static private void Initialize (Dictionary<string,string> init_params)
         {
             ModesMan.Initialize(init_params["mode"]);
@@ -107,24 +122,23 @@ namespace WorkTracker
             ProjectMan.Initialize(init_params["last_proj_dir"]);
             LocalizationMan.Initialize(init_params["lang"]);
             RecordingMan.Initialize();
-            ProgressShowingMan.Initialize();
+            ProgressMan.Initialize();
             CommitMan.Initialize();
-        }
-
- 
+        } 
     }
 
-
-
-
-
+    /// <summary>
+    /// class which contains functions for checking of resources - project and tortoise git (directories)
+    /// </summary>
     public static class ResourceControlMan
     {
+        // properties set by calling function IsProjValid() and IsTGitValid()
         static public bool LastProjValidity { get; private set; }
         static public bool LastTGitValidity { get; private set; }
-        static public bool IsProjValid() => ModesMan.visitMode.VisitForIsProjectValid();
-        static public bool IsTGitValid() => ModesMan.visitMode.VisitForIsTGitValid();
-        public static void CheckAndSetResources(out bool ableToAccessCSV)
+        /// <summary>
+        /// calls functions of project and TGit managers, that sets correctly enviroment according to newly checked project/TGit validity
+        /// </summary>
+        public static void CheckAndSetResources()
         {
             bool projValidityBeforeCheck = LastProjValidity;
             bool tGitValidityBeforeCheck = LastTGitValidity;
@@ -136,9 +150,18 @@ namespace WorkTracker
                 if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfProject_dir + "\n" + Localization.NonValidChangeOfTGit_dir);
                 else MessageBox.Show(Localization.NonValidChangeOfProject_dir);
             else if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfTGit_dir);
-
-            RecordingMan.AdaptToEnviromentWithNewProj(out ableToAccessCSV);
         }
+        /// <summary>
+        /// Checks if project directory is valid by visiting mode in ModesMan
+        /// </summary>
+        /// <returns>validity</returns>
+        static public bool IsProjValid() => ModesMan.VisitMode.VisitForIsProjectValid();
+        /// <summary>
+        /// Checks if TGit directory is valid by visiting mode in ModesMan
+        /// </summary>
+        /// <returns>validity</returns>
+        static public bool IsTGitValid() => ModesMan.VisitMode.VisitForIsTGitValid();
+
         static public bool IsProjValid(ModesMan.VisitLocalMode mode)
         {
             LastProjValidity = ProjectMan.ExistsProjDir();
@@ -162,8 +185,17 @@ namespace WorkTracker
 
 
     }
+
+    /// <summary>
+    /// guarantees correct exiting of aplication
+    /// </summary>
     public static class AppExitMan
     {
+        /// <summary>
+        /// called whenever closing of aplication is called
+        /// if user decides not to exit application after dialog window shows, it cancels closing of application
+        /// </summary>
+        /// <param name="e"></param>
         public static void ExitApp(FormClosingEventArgs e)
         {
 
@@ -180,58 +212,55 @@ namespace WorkTracker
             SaveParameters();
             System.Windows.Forms.Application.Exit();
         }
-
+        /// <summary>
+        /// function, which saves parameter to initialization file for future use
+        /// </summary>
         private static void SaveParameters()
         {
             using (StreamWriter paramFile = new StreamWriter("init_params.txt"))
             {
-                paramFile.WriteLine("lang " + LocalizationMan.lang);
-                paramFile.WriteLine("mode " + ModesMan.modeI);
+                paramFile.WriteLine("lang " + LocalizationMan.Lang);
+                paramFile.WriteLine("mode " + ModesMan.ModeI);
                 TortoiseGitMan.WriteTGit_dirTo(paramFile);
                 ProjectMan.WriteProj_dirTo(paramFile);
             }
         }
     }
+    /// <summary>
+    /// class for justifying text
+    /// it is adapted implementation from one of my others works, originally it worked with files and fileStreams
+    /// some of the implementation decisions are therefore litle bit strange
+    /// </summary>
     static internal class TextJustification
     {
-
-        /// <summary>
-        /// writes justified text paragraphs to output file by concatinating input files to one.
-        /// the boundary of files serves as not-written word separator.
-        /// </summary>
-        /// <param name="highlightSpaceIndic"> indicates if in output file should be highlighted white characters as spaces and ends of lines</param>
-        /// <param name="input_file_names"></param>
-        /// <param name="output_file_name"></param>
-        /// <param name="lineLength">given length of one line in output file</param>
-        /// <returns>0 if justifiing ran flawlessly and 1 if any error occured. If any error occured, we can't say anything about the output file</returns>
         static public string Justify(bool highlightSpaceIndic, int lineLength, string inputText)
         {
             bool EndOfParagraph;
-            bool EndOfFile = false;
+            bool EndOfString = false;
             string line;
 
             string justifiedText = "";
             LineReader LR = new LineReader(inputText, lineLength);
             LineWriter LW = highlightSpaceIndic ? new FilledLineWriter(lineLength) : new WhiteLineWriter(lineLength);
-            while (!EndOfFile)
+            while (!EndOfString)
             {
-                (line, EndOfParagraph, EndOfFile) = LR.ReadLine();
+                (line, EndOfParagraph, EndOfString) = LR.ReadLine();
 
-                // if we get end of file and empty line at the same time, it means that LR.ReadLine()
+                // if we get end of string and empty line at the same time, it means that LR.ReadLine()
                 //reads only lines full of blank chars, so we dont want to write nothing to output
-                if (EndOfFile && line == "")
+                if (EndOfString && line == "")
                 {
                     return justifiedText;
                 }
 
-                LW.WriteLine(line, EndOfParagraph, EndOfFile, out string justifiedLine);
+                LW.WriteLine(line, EndOfParagraph, EndOfString, out string justifiedLine);
                 justifiedText = justifiedText + justifiedLine;
             }
             return justifiedText;
         }
 
         /// <summary>
-        /// class for reading lines from file, reading one character form file at the time
+        /// class for reading lines from string, reading one character form string at the time
         /// </summary>
         class LineReader
         {
@@ -239,7 +268,7 @@ namespace WorkTracker
             private string lastWord;
             private char lastChar;
             private int lineLength;
-            private bool endOfFile;
+            private bool endOfStream;
             private char[] blankChars = { ' ', '\n', '\t' };
             public LineReader(string text, int lineLength)
             {
@@ -247,42 +276,40 @@ namespace WorkTracker
                 this.lineLength = lineLength;
                 lastWord = "";
                 lastChar = ' ';
-                endOfFile = false;
+                endOfStream = false;
             }
 
             /// <summary>
-            /// reads line form file of specific length, replace ale big blank chunks with only one space
+            /// reads line of specific length, replace ale big blank chunks with only one space
             /// and returns it at the output
             /// end of paragraph indicator is set when there occures word, which has blank line in front of it
-            /// end of file indicator is set when the end of the file occures after word or some blank string 
-            /// no file is set when no openable file was found
-            /// success indicator indicates, if reading from file was successful. If it wasnt, then process is immediately terminated
+            /// end of stream indicator is set when the end of the stream occures after word or some blank string 
             /// every time we save last word which doesnt fit in the line or is from other paragraph
             /// </summary>
-            /// <returns>adapted line, end of paragraph, end of file, and success indicator</returns>
+            /// <returns>adapted line, end of paragraph, end of string</returns>
             public (string, bool, bool) ReadLine()
             {
                 string line = lastWord;
                 string word;
                 bool endOfParagrah;
 
-                if (endOfFile) return (line, true, true);
+                if (endOfStream) return (line, true, true);
 
-                (word, endOfParagrah, endOfFile) = ReadWord();
+                (word, endOfParagrah, endOfStream) = ReadWord();
 
                 while (line.Length + word.Length + 1 <= lineLength)
                 {
-                    if (endOfFile || endOfParagrah)
+                    if (endOfStream || endOfParagrah)
                     {
                         //if endOfParagraph is true, then word is from the next paragraph, so it doesnt goes in current line
-                        //on the other hand, when endOfFile is true, then we read it after the word, so the word belongs to the line
-                        if (endOfFile && word != "") line += line == "" ? word : ' ' + word;
+                        //on the other hand, when endOfStream is true, then we read it after the word, so the word belongs to the line
+                        if (endOfStream && word != "") line += line == "" ? word : ' ' + word;
                         lastWord = word;
-                        return (line, endOfParagrah, endOfFile);
+                        return (line, endOfParagrah, endOfStream);
                     }
                     if (word != "") line += line == "" ? word : ' ' + word;
 
-                    (word, endOfParagrah, endOfFile) = ReadWord();
+                    (word, endOfParagrah, endOfStream) = ReadWord();
                 }
                 lastWord = word;
                 return (line, endOfParagrah, false);
@@ -290,11 +317,11 @@ namespace WorkTracker
             }
 
             /// <summary>
-            /// reads and return one word from the file. Firstly goes through blank characters and then loads one word.
+            /// reads and return one word from the string. Firstly goes through blank characters and then loads one word.
             /// end of paragraph is set, when two or more lineFeeds are found after each other
             /// each time we will save last char loaded becaouse of counting of lineFeeds 
             /// </summary>
-            /// <returns>loaded word, end of paragraph, end of file and success indicators</returns>
+            /// <returns>loaded word, end of paragraph, end of string</returns>
             private (string, bool, bool) ReadWord()
             {
                 string word = "";
@@ -310,7 +337,7 @@ namespace WorkTracker
                     charUniCode = reader.Read();
                 }
 
-                if (charUniCode != -1) // if end of file doesnt occure
+                if (charUniCode != -1) // if end of stream doesnt occure
                 {
                     while (charUniCode != -1 && !blankChars.Contains((char)charUniCode))
                     {
@@ -323,13 +350,13 @@ namespace WorkTracker
                 else
                 {
                     lastChar = (char)charUniCode;
-                    return ("", false, true); // end of file comes after blank char, so it is not end of paragraph
+                    return ("", false, true); // end of stream comes after blank char, so it is not end of paragraph
                 }
             }
         }
 
         /// <summary>
-        /// class for writing justified lines to file of choose
+        /// class that returns justified lines of strings
         /// </summary>
         abstract class LineWriter
         {
@@ -342,17 +369,16 @@ namespace WorkTracker
                 newParagraph = false;
             }
 
+
             /// <summary>
             /// takes input line, which is in form of text, where words are delimeterated 
             /// by just one single space character or end or start of the line
-            /// writes justified line to the file
             /// </summary>
             /// <param name="line">line of properly formated text</param>
             /// <param name="endOfParagraph">indicator of the end of paragraph occurence</param>
-            /// <param name="endOfFile">indicator of the end of file occurence</param>
-            /// <param name="noFile">indicator if any openable file was found for reading</param>
-            /// <returns></returns>
-            abstract public void WriteLine(string line, bool endOfParagraph, bool endOfFile, out string justifiedLine);
+            /// <param name="endOfStream">indicator of the end of stream occurence</param>
+            /// <param name="justifiedLine"></param>
+            abstract public void WriteLine(string line, bool endOfParagraph, bool endOfStream, out string justifiedLine);
 
             /// <summary>
             /// distributes uniformly white spaces between words, such that line has length of lineLength variable
@@ -364,12 +390,12 @@ namespace WorkTracker
         }
 
         /// <summary>
-        /// class for writing justified lines to file of choose by concatinating words with spaces and lines with "end of line" chars
+        /// class that returns justified lines of strings by concatinating words with spaces and lines with "end of line" chars
         /// </summary>
         class WhiteLineWriter : LineWriter
         {
             public WhiteLineWriter(int lineLength) : base(lineLength) { }
-            override public void WriteLine(string line, bool endOfParagraph, bool endOfFile, out string justifiedLine)
+            override public void WriteLine(string line, bool endOfParagraph, bool endOfStream, out string justifiedLine)
             {
                 justifiedLine = "";
                 // if after previous line was found pargraph delimeter then now starts the new one
@@ -380,7 +406,7 @@ namespace WorkTracker
                     newParagraph = false;
                 }
 
-                if (line.Split(' ').Length > 1 && !endOfParagraph && !endOfFile)
+                if (line.Split(' ').Length > 1 && !endOfParagraph && !endOfStream)
                     line = DistributeWhiteSpaces(line);
 
                 if (line != "") justifiedLine = justifiedLine + line + Environment.NewLine;
@@ -412,13 +438,13 @@ namespace WorkTracker
             }
         }
         /// <summary>
-        /// class for writing justified lines to file of choose by concatinating words with '.' and lines with "end of line" chars before which '<-' is written
+        /// class that returns justified lines of strings by concatinating words with '.' and lines with "end of line" chars before which '<-' is written
         /// </summary>
         class FilledLineWriter : LineWriter
         {
             public FilledLineWriter(int lineLength) : base(lineLength) { }
 
-            override public void WriteLine(string line, bool endOfParagraph, bool endOfFile, out string justifiedLine)
+            override public void WriteLine(string line, bool endOfParagraph, bool endOfStream, out string justifiedLine)
             {
                 justifiedLine = "";
                 // if after previous line was found pargraph delimeter then now starts the new one
@@ -429,7 +455,7 @@ namespace WorkTracker
                     newParagraph = false;
                 }
 
-                if (line.Split(' ').Length > 1 && !endOfParagraph && !endOfFile)
+                if (line.Split(' ').Length > 1 && !endOfParagraph && !endOfStream)
                     line = DistributeWhiteSpaces(line);
                 else line = line.Replace(' ', '.');
 

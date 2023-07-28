@@ -355,9 +355,9 @@ Pokúste sa zatovriť všetky procesy znemožňujúce prístup k tomuto súboru.
 Dokým sa problém nevyrieši, nebude možné prezrieť výsledky.</value>
   </data>
   <data name="Progress_RecordSinceText_label_text" xml:space="preserve">
-    <value>Nahrávané od</value>
+    <value>Nahrávané od:</value>
   </data>
   <data name="Progress_RecordUntilText_label_text" xml:space="preserve">
-    <value>Nahrávané do</value>
+    <value>Nahrávané do:</value>
   </data>
 </root>
