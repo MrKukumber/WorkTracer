@@ -101,7 +101,7 @@ namespace WorkTracker
             Program.main_form.Show();
             this.Hide();
         }
-        public void Relabel()
+        public void Relable()
         {
             this.Text = Localization.Recording_form_text;
             ConfigFormOpening_button.Text = Localization.Recording_ConfigFormOpening_button_text;
@@ -144,7 +144,7 @@ namespace WorkTracker
     /// </summary>
     static public class RecordingMan
     {
-        public enum RecStatesI { unknown =  0, started, paused, stoped }
+        public enum RecStatesI { unknown, started, paused, stoped }
         public enum WorkPhasesI { creating, programing, debuging };
         static public RecStatesI recState { get; private set; }
         static public WorkPhasesI workPhase { get; private set; }
@@ -162,13 +162,6 @@ namespace WorkTracker
             new StartedRecState(), 
             new PausedRecState(), 
             new StopedRecState() 
-        };
-        static public VisitRecState[] visitRecStates =
-        {
-            new VisitUnknownRecState(),
-            new VisitStartedRecState(),
-            new VisitPausedRecState(),
-            new VisitStopedRecState()
         };
         // holds last project record
         static public Record? LastRecord { get; private set; }
@@ -191,8 +184,8 @@ namespace WorkTracker
             public string? Git { get; set; }
         }
         // configurations for writing into CSV file
-        static private CsvConfiguration basicConfig = new(CultureInfo.InvariantCulture) {Delimiter = ",", Comment = '%'};
-        static private CsvConfiguration withoutHeaderConfig = new(CultureInfo.InvariantCulture) { Delimiter = ",", Comment = '%', HasHeaderRecord = false };
+        static private readonly CsvConfiguration basicConfig = new(CultureInfo.InvariantCulture) {Delimiter = ",", Comment = '%'};
+        static private readonly CsvConfiguration withoutHeaderConfig = new(CultureInfo.InvariantCulture) { Delimiter = ",", Comment = '%', HasHeaderRecord = false };
         static public void Initialize()
         {
             AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
@@ -258,12 +251,12 @@ namespace WorkTracker
         static public void AdaptToEnviromentWithNewProj(out bool ableToAccessCSV)
         {
             ableToAccessCSV = true;
-            if (ResourceControlMan.LastProjValidity)
+            if (ProjectMan.LastProjValidity)
             {
                 try
                 {
                     LastRecord = GetLastRecordFromCSV();
-                    if (ResourceControlMan.LastTGitValidity)
+                    if (TortoiseGitMan.LastTGitValidity)
                     {
                         if (LastRecord is not null)
                         {
@@ -296,7 +289,7 @@ namespace WorkTracker
         /// </summary>
         static public void AdaptToEnviromentWithOldProj()
         {
-            if (ResourceControlMan.LastProjValidity && ResourceControlMan.LastTGitValidity)
+            if (ProjectMan.LastProjValidity && TortoiseGitMan.LastTGitValidity)
             {
                 if (LastRecord is not null)
                 {

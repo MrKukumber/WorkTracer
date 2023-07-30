@@ -61,15 +61,15 @@ namespace WorkTracker
         private void ChooseMode_trackBar_Scroll(object sender, EventArgs e)
         {
             ModesMan.ChangeMode((ModesMan.ModesI) ChooseMode_trackBar.Value);
-            if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
-            if (!ResourceControlMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
+            if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+            if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
         }
         private void ChooseTGitDir_button_Click(object sender, EventArgs e)
         {
             TortoiseGitMan.ChooseTGitFromDialog();
         }
 
-        public void Relabel()
+        public void Relable()
         {
             this.Text = Localization.Configure_form_text;
             ChooseTGitDir_button.Text = Localization.Select;
@@ -137,18 +137,18 @@ namespace WorkTracker
                     break;
 
             }
-            Relabel();
+            Relable();
         }
         /// <summary>
         /// calls Relable functions in all forms. These functions rewrites all labels in those forms.
         /// </summary>
-        static public void Relabel()
+        static public void Relable()
         {
-            Program.configure_form.Relabel();
-            Program.main_form.Relabel();
-            Program.recording_form.Relabel();
-            Program.commit_form.Relabel();
-            Program.progress_form.Relabel();
+            Program.configure_form.Relable();
+            Program.main_form.Relable();
+            Program.recording_form.Relable();
+            Program.commit_form.Relable();
+            Program.progress_form.Relable();
             CommitMan.CheckAndSetCommit_richTextBoxes();
         }
     }
@@ -222,13 +222,11 @@ namespace WorkTracker
             /// </summary>
             public abstract void SetMode();
         }
-
         private class LocalMode : Mode
         {
             public override void SetMode()
             {
                 Program.main_form.SetMode_label();
-
                 Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Olive);
             }
         }
@@ -237,10 +235,8 @@ namespace WorkTracker
             public override void SetMode()
             {
                 Program.main_form.SetMode_label();
-
                 Program.configure_form.SetForeColor_TGitLabelsButtons(Color.Black);
             }
-
         }
         /// <summary>
         /// classes inherited from this interace, serve for other managers as instances 
@@ -261,8 +257,8 @@ namespace WorkTracker
         }
         public class VisitLocalMode : IVisitMode
         {
-            public bool VisitForIsProjectValid() => ResourceControlMan.IsProjValid(this);
-            public bool VisitForIsTGitValid() => ResourceControlMan.IsTGitValid(this);
+            public bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
+            public bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
             public void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
             public void VisitForDoYouWnatToCreateRepoQuestion() => ProjectMan.DoYouWnatToCreateRepoQuestion(this);
@@ -273,8 +269,8 @@ namespace WorkTracker
         }
         public class VisitReposMode : IVisitMode
         {
-            public bool VisitForIsProjectValid() => ResourceControlMan.IsProjValid(this);
-            public bool VisitForIsTGitValid() => ResourceControlMan.IsTGitValid(this);
+            public bool VisitForIsProjectValid() => ProjectMan.IsProjValid(this);
+            public bool VisitForIsTGitValid() => TortoiseGitMan.IsTGitValid(this);
             public void VisitForSetRightTGit_dir() => TortoiseGitMan.SetRightTGit_dir(this);
             public void VisitForSetFalseTGit_dir() => TortoiseGitMan.SetFalseTGit_dir(this);
             public void VisitForDoYouWnatToCreateRepoQuestion() => ProjectMan.DoYouWnatToCreateRepoQuestion(this);
@@ -292,6 +288,8 @@ namespace WorkTracker
     {
         static public string TGit_dir { get => tGit_dir; }
         static private string tGit_dir = "";
+        static public bool LastTGitValidity { get; private set; }// properties set by calling function IsTGitValid() 
+
         /// <summary>
         /// intitialize TGit directory to saved one and checks, if it is valid
         /// </summary>
@@ -314,7 +312,7 @@ namespace WorkTracker
                 {
                     tGit_dir = openFileDialog.SelectedPath;
                     CheckAndSetTGit_dir();
-                    if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+                    if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
                     RecordingMan.AdaptToEnviromentWithOldProj();
                 }
                 else
@@ -329,11 +327,26 @@ namespace WorkTracker
         /// <returns></returns>
         static public bool ExistsTG() => File.Exists(tGit_dir + "\\TortoiseGitProc.exe");
         /// <summary>
+        /// Checks if TGit directory is valid by visiting mode in ModesMan
+        /// </summary>
+        /// <returns>validity</returns>
+        static public bool IsTGitValid() => ModesMan.VisitMode.VisitForIsTGitValid();
+        static public bool IsTGitValid(ModesMan.VisitLocalMode mode)
+        {
+            LastTGitValidity = true;
+            return LastTGitValidity;
+        }
+        static public bool IsTGitValid(ModesMan.VisitReposMode mode)
+        {
+            LastTGitValidity = ExistsTG();
+            return LastTGitValidity;
+        }
+        /// <summary>
         /// function that sets appropriate changes of enviroment according to TGit dir validity
         /// </summary>
         static public void CheckAndSetTGit_dir()
         {
-            if (ResourceControlMan.IsTGitValid()) SetRightTGit_dir();
+            if (TortoiseGitMan.IsTGitValid()) SetRightTGit_dir();
             else SetFalseTGit_dir();
         }
         static private void SetRightTGit_dir() => ModesMan.VisitMode.VisitForSetRightTGit_dir(); //visits mode for correct adjustments
@@ -373,6 +386,8 @@ namespace WorkTracker
         private const string csvRecordFileName = ".workTracer_recordings.csv";
         static public string Proj_dir { get => proj_dir; }
         static private string proj_dir = "";
+        static public bool LastProjValidity { get; private set; }// properties set by calling function IsProjValid() 
+
         /// intitialize project directory to saved one and checks, if it is valid
         static public void Initialize(string init_proj_dir)
         {
@@ -398,7 +413,7 @@ namespace WorkTracker
                     DoYouWnatToCreateRepoQuestion();
 
                     CheckAndSetProj_dir();
-                    if (!ResourceControlMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
+                    if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
                     RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
                     ProgressMan.CheckAndSetDateTimePickersInProgress(true, out _);
                     CommitMan.CheckAndSetCommit_richTextBoxes(0);
@@ -444,14 +459,29 @@ namespace WorkTracker
                 return output == "true\n";
             }
         }
-        public static void WriteProj_dirTo(StreamWriter file) => file.WriteLine("last_proj_dir " + proj_dir);
+        /// <summary>
+        /// Checks if project directory is valid by visiting mode in ModesMan
+        /// </summary>
+        /// <returns>validity</returns>
+        static public bool IsProjValid() => ModesMan.VisitMode.VisitForIsProjectValid();
 
+
+        static public bool IsProjValid(ModesMan.VisitLocalMode mode)
+        {
+            LastProjValidity = ExistsProjDir();
+            return LastProjValidity;
+        }
+        static public bool IsProjValid(ModesMan.VisitReposMode mode)
+        {
+            LastProjValidity = ExistsProjDir() && IsThereRepo();
+            return LastProjValidity;
+        }
         /// <summary>
         /// function that sets appropriate changes of enviroment according to project dir validity
         /// </summary>
         static public void CheckAndSetProj_dir()
         {
-            if (ResourceControlMan.IsProjValid()) SetRightProj_dir();
+            if (ProjectMan.IsProjValid()) SetRightProj_dir();
             else SetFalseProj_dir();
 
         }
@@ -489,7 +519,7 @@ namespace WorkTracker
                 p.WaitForExit();
             }
         }
-
+        public static void WriteProj_dirTo(StreamWriter file) => file.WriteLine("last_proj_dir " + proj_dir);
 
     }
 }

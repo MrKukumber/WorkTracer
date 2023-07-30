@@ -94,7 +94,7 @@ namespace WorkTracker
             }
             else System.Windows.Forms.Application.Exit();
         }
-        public void Relabel()
+        public void Relable()
         {
             this.Text = Localization.Commit_form_text;
             WantCommit_label.Text = Localization.Commit_WantCommit_label_text;
@@ -185,7 +185,7 @@ namespace WorkTracker
         static public void CheckAndSetCommitInProgress(ModesMan.VisitReposMode mode, int? commitIndex)
         {
             if (commitIndex is not null) Program.progress_form.Commit_vScrollValue = (int)commitIndex;
-            if (ResourceControlMan.LastProjValidity) // if project is not valid, respective message is shown in commit rich text box
+            if (ProjectMan.LastProjValidity) // if project is not valid, respective message is shown in commit rich text box
             {
                 CommitPresenter.GetCommitsAndShowCurrentOneInProgress();
             }
@@ -211,7 +211,7 @@ namespace WorkTracker
 
         static public void CheckAndSetCommitInMain(ModesMan.VisitReposMode mode)
         {
-            if (ResourceControlMan.LastProjValidity)// if project is not valid, respective message is shown in commit rich text box
+            if (ProjectMan.LastProjValidity)// if project is not valid, respective message is shown in commit rich text box
             {
                 CommitPresenter.GetAndShowLastCommitInMain();
             }

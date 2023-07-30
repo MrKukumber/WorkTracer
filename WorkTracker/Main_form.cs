@@ -24,10 +24,10 @@ namespace WorkTracker
 
         private void RecordingFormOpening_Button_Click(object sender, EventArgs e)
         {
-            if (!ResourceControlMan.LastProjValidity)
-                if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidProjectDirSelected + "\n" + Localization.NotValidTGitDirChosen);
+            if (!ProjectMan.LastProjValidity)
+                if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidProjectDirSelected + "\n" + Localization.NotValidTGitDirChosen);
                 else MessageBox.Show(Localization.NotValidProjectDirSelected);
-            else if (!ResourceControlMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
+            else if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
             Program.recording_form.Show();
             this.Hide();
 
@@ -52,7 +52,7 @@ namespace WorkTracker
             Program.progress_form.Show();
             this.Hide();
         }
-        public void Relabel()
+        public void Relable()
         {
             this.Text = Localization.Main_form_text;
             Commit_label.Text = Localization.Main_Commit_label_text;

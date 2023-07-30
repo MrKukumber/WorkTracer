@@ -92,7 +92,7 @@ namespace WorkTracker
             ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
         }
 
-        public void Relabel()
+        public void Relable()
         {
             this.Text = Localization.Progress_form_text;
             Since_label.Text = Localization.Progress_From_label_text;
@@ -170,7 +170,7 @@ namespace WorkTracker
         static public void CheckAndSetDateTimePickersInProgress(bool ResetValues, out bool ableToAccessCSV)
         {
             ableToAccessCSV = true;
-            if (ResourceControlMan.LastProjValidity && ProjectMan.ExistsRecordCSV())
+            if (ProjectMan.LastProjValidity && ProjectMan.ExistsRecordCSV())
             {
                 try
                 {
@@ -236,7 +236,7 @@ namespace WorkTracker
             ResetComputedValues();
             try
             {
-                if (ResourceControlMan.LastProjValidity && ProjectMan.ExistsRecordCSV())
+                if (ProjectMan.LastProjValidity && ProjectMan.ExistsRecordCSV())
                 {
                     using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
                     using (var csv = new CsvReader(reader, basicConfig))

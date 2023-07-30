@@ -209,7 +209,7 @@ Naozaj chceš odísť?</value>
     <value>Debugovanie</value>
   </data>
   <data name="Progress_From_label_text" xml:space="preserve">
-    <value>Od dňa</value>
+    <value>Odo# dňa</value>
   </data>
   <data name="Progress_To_label_text" xml:space="preserve">
     <value>Do dňa</value>

@@ -48,11 +48,18 @@ namespace WorkTracker
         /// <param name="form">form, which was activated after aplication activation</param>
         static public void CheckAfterActivatingApp(Form form)
         {
-            ResourceControlMan.CheckAndSetResources();
+            bool projValidityBeforeCheck = ProjectMan.LastProjValidity;
+            bool tGitValidityBeforeCheck = TortoiseGitMan.LastTGitValidity;
+            TortoiseGitMan.CheckAndSetTGit_dir();
+            ProjectMan.CheckAndSetProj_dir();
             RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
             ProgressMan.CheckAndSetDateTimePickersInProgress(false, out _);
             CommitMan.CheckAndSetCommit_richTextBoxes();
             ProgressMan.SetAndShowProgression(out _);
+            if (!ProjectMan.LastProjValidity && projValidityBeforeCheck)
+                if (!TortoiseGitMan.LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfProject_dir + "\n" + Localization.NonValidChangeOfTGit_dir);
+                else MessageBox.Show(Localization.NonValidChangeOfProject_dir);
+            else if (!TortoiseGitMan.LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfTGit_dir);
             if (!ableToAccessCSV && !messageAlreadyShown)
             {
                 if (form is Progress_form) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
@@ -127,64 +134,6 @@ namespace WorkTracker
         } 
     }
 
-    /// <summary>
-    /// class which contains functions for checking of resources - project and tortoise git (directories)
-    /// </summary>
-    public static class ResourceControlMan
-    {
-        // properties set by calling function IsProjValid() and IsTGitValid()
-        static public bool LastProjValidity { get; private set; }
-        static public bool LastTGitValidity { get; private set; }
-        /// <summary>
-        /// calls functions of project and TGit managers, that sets correctly enviroment according to newly checked project/TGit validity
-        /// </summary>
-        public static void CheckAndSetResources()
-        {
-            bool projValidityBeforeCheck = LastProjValidity;
-            bool tGitValidityBeforeCheck = LastTGitValidity;
-            TortoiseGitMan.CheckAndSetTGit_dir();
-
-            ProjectMan.CheckAndSetProj_dir();
-
-            if (!LastProjValidity && projValidityBeforeCheck)
-                if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfProject_dir + "\n" + Localization.NonValidChangeOfTGit_dir);
-                else MessageBox.Show(Localization.NonValidChangeOfProject_dir);
-            else if (!LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfTGit_dir);
-        }
-        /// <summary>
-        /// Checks if project directory is valid by visiting mode in ModesMan
-        /// </summary>
-        /// <returns>validity</returns>
-        static public bool IsProjValid() => ModesMan.VisitMode.VisitForIsProjectValid();
-        /// <summary>
-        /// Checks if TGit directory is valid by visiting mode in ModesMan
-        /// </summary>
-        /// <returns>validity</returns>
-        static public bool IsTGitValid() => ModesMan.VisitMode.VisitForIsTGitValid();
-
-        static public bool IsProjValid(ModesMan.VisitLocalMode mode)
-        {
-            LastProjValidity = ProjectMan.ExistsProjDir();
-            return LastProjValidity;
-        }
-        static public bool IsProjValid(ModesMan.VisitReposMode mode)
-        {
-            LastProjValidity = ProjectMan.ExistsProjDir() && ProjectMan.IsThereRepo();
-            return LastProjValidity;
-        }
-        static public bool IsTGitValid(ModesMan.VisitLocalMode mode)
-        {
-            LastTGitValidity = true;
-            return LastTGitValidity;
-        }
-        static public bool IsTGitValid(ModesMan.VisitReposMode mode)
-        {
-            LastTGitValidity = TortoiseGitMan.ExistsTG();
-            return LastTGitValidity;
-        }
-
-
-    }
 
     /// <summary>
     /// guarantees correct exiting of aplication
@@ -199,18 +148,21 @@ namespace WorkTracker
         public static void ExitApp(FormClosingEventArgs e)
         {
 
-            if (e.CloseReason is CloseReason.UserClosing && RecordingMan.recState is (RecordingMan.RecStatesI.started or RecordingMan.RecStatesI.paused))
-            {
-                YesNoDialog_form areYouSureYouWantToExit_form = new YesNoDialog_form(Localization.NotStopedExit_YesNoDialog_label_text, Localization.Yes, Localization.No);
-                areYouSureYouWantToExit_form.ShowDialog();
-                if (areYouSureYouWantToExit_form.DialogResult is DialogResult.No)
+            if (e.CloseReason is CloseReason.UserClosing) 
+            { 
+                if (RecordingMan.recState is (RecordingMan.RecStatesI.started or RecordingMan.RecStatesI.paused))
                 {
-                    e.Cancel = true;
-                    return;
+                    YesNoDialog_form areYouSureYouWantToExit_form = new YesNoDialog_form(Localization.NotStopedExit_YesNoDialog_label_text, Localization.Yes, Localization.No);
+                    areYouSureYouWantToExit_form.ShowDialog();
+                    if (areYouSureYouWantToExit_form.DialogResult is DialogResult.No)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
                 }
+                SaveParameters();
+                System.Windows.Forms.Application.Exit();
             }
-            SaveParameters();
-            System.Windows.Forms.Application.Exit();
         }
         /// <summary>
         /// function, which saves parameter to initialization file for future use
