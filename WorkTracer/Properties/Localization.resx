@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Commit_WantCommit_label_text" xml:space="preserve">
+    <value>Do you want to commit your work?</value>
+    
+  </data>
+  <data name="Config_BackToPrevForm_button_text" xml:space="preserve">
+    <value>Return back</value>
+    
+  </data>
+  <data name="Config_ChooseLanguge_label_text" xml:space="preserve">
+    <value>Choose language</value>
+    
+  </data>
+  <data name="Config_ChooseProjDir_label_text" xml:space="preserve">
+    <value>Select project for tracking</value>
+    
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+    
+  </data>
+  <data name="Config_Mode1_label_text" xml:space="preserve">
+    <value>Select mode</value>
+    
+  </data>
+  <data name="Config_Mode2_label_text" xml:space="preserve">
+    <value>local     repo</value>
+    
+  </data>
+  <data name="Main_Commit_label_text" xml:space="preserve">
+    <value>Last project commit</value>
+    
+  </data>
+  <data name="Main_ConfigFormOpening_button_text" xml:space="preserve">
+    <value>Open configuration</value>
+    
+  </data>
+  <data name="CurrTrackState_label_pause_text" xml:space="preserve">
+    <value>Recording is paused</value>
+  </data>
+  <data name="CurrTrackState_label_start_text" xml:space="preserve">
+    <value>Recording is on</value>
+  </data>
+  <data name="CurrTrackState_label_stop_text" xml:space="preserve">
+    <value>Recording is stoped</value>
+  </data>
+  <data name="CurrTrackState_label_none_text" xml:space="preserve">
+    <value>No recording</value>
+  </data>
+  <data name="Main_ProgressFormOpening_button_text" xml:space="preserve">
+    <value>See work progress</value>
+  </data>
+  <data name="WantCreateRepo_YesNoDialog_label_text" xml:space="preserve">
+    <value>In current directory is no repository.\nWould you like to create one?</value>
+  </data>
+  <data name="ReturnToMain_button_text" xml:space="preserve">
+    <value>Return to Main</value>
+  </data>
+  <data name="Recording_ConfigFormOpening_button_text" xml:space="preserve">
+    <value>Open configuration</value>
+  </data>
+  <data name="NotStopedExit_YesNoDialog_label_text" xml:space="preserve">
+    <value>You did not stopped your recording?
+Are you sure, you want to exit?</value>
+  </data>
+  <data name="Commit_NotCommiting_YesNoDialog_label_text" xml:space="preserve">
+    <value>Are you sure you don't want to commit?</value>
+  </data>
+  <data name="Main_TortoiseFileNotSelected_label_text" xml:space="preserve">
+    <value>Valid TGit directory is not selected</value>
+    
+  </data>
+  <data name="Main_RecordingFormOpening_Button_text" xml:space="preserve">
+    <value>Record</value>
+    
+  </data>
+  <data name="Main_ProjNotSelected_label_text" xml:space="preserve">
+    <value>No valid project is selected</value>
+    
+  </data>
+  <data name="Mode_repo_text" xml:space="preserve">
+    <value>Mode: Repozitory</value>
+    
+  </data>
+  <data name="Mode_local_text" xml:space="preserve">
+    <value>Mode: Local</value>
+    
+  </data>
+  <data name="Recording_Faze_label_text" xml:space="preserve">
+    <value>Work phase</value>
+  </data>
+  <data name="PhaseCreate_label_text" xml:space="preserve">
+    <value>Creating</value>
+  </data>
+  <data name="PhaseProgr_label_text" xml:space="preserve">
+    <value>Programing</value>
+  </data>
+  <data name="PhaseDebug_label_text" xml:space="preserve">
+    <value>Debuging</value>
+  </data>
+  <data name="Progress_From_label_text" xml:space="preserve">
+    <value>Since day</value>
+  </data>
+  <data name="Progress_To_label_text" xml:space="preserve">
+    <value>Until day</value>
+  </data>
+  <data name="Progress_CompDurationText_label_text" xml:space="preserve">
+    <value>Total work duration:</value>
+  </data>
+  <data name="Progress_CompDurationWithStopText_label_text" xml:space="preserve">
+    <value>Total work duration
+(including paused intervals):</value>
+  </data>
+  <data name="Recording_form_text" xml:space="preserve">
+    <value>Recording</value>
+  </data>
+  <data name="Main_form_text" xml:space="preserve">
+    <value>Main menu</value>
+  </data>
+  <data name="Configure_form_text" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="Commit_form_text" xml:space="preserve">
+    <value>Commit</value>
+  </data>
+  <data name="Progress_form_text" xml:space="preserve">
+    <value>Work progression</value>
+  </data>
+  <data name="Main_Commit_richTextBox_local_mode_text" xml:space="preserve">
+    <value>
+
+
+
+    Local mode active</value>
+  </data>
+  <data name="Progress_Commit_richTextBox_local_mode_text" xml:space="preserve">
+    <value>
+
+
+
+         Local mode active</value>
+  </data>
+  <data name="NotValidProjectDirSelected" xml:space="preserve">
+    <value>Chosen project directory is not valid</value>
+  </data>
+  <data name="NotValidTGitDirChosen" xml:space="preserve">
+    <value>No valid Tortoise Git directory selected</value>
+  </data>
+  <data name="SomethingWentWrongProjectDialog" xml:space="preserve">
+    <value>Something went wrong while choosing project directory
+Try again</value>
+  </data>
+  <data name="SomethingWentWrongTGitDialog" xml:space="preserve">
+    <value>Something went wrong while choosing Tortoise Git directory
+Try again</value>
+  </data>
+  <data name="Configure_WantToCreateRepoDialog" xml:space="preserve">
+    <value>There is no repository in given folder.
+Do you want to create new one in there?</value>
+  </data>
+  <data name="Recording_UnableToAccessCSV" xml:space="preserve">
+    <value>Application was unable access the record file of project, because it is used by other process.
+Try to close all processes, that make impossible to access this file.
+State of recording will be set to the previous one and after recovering of access you can change it again.</value>
+  </data>
+  <data name="Config_UnableToAccessCSV" xml:space="preserve">
+    <value>Application was unable access the record file of project, because it is used by other process.
+Try to close all processes, that make impossible to access this file.
+It will not be possible to make any record, unless is this problem fixed.
+After recovering of access to record file you can choose project again.</value>
+  </data>
+  <data name="NonValidChangeOfProject_dir" xml:space="preserve">
+    <value>The directory of project or access to git repository was changed.
+Please revert changes of project directory or choose another valid project in configuration.</value>
+  </data>
+  <data name="NonValidChangeOfTGit_dir" xml:space="preserve">
+    <value>The directory of Tortoise Git was changed.
+Please choose new location in configuration.</value>
+  </data>
+  <data name="RunTortoiseGitFailure" xml:space="preserve">
+    <value>Failure has occured during calling of Tortoise Git process. 
+Try to call it again or manage Tortoise Git directory in configuration.</value>
+  </data>
+  <data name="Commit_NoCommitMade_YesNoDialog_text" xml:space="preserve">
+    <value>No commit was made. Are you sure you don't want to commit?</value>
+  </data>
+  <data name="Config_ChooseTGitDir_label_text" xml:space="preserve">
+    <value>Select directory with tortoise git</value>
+  </data>
+  <data name="Main_NoCommitMade_richTextBox_text" xml:space="preserve">
+    <value>
+
+
+
+   No commit made yet</value>
+  </data>
+  <data name="Main_InvalidProjectSelectedCommit_richTextBox" xml:space="preserve">
+    <value>
+
+
+
+Invalid project selected</value>
+  </data>
+  <data name="Progress_InvalidProjectSelectedCommit_richTextBox" xml:space="preserve">
+    <value>
+
+
+
+     Invalid project selected</value>
+  </data>
+  <data name="Progress_RecordingTime_label_text" xml:space="preserve">
+    <value>Total time</value>
+  </data>
+  <data name="Progress_RecordingTimeWithPause_label_text" xml:space="preserve">
+    <value>Total time
+with pauses</value>
+  </data>
+  <data name="Progress_CreatTime_label_text" xml:space="preserve">
+    <value>Creating</value>
+  </data>
+  <data name="Progress_ProgrTime_label_text" xml:space="preserve">
+    <value>Programing</value>
+  </data>
+  <data name="Progress_DebugTime_label_text" xml:space="preserve">
+    <value>Debuging</value>
+  </data>
+  <data name="Progress_RangeCommit_label_text" xml:space="preserve">
+    <value>Commits from given range</value>
+  </data>
+  <data name="Progress_NoCommitFound_richTextBox_text" xml:space="preserve">
+    <value>
+
+
+          No commit found
+          in given range
+</value>
+  </data>
+  <data name="Progress_SameDate_label_text" xml:space="preserve">
+    <value>Same date</value>
+  </data>
+  <data name="Progress_UnableToAccessCSV" xml:space="preserve">
+    <value>Application was unable access the record file of project, because it is used by other process.
+Try to close all processes, that make impossible to access this file.
+Until the problem is not solved, it will not be possible to see the results.</value>
+  </data>
+  <data name="Progress_RecordSinceText_label_text" xml:space="preserve">
+    <value>Recorded since:</value>
+  </data>
+  <data name="Progress_RecordUntilText_label_text" xml:space="preserve">
+    <value>Recorded until:</value>
+  </data>
+</root>

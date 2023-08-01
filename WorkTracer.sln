@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testovanie_funkcionalit", "Testovanie_funkcionalit\Testovanie_funkcionalit.csproj", "{30C45365-741F-4840-BBCA-AFA0C1DE2126}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testovanie_codu", "testovanie_codu\testovanie_codu.csproj", "{509A28AA-BDBE-4F5B-B1FC-D8DA84A975AE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkTracer", "WorkTracer\WorkTracer.csproj", "{3FC652CB-712D-4BF4-B68A-C6710243C4A1}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30C45365-741F-4840-BBCA-AFA0C1DE2126}.Release|Any CPU.Build.0 = Release|Any CPU
-		{509A28AA-BDBE-4F5B-B1FC-D8DA84A975AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{509A28AA-BDBE-4F5B-B1FC-D8DA84A975AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{509A28AA-BDBE-4F5B-B1FC-D8DA84A975AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{509A28AA-BDBE-4F5B-B1FC-D8DA84A975AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3FC652CB-712D-4BF4-B68A-C6710243C4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3FC652CB-712D-4BF4-B68A-C6710243C4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FC652CB-712D-4BF4-B68A-C6710243C4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
