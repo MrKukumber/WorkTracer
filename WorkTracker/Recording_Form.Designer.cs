@@ -81,7 +81,7 @@
             // ReturnToMain_button
             // 
             this.ReturnToMain_button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ReturnToMain_button.Location = new System.Drawing.Point(218, 239);
+            this.ReturnToMain_button.Location = new System.Drawing.Point(208, 145);
             this.ReturnToMain_button.Name = "ReturnToMain_button";
             this.ReturnToMain_button.Size = new System.Drawing.Size(110, 70);
             this.ReturnToMain_button.TabIndex = 3;
@@ -92,7 +92,7 @@
             // ConfigFormOpening_button
             // 
             this.ConfigFormOpening_button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ConfigFormOpening_button.Location = new System.Drawing.Point(218, 143);
+            this.ConfigFormOpening_button.Location = new System.Drawing.Point(208, 239);
             this.ConfigFormOpening_button.Name = "ConfigFormOpening_button";
             this.ConfigFormOpening_button.Size = new System.Drawing.Size(110, 70);
             this.ConfigFormOpening_button.TabIndex = 4;
@@ -103,7 +103,7 @@
             // PhaseCreat_label
             // 
             this.PhaseCreat_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PhaseCreat_label.Location = new System.Drawing.Point(51, 180);
+            this.PhaseCreat_label.Location = new System.Drawing.Point(51, 252);
             this.PhaseCreat_label.Name = "PhaseCreat_label";
             this.PhaseCreat_label.Size = new System.Drawing.Size(158, 20);
             this.PhaseCreat_label.TabIndex = 6;
@@ -112,7 +112,7 @@
             // PhaseProgr_label
             // 
             this.PhaseProgr_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PhaseProgr_label.Location = new System.Drawing.Point(51, 218);
+            this.PhaseProgr_label.Location = new System.Drawing.Point(51, 216);
             this.PhaseProgr_label.Name = "PhaseProgr_label";
             this.PhaseProgr_label.Size = new System.Drawing.Size(158, 20);
             this.PhaseProgr_label.TabIndex = 7;
@@ -121,7 +121,7 @@
             // PhaseDebug_label
             // 
             this.PhaseDebug_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PhaseDebug_label.Location = new System.Drawing.Point(51, 250);
+            this.PhaseDebug_label.Location = new System.Drawing.Point(51, 182);
             this.PhaseDebug_label.Name = "PhaseDebug_label";
             this.PhaseDebug_label.Size = new System.Drawing.Size(158, 20);
             this.PhaseDebug_label.TabIndex = 8;
@@ -131,7 +131,7 @@
             // 
             this.Phase_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Phase_label.AutoSize = true;
-            this.Phase_label.Location = new System.Drawing.Point(33, 143);
+            this.Phase_label.Location = new System.Drawing.Point(33, 145);
             this.Phase_label.Name = "Phase_label";
             this.Phase_label.Size = new System.Drawing.Size(86, 20);
             this.Phase_label.TabIndex = 9;
@@ -141,7 +141,7 @@
             // 
             this.Phase_trackBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Phase_trackBar.LargeChange = 1;
-            this.Phase_trackBar.Location = new System.Drawing.Point(9, 175);
+            this.Phase_trackBar.Location = new System.Drawing.Point(9, 177);
             this.Phase_trackBar.Maximum = 2;
             this.Phase_trackBar.Name = "Phase_trackBar";
             this.Phase_trackBar.Orientation = System.Windows.Forms.Orientation.Vertical;

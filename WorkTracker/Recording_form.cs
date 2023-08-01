@@ -343,6 +343,7 @@ namespace WorkTracker
                 csv.WriteRecord<Record>(record);
                 csv.NextRecord();
             }
+            File.SetAttributes(ProjectMan.PathToCSVRecordFile, FileAttributes.Hidden);
         }
         /// <summary>
         /// using CSVHelper library appends record into csv 
