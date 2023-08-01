@@ -4,7 +4,7 @@
 
 ---
 
-- Aplikácia s grafickým uživatelským rozhraním slúžiaca na zaznamenávanie času strávenom na práci na danom projekte.  
+- Aplikácia s grafickým uživatelským rozhraním slúžiaca na zaznamenávanie času strávenom na práci uživatela na danom projekte.  
 
 ---
 
@@ -67,11 +67,49 @@
 
 <img src="screen_shots/recording_form_screen_shot.jpg" width = 250>
 
-- v okne sa nachádzajú tri tlačidlá pre pre nahrávanie, track bar pre výber vývojových fází a dve tlačidlá pre vstup do nastavení (**Otvor nastavenie**)a pre návrat do hlavného menu (**Vráť sa do hlavného menu**)
+- v okne sa nachádzajú:
+  - tri tlačidlá pre pre nahrávanie, track bar pre výber vývojových fází
+  - dve tlačidlá pre:
+    - vstup do nastavení (**Otvor nastavenie**)
+    - návrat do hlavného menu (**Vráť sa do hlavného menu**)
+
 - tlačidlá pre náhrávanie z ľava sú:
   1. tlačidlo pre **spustenie** nahrávania
   2. tlačidlo pre **pozastavenie** nahrávania
   3. tlačidlo pre **zastavenie nahrávania**
 
+- pokiaľ je aktívy *repozitárový mód*, po zastavení nahrávania sa otvorí okno, ktoré sa pýta uživatela, či chce commitnúť svoju  spravenú prácu
+  - pokiaľ je jeho odpoveď kladná, otvorí sa okno aplikácie Tortoise Git, kde uživatel môže spraviť všetky možné úpravy svojho commit-u a následhne aj poslať svoje zmeny na server
+  - po dokončení tejto akcie je uživatel opäť vrátený do okna nahrávania
 
+- nahrávnaie je znemožnené pokiaľ nieje vybraný valídny projekt alebo valídny priečinok s Tortoise Git-om
 
+### prezeranie výsledkov
+
+<img src="screen_shots/progress_form_screen_shot.jpg" width = 600>
+
+v prezeraní výsledkov sa nachádzajú:
+
+- dve kolonky pre výber časového intervalu:
+  - **Odo dňa** - výber počiatočného dátumu
+  - **Do dňa** - výber koncového dátumu
+- okno pre zobrazovanie commit-ov
+  - toto okno je aktívne iba počas aktívneho *repozitárového módu*
+  - toto okno má pri sebe *scroll bar*, ktorým sa dá listovať medzi jednotlivými commit-mi
+  - v okne sa budú zobrazovať len commity z časového rozsahu vybraného v horných kolonkách okna
+  - commit je doplnený o časový údaj, ktorý vraví, pred koľkými dňami bol daný commit spravený ((3 days ago))
+- číselné údaje vyjadrujúce dobu strávenú prácou na projekte
+  - dve hodnoty na spodu ukazujú celkový počet hodín, strávených na práci na projekte
+    - prvé hovorí o čistom čase práce
+    - druhé započítava do výsledku aj dobu pozastavenia nahrávania
+  - hodntoy v hornej tabuľke hovoria to isté, avšak pre jednotlivé fázy nahrávania
+  - hodntoy sú, podobne ako zobrazované commity, počítané z rozshau daného dátumovými kolonkami vo vrchnej časti okna
+- v hornej časti medzi kolonkami sa ešte náchadza aj *check box* **Rovnaký dátum**, ktorý po zakliknutí zapríčiní, že sa obidve kolonky nastavia na rovnaký dátum a teda bude možné prezerať výsledky práce v jednotlivých dňoch bez otravného nastavovania obidvoch koloniek
+- tlačidlom **Vráť sa do hlavného menu** sa vrátime do hlavného menu :-)
+
+prezeranie výsledkov nieje možné, pokiaľ nieje vybraný valídny projekt
+
+### zatvorenie aplikácie
+
+- aplikácia sa zatvára jednoduchým zatvorením jedného z okien aplikácie
+- pokiaľ náhodou nieje zastavené nahrávanie, aplikácia na to upozorní uživatela pred zavretím a opýta sa ho, či naozaj chce aplikáciu opustiť

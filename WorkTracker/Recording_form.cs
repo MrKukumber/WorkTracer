@@ -45,7 +45,6 @@ namespace WorkTracker
         {
             RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.started);
         }
-
         private void Stop_roundButton_Click(object sender, EventArgs e)
         {
             ModesMan.VisitMode.VisitForStop_roundButton_Click(sender, e);
@@ -83,23 +82,24 @@ namespace WorkTracker
             if (Pause_roundButton.Enabled) Pause_roundButton.BackgroundImage =  global::WorkTracker.Properties.Resources.pause_icon;
             else Pause_roundButton.BackgroundImage = null;
         }
-
         private void ConfigFormOpening_button_Click(object sender, EventArgs e)
         {
             Program.configure_form.Show();
             Program.configure_form.previousForm = this;
             this.Hide();
         }
-
         private void Recording_form_FormClosing(object sender, FormClosingEventArgs e)
         {
             AppExitMan.ExitApp(e);
         }
-
         private void ReturnToMain_button_Click(object sender, EventArgs e)
         {
             Program.main_form.Show();
             this.Hide();
+        }
+        private void Phase_trackBar_Scroll(object sender, EventArgs e)
+        {
+            RecordingMan.ChangeWorkPhase((RecordingMan.WorkPhasesI)Phase_trackBar.Value);
         }
         public void Relable()
         {
@@ -119,11 +119,6 @@ namespace WorkTracker
         public void SetPause_roundButtonEnabled(bool indicator) => Pause_roundButton.Enabled = indicator;
         public void SetPhase_trackBarEnabled(bool indicator) => Phase_trackBar.Enabled = indicator;
         public void SetPhase_trackBarValue(int value) => Phase_trackBar.Value = value;
-
-        private void Phase_trackBar_Scroll(object sender, EventArgs e)
-        {
-            RecordingMan.ChangeWorkPhase((RecordingMan.WorkPhasesI)Phase_trackBar.Value);
-        }
 
     }
     /// <summary>
@@ -496,23 +491,23 @@ namespace WorkTracker
         /// 
         /// currently not used in any way, can be removed from code
         /// </summary>
-        public interface VisitRecState
+        public interface IVisitRecState
         {
 
         }
-        public class VisitStartedRecState : VisitRecState
+        public class VisitStartedRecState : IVisitRecState
         {
 
         }
-        public class VisitPausedRecState : VisitRecState
+        public class VisitPausedRecState : IVisitRecState
         {
 
         }
-        public class VisitStopedRecState : VisitRecState
+        public class VisitStopedRecState : IVisitRecState
         {
 
         }
-        public class VisitUnknownRecState : VisitRecState
+        public class VisitUnknownRecState : IVisitRecState
         {
 
         }

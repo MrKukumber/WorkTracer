@@ -149,7 +149,7 @@ namespace WorkTracker
             Program.recording_form.Relable();
             Program.commit_form.Relable();
             Program.progress_form.Relable();
-            CommitMan.CheckAndSetCommit_richTextBoxes();
+            CommitMan.GetCheckAndSetCommit_richTextBoxes();
         }
     }
     /// <summary>
@@ -209,7 +209,7 @@ namespace WorkTracker
             TortoiseGitMan.CheckAndSetTGit_dir();
             ProjectMan.CheckAndSetProj_dir();
             RecordingMan.AdaptToEnviromentWithOldProj();
-            CommitMan.CheckAndSetCommit_richTextBoxes(0);
+            CommitMan.GetCheckAndSetCommit_richTextBoxes(0);
         }
 
         /// <summary>
@@ -264,8 +264,8 @@ namespace WorkTracker
             public void VisitForDoYouWnatToCreateRepoQuestion() => ProjectMan.DoYouWnatToCreateRepoQuestion(this);
             public RecordingMan.Record VisitForCreateRecord() => RecordingMan.CreateStopRecord(this);
             public void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
-            public void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.CheckAndSetCommitInProgress(this, commitIndex);
-            public void VisitForCheckAndSetCommitInMain() => CommitMan.CheckAndSetCommitInMain(this);
+            public void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.GetCheckAndSetCommitInProgress(this, commitIndex);
+            public void VisitForCheckAndSetCommitInMain() => CommitMan.GetCheckAndSetCommitInMain(this);
         }
         public class VisitReposMode : IVisitMode
         {
@@ -276,8 +276,8 @@ namespace WorkTracker
             public void VisitForDoYouWnatToCreateRepoQuestion() => ProjectMan.DoYouWnatToCreateRepoQuestion(this);
             public RecordingMan.Record VisitForCreateRecord() => RecordingMan.CreateStopRecord(this);
             public void VisitForStop_roundButton_Click(object sender, EventArgs e) => Program.recording_form.Stop_roundButton_Click(this, sender, e);
-            public void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.CheckAndSetCommitInProgress(this, commitIndex);
-            public void VisitForCheckAndSetCommitInMain() => CommitMan.CheckAndSetCommitInMain(this);
+            public void VisitForCheckAndSetCommitInProgress(int? commitIndex) => CommitMan.GeCheckAndSetCommitInProgress(this, commitIndex);
+            public void VisitForCheckAndSetCommitInMain() => CommitMan.GetCheckAndSetCommitInMain(this);
         }
     }
 
@@ -416,7 +416,7 @@ namespace WorkTracker
                     if (!ProjectMan.LastProjValidity) MessageBox.Show(Localization.NotValidProjectDirSelected);
                     RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
                     ProgressMan.CheckAndSetDateTimePickersInProgress(true, out _);
-                    CommitMan.CheckAndSetCommit_richTextBoxes(0);
+                    CommitMan.GetCheckAndSetCommit_richTextBoxes(0);
                     if (!ableToAccessCSV) MessageBox.Show(Localization.Config_UnableToAccessCSV);
                 }
                 else MessageBox.Show(Localization.SomethingWentWrongProjectDialog);

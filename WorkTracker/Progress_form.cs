@@ -59,7 +59,7 @@ namespace WorkTracker
         {
             if (SameDate_checkBox.Checked) Until_dateTimePicker.Value = Since_dateTimePicker.Value;
             else Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
-            CommitMan.CheckAndSetCommitInProgress();
+            CommitMan.GetCheckAndSetCommitInProgress();
             ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
             if (!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
         }
@@ -68,7 +68,7 @@ namespace WorkTracker
         {
             if (SameDate_checkBox.Checked) Since_dateTimePicker.Value = Until_dateTimePicker.Value;
             else Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
-            CommitMan.CheckAndSetCommitInProgress();
+            CommitMan.GetCheckAndSetCommitInProgress();
             ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
             if(!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
         }
@@ -88,7 +88,7 @@ namespace WorkTracker
                 Until_dateTimePicker.MinDate = Since_dateTimePicker.Value;
                 Until_dateTimePicker.Enabled = true;
             }
-            CommitMan.CheckAndSetCommitInProgress();
+            CommitMan.GetCheckAndSetCommitInProgress();
             ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
         }
 
@@ -172,9 +172,8 @@ namespace WorkTracker
             ableToAccessCSV = true;
             if (ProjectMan.LastProjValidity && ProjectMan.ExistsRecordCSV())
             {
-                try
+                if(TryReadFirstAndLastRecordFromCsv(out RecordingMan.Record? first, out RecordingMan.Record ? last))
                 {
-                    (RecordingMan.Record? first, RecordingMan.Record? last) = ReadFirstAndLastRecordFromCsv();
                     if (first is not null && last is not null)
                     {
                         DateTime firstDateTime = first.Date.ToDateTime(first.Time);
@@ -194,7 +193,7 @@ namespace WorkTracker
                         }
                     }
                 }
-                catch (System.IO.IOException)
+                else
                 {
                     ableToAccessCSV = false;
                 }
@@ -298,22 +297,29 @@ namespace WorkTracker
         /// gets and returns first and last record of csv record file
         /// </summary>
         /// <returns>first and last record of csv, if there are some </returns>
-        static private (RecordingMan.Record?, RecordingMan.Record?) ReadFirstAndLastRecordFromCsv()
+        static private bool TryReadFirstAndLastRecordFromCsv(out RecordingMan.Record? firstRecord, out RecordingMan.Record? lastRecord)
         {
-            RecordingMan.Record? lastRecord = null;
-            RecordingMan.Record? firstRecord = null;
-            using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
-            using (var csv = new CsvReader(reader, basicConfig))
+            firstRecord = null;
+            lastRecord = null;
+            try
             {
-                csv.Read();
-                firstRecord = csv.GetRecord<RecordingMan.Record>();
-                lastRecord = firstRecord;
-                while (csv.Read())
+                using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
+                using (var csv = new CsvReader(reader, basicConfig))
                 {
-                    lastRecord = csv.GetRecord<RecordingMan.Record>();
+                    csv.Read();
+                    firstRecord = csv.GetRecord<RecordingMan.Record>();
+                    lastRecord = firstRecord;
+                    while (csv.Read())
+                    {
+                        lastRecord = csv.GetRecord<RecordingMan.Record>();
+                    }
                 }
             }
-            return (firstRecord, lastRecord);
+            catch (System.IO.IOException)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

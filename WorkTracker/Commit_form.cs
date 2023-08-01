@@ -72,7 +72,7 @@ namespace WorkTracker
         {
             Program.recording_form.Show();
             this.Hide();
-            CommitMan.CheckAndSetCommit_richTextBoxes(0);
+            CommitMan.GetCheckAndSetCommit_richTextBoxes(0);
             RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.stoped);
         }
         // if user close the commit form, same procedure as when he does not wnat to commit is made
@@ -92,7 +92,6 @@ namespace WorkTracker
                     RecordingMan.ProcessNewRecord(RecordingMan.RecStatesI.stoped);
                 }
             }
-            else System.Windows.Forms.Application.Exit();
         }
         public void Relable()
         {
@@ -110,7 +109,7 @@ namespace WorkTracker
 
         static public void Initialize()
         {
-            CheckAndSetCommit_richTextBoxes(0);
+            GetCheckAndSetCommit_richTextBoxes(0);
             hasBeenCommitted = false;
         }
 
@@ -152,25 +151,25 @@ namespace WorkTracker
         /// function that sets commits in rich text boxes in both main and progress forms
         /// index of showed commit in progress form is preserved
         /// </summary>
-        static public void CheckAndSetCommit_richTextBoxes()
+        static public void GetCheckAndSetCommit_richTextBoxes()
         {
-            CheckAndSetCommitInMain();
-            CheckAndSetCommitInProgress();
+            GetCheckAndSetCommitInMain();
+            GetCheckAndSetCommitInProgress();
         }
         /// <summary>
         /// function that sets commits in rich text boxes in both main and progress forms
         /// index of showed commit in progress form is set to commitIndexInProgress
         /// </summary>
-        static public void CheckAndSetCommit_richTextBoxes(int commitIndexInProgress)
+        static public void GetCheckAndSetCommit_richTextBoxes(int commitIndexInProgress)
         {
-            CheckAndSetCommitInMain();
-            CheckAndSetCommitInProgress(commitIndexInProgress);
+            GetCheckAndSetCommitInMain();
+            GetCheckAndSetCommitInProgress(commitIndexInProgress);
         }
         /// <summary>
         /// sets commit rich text box in progress form, preserving showed commit index in process
         /// taking current mode of project into concideration
         /// </summary>
-        static public void CheckAndSetCommitInProgress()
+        static public void GetCheckAndSetCommitInProgress()
         {
             ModesMan.VisitMode.VisitForCheckAndSetCommitInProgress(null);
         }
@@ -178,11 +177,11 @@ namespace WorkTracker
         /// sets commit rich text box in progress form, setting shown commit accroding to commitIndex
         /// taking current mode of project into concideration
         /// </summary>
-        static public void CheckAndSetCommitInProgress(int commitIndex)
+        static public void GetCheckAndSetCommitInProgress(int commitIndex)
         {
             ModesMan.VisitMode.VisitForCheckAndSetCommitInProgress(commitIndex);
         }
-        static public void CheckAndSetCommitInProgress(ModesMan.VisitReposMode mode, int? commitIndex)
+        static public void GeCheckAndSetCommitInProgress(ModesMan.VisitReposMode mode, int? commitIndex)
         {
             if (commitIndex is not null) Program.progress_form.Commit_vScrollValue = (int)commitIndex;
             if (ProjectMan.LastProjValidity) // if project is not valid, respective message is shown in commit rich text box
@@ -196,7 +195,7 @@ namespace WorkTracker
             }
         }
         // when local mod is active, respective message is shown in commit rich text box
-        static public void CheckAndSetCommitInProgress(ModesMan.VisitLocalMode mode, int? commitIndex)
+        static public void GetCheckAndSetCommitInProgress(ModesMan.VisitLocalMode mode, int? commitIndex)
         {
             Program.progress_form.WriteToCommit_richTextBox(Localization.Progress_Commit_richTextBox_local_mode_text);
             Program.progress_form.EnableCommit_vScrollBar(false);
@@ -204,12 +203,12 @@ namespace WorkTracker
         /// <summary>
         /// sets commit rich text box in main form, showing last commit of project
         /// </summary>
-        static public void CheckAndSetCommitInMain()
+        static public void GetCheckAndSetCommitInMain()
         {
             ModesMan.VisitMode.VisitForCheckAndSetCommitInMain();
         }
 
-        static public void CheckAndSetCommitInMain(ModesMan.VisitReposMode mode)
+        static public void GetCheckAndSetCommitInMain(ModesMan.VisitReposMode mode)
         {
             if (ProjectMan.LastProjValidity)// if project is not valid, respective message is shown in commit rich text box
             {
@@ -221,7 +220,7 @@ namespace WorkTracker
             }
         }
         // when local mod is active, respective message is shown in commit rich text box
-        static public void CheckAndSetCommitInMain(ModesMan.VisitLocalMode mode)
+        static public void GetCheckAndSetCommitInMain(ModesMan.VisitLocalMode mode)
         {
             Program.main_form.WriteToCommit_richTextBox(Localization.Main_Commit_richTextBox_local_mode_text);
         }
@@ -262,7 +261,7 @@ namespace WorkTracker
         /// </summary>
         static private class CommitPresenter
         {
-            const int richTextBoxCharSize = 8;
+            const int richTextBoxOneCharSize = 8;
             const int richTextBoxBias = 6;
             static private string[] commitsFromRangeInProgress = { };
             /// <summary>
@@ -322,7 +321,7 @@ namespace WorkTracker
             /// </summary>
             static private void JustifyAndShowCommitIn(Main_form main_form, string commit)
             {
-                int richTextBoxCharCount = (main_form.GetCommit_richTextBoxWidth() - richTextBoxBias) / richTextBoxCharSize;
+                int richTextBoxCharCount = (main_form.GetCommit_richTextBoxWidth() - richTextBoxBias) / richTextBoxOneCharSize;
                 string justifiedCommit = TextJustification.Justify(false, richTextBoxCharCount, commit);
                 main_form.WriteToCommit_richTextBox(justifiedCommit);
             }
@@ -331,7 +330,7 @@ namespace WorkTracker
             /// </summary>
             static private void JustifyAndShowCommitIn(Progress_form progress_form, string commit)
             {
-                int richTextBoxCharCount = (progress_form.GetCommit_richTextBoxWidth() - richTextBoxBias) / richTextBoxCharSize;
+                int richTextBoxCharCount = (progress_form.GetCommit_richTextBoxWidth() - richTextBoxBias) / richTextBoxOneCharSize;
                 string justifiedCommit = TextJustification.Justify(false, richTextBoxCharCount, commit);
                 progress_form.WriteToCommit_richTextBox(justifiedCommit);
             }

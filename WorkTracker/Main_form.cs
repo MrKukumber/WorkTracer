@@ -30,7 +30,6 @@ namespace WorkTracker
             else if (!TortoiseGitMan.LastTGitValidity) MessageBox.Show(Localization.NotValidTGitDirChosen);
             Program.recording_form.Show();
             this.Hide();
-
         }
         private void ConfigFormOpening_Button_Click(object sender, EventArgs e)
         {

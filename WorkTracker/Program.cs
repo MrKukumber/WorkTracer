@@ -54,7 +54,7 @@ namespace WorkTracker
             ProjectMan.CheckAndSetProj_dir();
             RecordingMan.AdaptToEnviromentWithNewProj(out bool ableToAccessCSV);
             ProgressMan.CheckAndSetDateTimePickersInProgress(false, out _);
-            CommitMan.CheckAndSetCommit_richTextBoxes();
+            CommitMan.GetCheckAndSetCommit_richTextBoxes();
             ProgressMan.SetAndShowProgression(out _);
             if (!ProjectMan.LastProjValidity && projValidityBeforeCheck)
                 if (!TortoiseGitMan.LastTGitValidity && tGitValidityBeforeCheck) MessageBox.Show(Localization.NonValidChangeOfProject_dir + "\n" + Localization.NonValidChangeOfTGit_dir);

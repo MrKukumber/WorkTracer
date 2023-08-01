@@ -20,11 +20,11 @@ Work Tracer
 
 ## Práca s aplikáciou
 
-### Základný princíp *edit*
+### Základný princíp
 
 - slúži na zaznamenávanie práce programátora na konkrétnom projekte
   - programátor si pri práci spúšťa a zastavuje "časomieru" a aplikácia dané úseky zaznamenáva a ukladá do príslušného vytvoreného .csv súboru, ktorý sa uloží do vybraného priečinku projektu
-- následne si môže uživatel pozrieť commit-y daného projektu a celkové množstvo odpracovaných hodín na projekte
+- následne si môže uživatel pozrieť commit-y daného projektu a celkové množstvo odpracovaných hodín na projekte *edit*
 
 ### Používanie a funkcie
 
@@ -70,8 +70,7 @@ Work Tracer
       - zastaviť nahrávanie je možné aj v prípade pozastavenia aj počas behu nahrávania
 - *track bar* pre nastavovanie fáze môžeme nastaviť do troch rôznych polôch
   - informácia o fáze programovania sa ukladá pre jednotlivé *spustenia* nahrávania
-  - nedá sa preto meniť počas spusteného nahrávania, iba počas pozastavenia alebo zastavenia
-  - (uvdím, či sa mi podarí informáciu o fáze programovania nejak zahrnúť do zobrazenia výsledkov)
+  - nedá sa preto meniť počas spusteného nahrávania alebo pozastaveného, iba počas zastavenia nahrávania *edit*
 - pomocou tlačidiel na spodu sa dokážem dostať späť do hlavného menu alebo do nastavení
 - to môžem učiniť v akejkoľvek fáze nahrávania, či už pri spustení, pozastavení alebo zastavení nahrávania
 
