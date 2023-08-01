@@ -41,7 +41,7 @@ namespace Testovanie_funkcionalit
         private void OpenTGitButton_Click(object sender, EventArgs e)
         {
             int exitCode = Program.OpenTGitCommitForm("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\skusam tortoise");
-            //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker
+            //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracer
             richTextBox1.Text = exitCode.ToString();
         }
 
@@ -77,8 +77,8 @@ namespace Testovanie_funkcionalit
 
         private void IsHereRepo_button_Click(object sender, EventArgs e)
         {
-            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker");
-            //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracker
+            string exit = Program.IsHereRepo("C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracer");
+            //C:\\Users\\matej\\Desktop\\Škola\\VÝŠKA\\5.semester\\Programovani_v_C#\\Zapoctovy_program\\WorkTracer
             richTextBox1.Text = exit;
         }
 

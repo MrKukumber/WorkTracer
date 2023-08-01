@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testovanie_funkcionalit", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testovanie_codu", "testovanie_codu\testovanie_codu.csproj", "{509A28AA-BDBE-4F5B-B1FC-D8DA84A975AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkTracker", "WorkTracker\WorkTracker.csproj", "{3FC652CB-712D-4BF4-B68A-C6710243C4A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkTracer", "WorkTracer\WorkTracer.csproj", "{3FC652CB-712D-4BF4-B68A-C6710243C4A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
