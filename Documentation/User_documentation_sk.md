@@ -53,7 +53,7 @@
   - **Nastav jazyk** - znova pomocou track bar-u si môžeme nastaviť jazyk aplikácie podľa svojej ľúbosit
   - **Vyber adresár s tortoise git**
     - po zmačknutí tlačidla *Vyber* sa otvorí dialógové okno, v ktorom uživatel môže vybrať priečinok, v ktorom je umiestnený spustitelný súbor *TortoiseGitProc.exe*
-    - daný súbor sa bude najskôr nachádzať v *cesta_ku_priecinku_s_TortoiseGit\Nazov_priecinka_vybrany_pri_instalacii\bin* (napr.: C:\Program Files\TortoiseGit\bin)
+    - daný súbor sa bude najskôr nachádzať v *cesta ku priecinku s TortoiseGit\\Nazov priecinka vybrany pri instalacii\\bin* (napr.: C:\\Program Files\\TortoiseGit\\bin)
     - nemusí byť vybraný v lokálnom móde
   - **Vyber adresár s projektom**
     - po zmačknutí tlačidla *Vyber* sa otvorí dialógové okno, v ktorom si uživatel môže vybrať priečinok s projektom, ktorý bude chcieť zaznamenávať

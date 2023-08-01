@@ -193,6 +193,7 @@ static public readonly IVisitMode[] visitModes =
 // aktuálny reprezentant módu pre ostatných manager-ov
 static public IVisitMode VisitMode;
 ```
+
 #### vnútorné triedy a interface-y
 
 ```cs
@@ -238,6 +239,8 @@ public void VisitForCheckAndSetCommitInProgress(int? commitIndex);
 public void VisitForCheckAndSetCommitInMain();
 ```
 
+---
+
 #### metódy
 
 ```cs
@@ -255,6 +258,8 @@ static public void ChangeMode(ModesI new_mode)
 - zmení mód aplikácie na daný argumentom
 - nastavi mód aj reprezentanta módu pre ostatné triedy a zavolá metódu aktuálneho módu `SetMode()`
 - následne volá metódy všetkých manager-ov, ktorých by sa zmena módu mohla týkať, nech sa na ňu adaptujú
+
+---
 
 ### public static class **TortoiseGitMan**
 
@@ -721,7 +726,6 @@ static public void ShowCommitInProgress(int index)
 
 - zobrazenie zarovnaného textu commit-u s daným indexom `index` v `progress_form`-e
 - pokiaľ je index väčší ako množstvo uložených commit-ov v `commitsFromRangeInProgress`, vypíše sa posledný z uložených commitov
-
 
 ```cs
 static public void GetAndShowLastCommitInMain()
