@@ -335,14 +335,18 @@ namespace WorkTracer
         /// <param name="record"></param>
         static private void WriteRecordToCsv(Record record)
         {
-            using (var writer = new StreamWriter(ProjectMan.PathToCSVRecordFile))
-            using (var csv = new CsvWriter(writer, basicConfig))
+            try
             {
-                csv.WriteHeader<Record>();
-                csv.NextRecord();
-                csv.WriteRecord<Record>(record);
-                csv.NextRecord();
+                using (var writer = new StreamWriter(ProjectMan.PathToCSVRecordFile))
+                using (var csv = new CsvWriter(writer, basicConfig))
+                {
+                    csv.WriteHeader<Record>();
+                    csv.NextRecord();
+                    csv.WriteRecord<Record>(record);
+                    csv.NextRecord();
+                }
             }
+            catch (CsvHelper.WriterException) { }
             File.SetAttributes(ProjectMan.PathToCSVRecordFile, FileAttributes.Hidden);
         }
         /// <summary>
@@ -352,12 +356,16 @@ namespace WorkTracer
         /// <param name="record"></param>
         static private void AppendRecordToCsv(Record record)
         {
-            using (var writer = new StreamWriter(ProjectMan.PathToCSVRecordFile, true))
-            using (var csv = new CsvWriter(writer, withoutHeaderConfig))
+            try
             {
-                csv.WriteRecord(record);
-                csv.NextRecord();
+                using (var writer = new StreamWriter(ProjectMan.PathToCSVRecordFile, true))
+                using (var csv = new CsvWriter(writer, withoutHeaderConfig))
+                {
+                    csv.WriteRecord(record);
+                    csv.NextRecord();
+                }
             }
+            catch(CsvHelper.WriterException) { }
         }
         /// <summary>
         /// reads last record from csv by reading all records of csv
@@ -366,14 +374,18 @@ namespace WorkTracer
         static private Record? ReadLastRecordFromCsv()
         {
             Record? lastRecord = null;
-            using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
-            using (var csv = new CsvReader(reader, basicConfig))
+            try
             {
-                while (csv.Read())
+                using (var reader = new StreamReader(ProjectMan.PathToCSVRecordFile))
+                using (var csv = new CsvReader(reader, basicConfig))
                 {
-                    lastRecord = csv.GetRecord<Record>();
+                    while (csv.Read())
+                    {
+                        lastRecord = csv.GetRecord<Record>();
+                    }
                 }
             }
+            catch (CsvHelper.ReaderException){ }
             return lastRecord;
         }
         

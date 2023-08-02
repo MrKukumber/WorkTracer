@@ -63,7 +63,7 @@
             // 
             // ReturnToMain_button
             // 
-            this.ReturnToMain_button.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ReturnToMain_button.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ReturnToMain_button.Location = new System.Drawing.Point(966, 408);
             this.ReturnToMain_button.Name = "ReturnToMain_button";
             this.ReturnToMain_button.Size = new System.Drawing.Size(110, 70);
@@ -74,7 +74,7 @@
             // 
             // Commit_richTextBox
             // 
-            this.Commit_richTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Commit_richTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Commit_richTextBox.BackColor = System.Drawing.SystemColors.MenuBar;
             this.Commit_richTextBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Commit_richTextBox.Location = new System.Drawing.Point(21, 57);
@@ -85,7 +85,7 @@
             // 
             // Commit_vScrollBar
             // 
-            this.Commit_vScrollBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Commit_vScrollBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Commit_vScrollBar.LargeChange = 1;
             this.Commit_vScrollBar.Location = new System.Drawing.Point(329, 57);
             this.Commit_vScrollBar.Maximum = 5;
@@ -96,7 +96,7 @@
             // 
             // CompDurationText_label
             // 
-            this.CompDurationText_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CompDurationText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CompDurationText_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CompDurationText_label.Location = new System.Drawing.Point(358, 307);
             this.CompDurationText_label.Name = "CompDurationText_label";
@@ -106,7 +106,7 @@
             // 
             // Until_dateTimePicker
             // 
-            this.Until_dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Until_dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Until_dateTimePicker.Location = new System.Drawing.Point(788, 37);
             this.Until_dateTimePicker.Name = "Until_dateTimePicker";
             this.Until_dateTimePicker.Size = new System.Drawing.Size(250, 27);
@@ -115,7 +115,7 @@
             // 
             // Since_label
             // 
-            this.Since_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Since_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Since_label.Location = new System.Drawing.Point(413, 9);
             this.Since_label.Name = "Since_label";
             this.Since_label.Size = new System.Drawing.Size(248, 20);
@@ -125,7 +125,7 @@
             // 
             // Until_label
             // 
-            this.Until_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Until_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Until_label.Location = new System.Drawing.Point(788, 9);
             this.Until_label.Name = "Until_label";
             this.Until_label.Size = new System.Drawing.Size(250, 20);
@@ -135,7 +135,7 @@
             // 
             // CompDurationWithPauseText_label
             // 
-            this.CompDurationWithPauseText_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CompDurationWithPauseText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CompDurationWithPauseText_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CompDurationWithPauseText_label.Location = new System.Drawing.Point(358, 387);
             this.CompDurationWithPauseText_label.Name = "CompDurationWithPauseText_label";
@@ -211,7 +211,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.70317F));
@@ -233,6 +233,7 @@
             // 
             // RecordingTimeWithPause_label
             // 
+            this.RecordingTimeWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordingTimeWithPause_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RecordingTimeWithPause_label.Location = new System.Drawing.Point(365, 218);
             this.RecordingTimeWithPause_label.Name = "RecordingTimeWithPause_label";
@@ -243,6 +244,7 @@
             // 
             // RecordingTime_label
             // 
+            this.RecordingTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordingTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RecordingTime_label.Location = new System.Drawing.Point(365, 163);
             this.RecordingTime_label.Name = "RecordingTime_label";
@@ -253,6 +255,7 @@
             // 
             // CreatTime_label
             // 
+            this.CreatTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CreatTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CreatTime_label.Location = new System.Drawing.Point(537, 120);
             this.CreatTime_label.Name = "CreatTime_label";
@@ -263,6 +266,7 @@
             // 
             // ProgrTime_label
             // 
+            this.ProgrTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ProgrTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ProgrTime_label.Location = new System.Drawing.Point(706, 120);
             this.ProgrTime_label.Name = "ProgrTime_label";
@@ -273,6 +277,7 @@
             // 
             // DebugTime_label
             // 
+            this.DebugTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DebugTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.DebugTime_label.Location = new System.Drawing.Point(884, 120);
             this.DebugTime_label.Name = "DebugTime_label";
@@ -283,6 +288,7 @@
             // 
             // CompDuration_label
             // 
+            this.CompDuration_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CompDuration_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CompDuration_label.Location = new System.Drawing.Point(358, 339);
             this.CompDuration_label.Name = "CompDuration_label";
@@ -292,6 +298,7 @@
             // 
             // CompDurationWithPause_label
             // 
+            this.CompDurationWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CompDurationWithPause_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CompDurationWithPause_label.Location = new System.Drawing.Point(358, 450);
             this.CompDurationWithPause_label.Name = "CompDurationWithPause_label";
@@ -301,6 +308,7 @@
             // 
             // RangeCommit_label
             // 
+            this.RangeCommit_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RangeCommit_label.Location = new System.Drawing.Point(21, 29);
             this.RangeCommit_label.Name = "RangeCommit_label";
             this.RangeCommit_label.Size = new System.Drawing.Size(286, 25);
@@ -310,6 +318,7 @@
             // 
             // SameDate_label
             // 
+            this.SameDate_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SameDate_label.Location = new System.Drawing.Point(655, 9);
             this.SameDate_label.Name = "SameDate_label";
             this.SameDate_label.Size = new System.Drawing.Size(141, 20);
@@ -319,6 +328,7 @@
             // 
             // SameDate_checkBox
             // 
+            this.SameDate_checkBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SameDate_checkBox.AutoSize = true;
             this.SameDate_checkBox.Location = new System.Drawing.Point(715, 37);
             this.SameDate_checkBox.Name = "SameDate_checkBox";
@@ -329,6 +339,7 @@
             // 
             // Since_dateTimePicker
             // 
+            this.Since_dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Since_dateTimePicker.Location = new System.Drawing.Point(413, 37);
             this.Since_dateTimePicker.Name = "Since_dateTimePicker";
             this.Since_dateTimePicker.Size = new System.Drawing.Size(250, 27);
@@ -337,6 +348,7 @@
             // 
             // RecordSinceText_label
             // 
+            this.RecordSinceText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordSinceText_label.Location = new System.Drawing.Point(413, 67);
             this.RecordSinceText_label.Name = "RecordSinceText_label";
             this.RecordSinceText_label.Size = new System.Drawing.Size(132, 20);
@@ -346,6 +358,7 @@
             // 
             // RecordSinceDate_label
             // 
+            this.RecordSinceDate_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordSinceDate_label.Location = new System.Drawing.Point(551, 67);
             this.RecordSinceDate_label.Name = "RecordSinceDate_label";
             this.RecordSinceDate_label.Size = new System.Drawing.Size(110, 20);
@@ -354,6 +367,7 @@
             // 
             // RecordUntilText_label
             // 
+            this.RecordUntilText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordUntilText_label.Location = new System.Drawing.Point(788, 67);
             this.RecordUntilText_label.Name = "RecordUntilText_label";
             this.RecordUntilText_label.Size = new System.Drawing.Size(135, 20);
@@ -363,6 +377,7 @@
             // 
             // RecordUntilDate_label
             // 
+            this.RecordUntilDate_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RecordUntilDate_label.Location = new System.Drawing.Point(929, 67);
             this.RecordUntilDate_label.Name = "RecordUntilDate_label";
             this.RecordUntilDate_label.Size = new System.Drawing.Size(109, 20);

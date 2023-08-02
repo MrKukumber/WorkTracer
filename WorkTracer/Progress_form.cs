@@ -283,13 +283,11 @@ namespace WorkTracer
         /// <returns>false, when no other record can be read</returns>
         private static bool TryReadRecord(CsvReader csv, out RecordingMan.Record? record)
         {
+            record = null;
             if (csv.Read())
             {
-                record = csv.GetRecord<RecordingMan.Record>();
-            }
-            else
-            {
-                record = null;
+                try { record = csv.GetRecord<RecordingMan.Record>(); }
+                catch (CsvHelper.ReaderException) { }
             }
             return (record is not null);
         }
@@ -315,7 +313,7 @@ namespace WorkTracer
                     }
                 }
             }
-            catch (System.IO.IOException)
+            catch (Exception ex) when (ex is IOException or CsvHelper.ReaderException)
             {
                 return false;
             }
