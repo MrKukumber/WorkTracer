@@ -382,7 +382,7 @@ namespace WorkTracer
                 switch (process)
                 {
                     case Processes.initialize:
-                        InitialClosure = datetime;
+                        if (InitialClosure is null) InitialClosure = datetime;
                         break;
                     case Processes.add:
                         if (InitialClosure is not null) CompleteTime += datetime - (DateTime)InitialClosure;

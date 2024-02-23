@@ -257,11 +257,13 @@ namespace WorkTracer
                         {
                             ChangeAndSetRecState(LastRecord.State);
                             Program.recording_form.SetPhase_trackBarValue((int)LastRecord.Phase);
+                            ChangeWorkPhase(LastRecord.Phase);
                         }
                         else
                         {
                             ChangeAndSetRecState(RecStatesI.stoped);
                             Program.recording_form.SetPhase_trackBarValue((int)WorkPhasesI.creating);
+                            ChangeWorkPhase(WorkPhasesI.creating);
                         }
                         return;
                     }

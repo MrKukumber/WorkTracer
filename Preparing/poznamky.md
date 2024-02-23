@@ -137,13 +137,9 @@ git rev-parse --is-inside-work-tree
 
 ## Problemy na vyriesenie
 
-> nekonzistencia csv-cka sposobena hrabanim sa v directory pocas nahravania - budem kontrolovat ci tam je vzdy ked kliknem do recording formularu
-
-- ci sa mozem pocas nahravania vratit do main formularu - mozem
-- jak sakra zobrazovat tie commity a tie celkove casy celkovo
-
-- teraz som si uvedomil, ze budem vyuzivat vlastne este dalsie externe procedury a to git-ove - to by sa asi malo uviest tiez potom v specifikacii alebo dokumentacii
 - mozno dako riesit nedostupnost git-ovych procesov
+- dako vyriesit, ked sa mi niekto bude hrabat v csv-cku a znevalidniho, osetrene to mam ale dako by to chcelo asi oznamovat uzivatelovi
+- umiestnenie aplikacie, aby sa mi nezobrazovali okna stale len hore ale aby sa vsetky premiestnovali po premiestneni jednoho z nich, najlepsie aby sa centrovali vsetky do stredu
 
 ## Uzitocne veci
 
