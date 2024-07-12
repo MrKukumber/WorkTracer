@@ -70,7 +70,7 @@ namespace WorkTracer
             else Since_dateTimePicker.MaxDate = Until_dateTimePicker.Value;
             CommitMan.GetCheckAndSetCommitInProgress();
             ProgressMan.SetAndShowProgression(out bool ableToAccessCSV);
-            if(!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
+            if (!ableToAccessCSV) MessageBox.Show(Localization.Progress_UnableToAccessCSV);
         }
         // when this check box is checked, the date time pickers are functioning as one
         private void SameDate_checkBox_CheckedChanged(object sender, EventArgs e)
@@ -105,6 +105,7 @@ namespace WorkTracer
             CreatTime_label.Text = Localization.Progress_CreatTime_label_text;
             ProgrTime_label.Text = Localization.Progress_ProgrTime_label_text;
             DebugTime_label.Text = Localization.Progress_DebugTime_label_text;
+            CommeTime_label.Text = Localization.Progress_CommeTime_label_text;
             CompDurationText_label.Text = Localization.Progress_CompDurationText_label_text;
             CompDurationWithPauseText_label.Text = Localization.Progress_CompDurationWithStopText_label_text;
             ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
@@ -121,6 +122,8 @@ namespace WorkTracer
         public void SetProgrDurationWithPause_labelText(string text) => ProgrDurationWithPause_label.Text = text;
         public void SetDebugDuration_labelText(string text) => DebugDuration_label.Text = text;
         public void SetDebugDurationWithPause_labelText(string text) => DebugDurationWithPause_label.Text = text;
+        public void SetCommeDuration_labelText(string text) => CommeDuration_label.Text = text;
+        public void SetCommeDurationWithPause_labelText(string text) => CommeDurationWithPause_label.Text = text;
         public void WriteToCommit_richTextBox(string what) => Commit_richTextBox.Text = what;
         public int GetCommit_richTextBoxWidth() => Commit_richTextBox.Width;
         public void EnableCommit_vScrollBar(bool indicator) => Commit_vScrollBar.Enabled = indicator;
@@ -133,6 +136,8 @@ namespace WorkTracer
         public void SetRecordSinceDate_labelText(string date) => RecordSinceDate_label.Text = date;
         public void SetRecordUntilDate_labelText(string date) => RecordUntilDate_label.Text = date;
         public void SetCommit_vScrollBarMaximum(int maximum) => Commit_vScrollBar.Maximum = maximum;
+
+
         public int Commit_vScrollValue { get => Commit_vScrollBar.Value; set => Commit_vScrollBar.Value = value; }
     }
     /// <summary>
@@ -154,6 +159,8 @@ namespace WorkTracer
                 new ProgramingWithStopsComputedValue(),
                 new DebugingComputedValue(),
                 new DebugingWithStopsComputedValue(),
+                new CommentingComputedValue(),
+                new CommentingWithStopsComputedValue()
             };
             CheckAndSetDateTimePickersInProgress(true, out _);
         }
@@ -172,7 +179,7 @@ namespace WorkTracer
             ableToAccessCSV = true;
             if (ProjectMan.LastProjValidity && ProjectMan.ExistsRecordCSV())
             {
-                if(TryReadFirstAndLastRecordFromCsv(out RecordingMan.Record? first, out RecordingMan.Record ? last))
+                if (TryReadFirstAndLastRecordFromCsv(out RecordingMan.Record? first, out RecordingMan.Record? last))
                 {
                     if (first is not null && last is not null)
                     {
@@ -220,6 +227,8 @@ namespace WorkTracer
             Program.progress_form.SetProgrDurationWithPause_labelText(computedValues[5].CompleteTime.ToString());
             Program.progress_form.SetDebugDuration_labelText(computedValues[6].CompleteTime.ToString());
             Program.progress_form.SetDebugDurationWithPause_labelText(computedValues[7].CompleteTime.ToString());
+            Program.progress_form.SetCommeDuration_labelText(computedValues[8].CompleteTime.ToString());
+            Program.progress_form.SetCommeDurationWithPause_labelText(computedValues[9].CompleteTime.ToString());
         }
         /// <summary>
         /// at first resets the computed values, 
@@ -352,28 +361,33 @@ namespace WorkTracer
             protected enum Processes { nothing, initialize, add }
             protected Processes[,,] whatTodo =
             {   /*Unknown state*/
-                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses  */
- /*creat phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing    },
- /*progr phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing    },
- /*debug phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing    }
+                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses    Commenting            CommentingWithPauses */
+ /*creat phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*progr phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*debug phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*comme phase*/    { Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   }
                 },
                 /*Started state*/
-                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses  */
- /*creat phase*/    { Processes.initialize, Processes.initialize, Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing    },
- /*progr phase*/    { Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing    },
- /*debug phase*/    { Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.initialize, Processes.initialize },
+                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses    Commenting            CommentingWithPauses */
+ /*creat phase*/    { Processes.initialize, Processes.initialize, Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*progr phase*/    { Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*debug phase*/    { Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing   },
+ /*comme phase*/    { Processes.initialize, Processes.initialize, Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.initialize, Processes.initialize}
                 },
                 /*Pused state*/
-                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses  */
- /*creat phase*/    { Processes.add,        Processes.nothing,    Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing    },
- /*progr phase*/    { Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing    },
- /*debug phase*/    { Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.nothing    }
+                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses    Commenting            CommentingWithPauses */
+ /*creat phase*/    { Processes.add,        Processes.nothing,    Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*progr phase*/    { Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*debug phase*/    { Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*comme phase*/    { Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.nothing   }
                 },
                 /*Stoped state*/
-                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses  */
- /*creat phase*/    { Processes.add,        Processes.add,        Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing    },
- /*progr phase*/    { Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing    },
- /*debug phase*/    { Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.add        }
+                { /*  Complete,             CompleteWithPauses,   Creating,             CreatingWithPauses,   Programing,           ProgramingWithPauses, Debuging,             DebugingWithPauses    Commenting            CommentingWithPauses */
+ /*creat phase*/    { Processes.add,        Processes.add,        Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*progr phase*/    { Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing   },
+ /*debug phase*/    { Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing   },
+ /*comme phase*/    { Processes.add,        Processes.add,        Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.nothing,    Processes.add,        Processes.add       }
+
                 }
 
             };
@@ -449,6 +463,20 @@ namespace WorkTracer
             public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
             {
                 Process(whatTodo[(int)recStateI, (int)workPhaseI, 7], datetime);
+            }
+        }
+        private class CommentingComputedValue : ComputedValue
+        {
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
+            {
+                Process(whatTodo[(int)recStateI, (int)workPhaseI, 8], datetime);
+            }
+        }
+        private class CommentingWithStopsComputedValue : ComputedValue
+        {
+            public override void ProcessRecord(RecordingMan.RecStatesI recStateI, RecordingMan.WorkPhasesI workPhaseI, DateTime datetime)
+            {
+                Process(whatTodo[(int)recStateI, (int)workPhaseI, 9], datetime);
             }
         }
     }

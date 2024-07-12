@@ -241,6 +241,9 @@ Are you sure, you want to exit?</value>
   <data name="NotValidTGitDirChosen" xml:space="preserve">
     <value>No valid Tortoise Git directory selected</value>
   </data>
+  <data name="PhaseComment_label_text" xml:space="preserve">
+    <value>Commenting</value>
+  </data>
   <data name="PhaseCreate_label_text" xml:space="preserve">
     <value>Creating</value>
   </data>
@@ -249,6 +252,9 @@ Are you sure, you want to exit?</value>
   </data>
   <data name="PhaseProgr_label_text" xml:space="preserve">
     <value>Programing</value>
+  </data>
+  <data name="Progress_CommeTime_label_text" xml:space="preserve">
+    <value>Komentovanie</value>
   </data>
   <data name="Progress_Commit_richTextBox_local_mode_text" xml:space="preserve">
     <value>

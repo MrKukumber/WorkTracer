@@ -28,160 +28,171 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Start_roundButton = new WorkTracer.RoundButton();
-            this.Pause_roundButton = new WorkTracer.RoundButton();
-            this.Stop_roundButton = new WorkTracer.RoundButton();
-            this.ReturnToMain_button = new System.Windows.Forms.Button();
-            this.ConfigFormOpening_button = new System.Windows.Forms.Button();
-            this.PhaseCreat_label = new System.Windows.Forms.Label();
-            this.PhaseProgr_label = new System.Windows.Forms.Label();
-            this.PhaseDebug_label = new System.Windows.Forms.Label();
-            this.Phase_label = new System.Windows.Forms.Label();
-            this.Phase_trackBar = new System.Windows.Forms.TrackBar();
-            this.CurrTrackState_label = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Phase_trackBar)).BeginInit();
-            this.SuspendLayout();
+            Start_roundButton = new RoundButton();
+            Pause_roundButton = new RoundButton();
+            Stop_roundButton = new RoundButton();
+            ReturnToMain_button = new Button();
+            ConfigFormOpening_button = new Button();
+            PhaseCreat_label = new Label();
+            PhaseProgr_label = new Label();
+            PhaseDebug_label = new Label();
+            Phase_label = new Label();
+            Phase_trackBar = new TrackBar();
+            CurrTrackState_label = new Label();
+            PhaseComment_label = new Label();
+            ((System.ComponentModel.ISupportInitialize)Phase_trackBar).BeginInit();
+            SuspendLayout();
             // 
             // Start_roundButton
             // 
-            this.Start_roundButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Start_roundButton.BackgroundImage = global::WorkTracer.Properties.Resources.play_icon;
-            this.Start_roundButton.Location = new System.Drawing.Point(33, 24);
-            this.Start_roundButton.Name = "Start_roundButton";
-            this.Start_roundButton.Size = new System.Drawing.Size(67, 66);
-            this.Start_roundButton.TabIndex = 0;
-            this.Start_roundButton.UseVisualStyleBackColor = true;
-            this.Start_roundButton.EnabledChanged += new System.EventHandler(this.Start_roundButton_EnabledChanged);
-            this.Start_roundButton.Click += new System.EventHandler(this.Start_roundButton_Click);
+            Start_roundButton.Anchor = AnchorStyles.Top;
+            Start_roundButton.BackgroundImage = Properties.Resources.play_icon;
+            Start_roundButton.Location = new Point(33, 24);
+            Start_roundButton.Name = "Start_roundButton";
+            Start_roundButton.Size = new Size(67, 66);
+            Start_roundButton.TabIndex = 0;
+            Start_roundButton.UseVisualStyleBackColor = true;
+            Start_roundButton.EnabledChanged += Start_roundButton_EnabledChanged;
+            Start_roundButton.Click += Start_roundButton_Click;
             // 
             // Pause_roundButton
             // 
-            this.Pause_roundButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Pause_roundButton.BackgroundImage = global::WorkTracer.Properties.Resources.pause_icon;
-            this.Pause_roundButton.Location = new System.Drawing.Point(142, 24);
-            this.Pause_roundButton.Name = "Pause_roundButton";
-            this.Pause_roundButton.Size = new System.Drawing.Size(67, 66);
-            this.Pause_roundButton.TabIndex = 1;
-            this.Pause_roundButton.UseVisualStyleBackColor = true;
-            this.Pause_roundButton.EnabledChanged += new System.EventHandler(this.Pause_roundButton_EnabledChanged);
-            this.Pause_roundButton.Click += new System.EventHandler(this.Pause_roundButton_Click);
+            Pause_roundButton.Anchor = AnchorStyles.Top;
+            Pause_roundButton.BackgroundImage = Properties.Resources.pause_icon;
+            Pause_roundButton.Location = new Point(142, 24);
+            Pause_roundButton.Name = "Pause_roundButton";
+            Pause_roundButton.Size = new Size(67, 66);
+            Pause_roundButton.TabIndex = 1;
+            Pause_roundButton.UseVisualStyleBackColor = true;
+            Pause_roundButton.EnabledChanged += Pause_roundButton_EnabledChanged;
+            Pause_roundButton.Click += Pause_roundButton_Click;
             // 
             // Stop_roundButton
             // 
-            this.Stop_roundButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Stop_roundButton.BackgroundImage = global::WorkTracer.Properties.Resources.stop_icon;
-            this.Stop_roundButton.Location = new System.Drawing.Point(251, 24);
-            this.Stop_roundButton.Name = "Stop_roundButton";
-            this.Stop_roundButton.Size = new System.Drawing.Size(67, 66);
-            this.Stop_roundButton.TabIndex = 2;
-            this.Stop_roundButton.UseVisualStyleBackColor = true;
-            this.Stop_roundButton.EnabledChanged += new System.EventHandler(this.Stop_roundButton_EnabledChanged);
-            this.Stop_roundButton.Click += new System.EventHandler(this.Stop_roundButton_Click);
+            Stop_roundButton.Anchor = AnchorStyles.Top;
+            Stop_roundButton.BackgroundImage = Properties.Resources.stop_icon;
+            Stop_roundButton.Location = new Point(251, 24);
+            Stop_roundButton.Name = "Stop_roundButton";
+            Stop_roundButton.Size = new Size(67, 66);
+            Stop_roundButton.TabIndex = 2;
+            Stop_roundButton.UseVisualStyleBackColor = true;
+            Stop_roundButton.EnabledChanged += Stop_roundButton_EnabledChanged;
+            Stop_roundButton.Click += Stop_roundButton_Click;
             // 
             // ReturnToMain_button
             // 
-            this.ReturnToMain_button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ReturnToMain_button.Location = new System.Drawing.Point(208, 145);
-            this.ReturnToMain_button.Name = "ReturnToMain_button";
-            this.ReturnToMain_button.Size = new System.Drawing.Size(110, 70);
-            this.ReturnToMain_button.TabIndex = 3;
-            this.ReturnToMain_button.Text = "ReturnToMain_button";
-            this.ReturnToMain_button.UseVisualStyleBackColor = true;
-            this.ReturnToMain_button.Click += new System.EventHandler(this.ReturnToMain_button_Click);
+            ReturnToMain_button.Anchor = AnchorStyles.Top;
+            ReturnToMain_button.Location = new Point(208, 145);
+            ReturnToMain_button.Name = "ReturnToMain_button";
+            ReturnToMain_button.Size = new Size(110, 70);
+            ReturnToMain_button.TabIndex = 3;
+            ReturnToMain_button.Text = "ReturnToMain_button";
+            ReturnToMain_button.UseVisualStyleBackColor = true;
+            ReturnToMain_button.Click += ReturnToMain_button_Click;
             // 
             // ConfigFormOpening_button
             // 
-            this.ConfigFormOpening_button.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ConfigFormOpening_button.Location = new System.Drawing.Point(208, 239);
-            this.ConfigFormOpening_button.Name = "ConfigFormOpening_button";
-            this.ConfigFormOpening_button.Size = new System.Drawing.Size(110, 70);
-            this.ConfigFormOpening_button.TabIndex = 4;
-            this.ConfigFormOpening_button.Text = "ConfigFormOpening_Button";
-            this.ConfigFormOpening_button.UseVisualStyleBackColor = true;
-            this.ConfigFormOpening_button.Click += new System.EventHandler(this.ConfigFormOpening_button_Click);
+            ConfigFormOpening_button.Anchor = AnchorStyles.Top;
+            ConfigFormOpening_button.Location = new Point(208, 239);
+            ConfigFormOpening_button.Name = "ConfigFormOpening_button";
+            ConfigFormOpening_button.Size = new Size(110, 70);
+            ConfigFormOpening_button.TabIndex = 4;
+            ConfigFormOpening_button.Text = "ConfigFormOpening_Button";
+            ConfigFormOpening_button.UseVisualStyleBackColor = true;
+            ConfigFormOpening_button.Click += ConfigFormOpening_button_Click;
             // 
             // PhaseCreat_label
             // 
-            this.PhaseCreat_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PhaseCreat_label.Location = new System.Drawing.Point(51, 252);
-            this.PhaseCreat_label.Name = "PhaseCreat_label";
-            this.PhaseCreat_label.Size = new System.Drawing.Size(158, 20);
-            this.PhaseCreat_label.TabIndex = 6;
-            this.PhaseCreat_label.Text = "PhaseCreat_label";
+            PhaseCreat_label.Anchor = AnchorStyles.Top;
+            PhaseCreat_label.Location = new Point(44, 280);
+            PhaseCreat_label.Name = "PhaseCreat_label";
+            PhaseCreat_label.Size = new Size(158, 20);
+            PhaseCreat_label.TabIndex = 6;
+            PhaseCreat_label.Text = "PhaseCreat_label";
+            PhaseCreat_label.Click += PhaseCreat_label_Click;
             // 
             // PhaseProgr_label
             // 
-            this.PhaseProgr_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PhaseProgr_label.Location = new System.Drawing.Point(51, 216);
-            this.PhaseProgr_label.Name = "PhaseProgr_label";
-            this.PhaseProgr_label.Size = new System.Drawing.Size(158, 20);
-            this.PhaseProgr_label.TabIndex = 7;
-            this.PhaseProgr_label.Text = "PhaseProgr_label";
+            PhaseProgr_label.Anchor = AnchorStyles.Top;
+            PhaseProgr_label.Location = new Point(44, 244);
+            PhaseProgr_label.Name = "PhaseProgr_label";
+            PhaseProgr_label.Size = new Size(158, 20);
+            PhaseProgr_label.TabIndex = 7;
+            PhaseProgr_label.Text = "PhaseProgr_label";
             // 
             // PhaseDebug_label
             // 
-            this.PhaseDebug_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PhaseDebug_label.Location = new System.Drawing.Point(51, 182);
-            this.PhaseDebug_label.Name = "PhaseDebug_label";
-            this.PhaseDebug_label.Size = new System.Drawing.Size(158, 20);
-            this.PhaseDebug_label.TabIndex = 8;
-            this.PhaseDebug_label.Text = "PhaseDebug_label";
+            PhaseDebug_label.Anchor = AnchorStyles.Top;
+            PhaseDebug_label.Location = new Point(44, 210);
+            PhaseDebug_label.Name = "PhaseDebug_label";
+            PhaseDebug_label.Size = new Size(158, 20);
+            PhaseDebug_label.TabIndex = 8;
+            PhaseDebug_label.Text = "PhaseDebug_label";
             // 
             // Phase_label
             // 
-            this.Phase_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Phase_label.AutoSize = true;
-            this.Phase_label.Location = new System.Drawing.Point(33, 145);
-            this.Phase_label.Name = "Phase_label";
-            this.Phase_label.Size = new System.Drawing.Size(86, 20);
-            this.Phase_label.TabIndex = 9;
-            this.Phase_label.Text = "Phase_label";
+            Phase_label.Anchor = AnchorStyles.Top;
+            Phase_label.AutoSize = true;
+            Phase_label.Location = new Point(33, 145);
+            Phase_label.Name = "Phase_label";
+            Phase_label.Size = new Size(86, 20);
+            Phase_label.TabIndex = 9;
+            Phase_label.Text = "Phase_label";
             // 
             // Phase_trackBar
             // 
-            this.Phase_trackBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Phase_trackBar.LargeChange = 1;
-            this.Phase_trackBar.Location = new System.Drawing.Point(9, 177);
-            this.Phase_trackBar.Maximum = 2;
-            this.Phase_trackBar.Name = "Phase_trackBar";
-            this.Phase_trackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.Phase_trackBar.Size = new System.Drawing.Size(56, 101);
-            this.Phase_trackBar.TabIndex = 5;
-            this.Phase_trackBar.Scroll += new System.EventHandler(this.Phase_trackBar_Scroll);
+            Phase_trackBar.Anchor = AnchorStyles.Top;
+            Phase_trackBar.LargeChange = 1;
+            Phase_trackBar.Location = new Point(12, 168);
+            Phase_trackBar.Maximum = 3;
+            Phase_trackBar.Name = "Phase_trackBar";
+            Phase_trackBar.Orientation = Orientation.Vertical;
+            Phase_trackBar.Size = new Size(56, 141);
+            Phase_trackBar.TabIndex = 5;
+            Phase_trackBar.Scroll += Phase_trackBar_Scroll;
             // 
             // CurrTrackState_label
             // 
-            this.CurrTrackState_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.CurrTrackState_label.Location = new System.Drawing.Point(33, 102);
-            this.CurrTrackState_label.Name = "CurrTrackState_label";
-            this.CurrTrackState_label.Size = new System.Drawing.Size(285, 20);
-            this.CurrTrackState_label.TabIndex = 10;
-            this.CurrTrackState_label.Text = "CurrTrackState_label";
-            this.CurrTrackState_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            CurrTrackState_label.Anchor = AnchorStyles.Top;
+            CurrTrackState_label.Location = new Point(33, 102);
+            CurrTrackState_label.Name = "CurrTrackState_label";
+            CurrTrackState_label.Size = new Size(285, 20);
+            CurrTrackState_label.TabIndex = 10;
+            CurrTrackState_label.Text = "CurrTrackState_label";
+            CurrTrackState_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // PhaseComment_label
+            // 
+            PhaseComment_label.AutoSize = true;
+            PhaseComment_label.Location = new Point(44, 176);
+            PhaseComment_label.Name = "PhaseComment_label";
+            PhaseComment_label.Size = new Size(151, 20);
+            PhaseComment_label.TabIndex = 11;
+            PhaseComment_label.Text = "PhaseComment_label";
             // 
             // Recording_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 321);
-            this.Controls.Add(this.CurrTrackState_label);
-            this.Controls.Add(this.Phase_label);
-            this.Controls.Add(this.PhaseDebug_label);
-            this.Controls.Add(this.PhaseProgr_label);
-            this.Controls.Add(this.PhaseCreat_label);
-            this.Controls.Add(this.Phase_trackBar);
-            this.Controls.Add(this.ConfigFormOpening_button);
-            this.Controls.Add(this.ReturnToMain_button);
-            this.Controls.Add(this.Stop_roundButton);
-            this.Controls.Add(this.Pause_roundButton);
-            this.Controls.Add(this.Start_roundButton);
-            this.Name = "Recording_form";
-            this.Text = "Form2";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Recording_form_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.Phase_trackBar)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(346, 321);
+            Controls.Add(PhaseComment_label);
+            Controls.Add(CurrTrackState_label);
+            Controls.Add(Phase_label);
+            Controls.Add(PhaseDebug_label);
+            Controls.Add(PhaseProgr_label);
+            Controls.Add(PhaseCreat_label);
+            Controls.Add(Phase_trackBar);
+            Controls.Add(ConfigFormOpening_button);
+            Controls.Add(ReturnToMain_button);
+            Controls.Add(Stop_roundButton);
+            Controls.Add(Pause_roundButton);
+            Controls.Add(Start_roundButton);
+            Name = "Recording_form";
+            Text = "Form2";
+            FormClosing += Recording_form_FormClosing;
+            ((System.ComponentModel.ISupportInitialize)Phase_trackBar).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -197,5 +208,6 @@
         private Label Phase_label;
         private TrackBar Phase_trackBar;
         private Label CurrTrackState_label;
+        private Label PhaseComment_label;
     }
 }

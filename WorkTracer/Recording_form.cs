@@ -69,17 +69,17 @@ namespace WorkTracer
         }
         private void Start_roundButton_EnabledChanged(object sender, EventArgs e)
         {
-            if (Start_roundButton.Enabled) Start_roundButton.BackgroundImage  = global::WorkTracer.Properties.Resources.play_icon;
+            if (Start_roundButton.Enabled) Start_roundButton.BackgroundImage = global::WorkTracer.Properties.Resources.play_icon;
             else Start_roundButton.BackgroundImage = null;
         }
         private void Stop_roundButton_EnabledChanged(object sender, EventArgs e)
         {
-            if (Stop_roundButton.Enabled) Stop_roundButton.BackgroundImage =  global::WorkTracer.Properties.Resources.stop_icon;
+            if (Stop_roundButton.Enabled) Stop_roundButton.BackgroundImage = global::WorkTracer.Properties.Resources.stop_icon;
             else Stop_roundButton.BackgroundImage = null;
         }
         private void Pause_roundButton_EnabledChanged(object sender, EventArgs e)
         {
-            if (Pause_roundButton.Enabled) Pause_roundButton.BackgroundImage =  global::WorkTracer.Properties.Resources.pause_icon;
+            if (Pause_roundButton.Enabled) Pause_roundButton.BackgroundImage = global::WorkTracer.Properties.Resources.pause_icon;
             else Pause_roundButton.BackgroundImage = null;
         }
         private void ConfigFormOpening_button_Click(object sender, EventArgs e)
@@ -107,6 +107,7 @@ namespace WorkTracer
             ConfigFormOpening_button.Text = Localization.Recording_ConfigFormOpening_button_text;
             ReturnToMain_button.Text = Localization.ReturnToMain_button_text;
             Phase_label.Text = Localization.Recording_Faze_label_text;
+            PhaseComment_label.Text = Localization.PhaseComment_label_text;
             PhaseCreat_label.Text = Localization.PhaseCreate_label_text;
             PhaseProgr_label.Text = Localization.PhaseProgr_label_text;
             PhaseDebug_label.Text = Localization.PhaseDebug_label_text;
@@ -120,6 +121,10 @@ namespace WorkTracer
         public void SetPhase_trackBarEnabled(bool indicator) => Phase_trackBar.Enabled = indicator;
         public void SetPhase_trackBarValue(int value) => Phase_trackBar.Value = value;
 
+        private void PhaseCreat_label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     /// <summary>
     /// class for round shaped buttons
@@ -140,7 +145,7 @@ namespace WorkTracer
     static public class RecordingMan
     {
         public enum RecStatesI { unknown, started, paused, stoped }
-        public enum WorkPhasesI { creating, programing, debuging };
+        public enum WorkPhasesI { creating, programing, debuging, commenting };
         static public RecStatesI recState { get; private set; }
         static public WorkPhasesI workPhase { get; private set; }
         static public string[] StatesLocalizations

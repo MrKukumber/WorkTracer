@@ -28,398 +28,437 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ReturnToMain_button = new System.Windows.Forms.Button();
-            this.Commit_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.Commit_vScrollBar = new System.Windows.Forms.VScrollBar();
-            this.CompDurationText_label = new System.Windows.Forms.Label();
-            this.Until_dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.Since_label = new System.Windows.Forms.Label();
-            this.Until_label = new System.Windows.Forms.Label();
-            this.CompDurationWithPauseText_label = new System.Windows.Forms.Label();
-            this.CreatDuration_label = new System.Windows.Forms.Label();
-            this.CreatDurationWithPause_label = new System.Windows.Forms.Label();
-            this.ProgrDuration_label = new System.Windows.Forms.Label();
-            this.ProgrDurationWithPause_label = new System.Windows.Forms.Label();
-            this.DebugDuration_label = new System.Windows.Forms.Label();
-            this.DebugDurationWithPause_label = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.RecordingTimeWithPause_label = new System.Windows.Forms.Label();
-            this.RecordingTime_label = new System.Windows.Forms.Label();
-            this.CreatTime_label = new System.Windows.Forms.Label();
-            this.ProgrTime_label = new System.Windows.Forms.Label();
-            this.DebugTime_label = new System.Windows.Forms.Label();
-            this.CompDuration_label = new System.Windows.Forms.Label();
-            this.CompDurationWithPause_label = new System.Windows.Forms.Label();
-            this.RangeCommit_label = new System.Windows.Forms.Label();
-            this.SameDate_label = new System.Windows.Forms.Label();
-            this.SameDate_checkBox = new System.Windows.Forms.CheckBox();
-            this.Since_dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.RecordSinceText_label = new System.Windows.Forms.Label();
-            this.RecordSinceDate_label = new System.Windows.Forms.Label();
-            this.RecordUntilText_label = new System.Windows.Forms.Label();
-            this.RecordUntilDate_label = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            ReturnToMain_button = new Button();
+            Commit_richTextBox = new RichTextBox();
+            Commit_vScrollBar = new VScrollBar();
+            CompDurationText_label = new Label();
+            Until_dateTimePicker = new DateTimePicker();
+            Since_label = new Label();
+            Until_label = new Label();
+            CompDurationWithPauseText_label = new Label();
+            CreatDuration_label = new Label();
+            CreatDurationWithPause_label = new Label();
+            ProgrDuration_label = new Label();
+            ProgrDurationWithPause_label = new Label();
+            DebugDuration_label = new Label();
+            DebugDurationWithPause_label = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            CommeDurationWithPause_label = new Label();
+            CommeDuration_label = new Label();
+            RecordingTimeWithPause_label = new Label();
+            RecordingTime_label = new Label();
+            CreatTime_label = new Label();
+            ProgrTime_label = new Label();
+            DebugTime_label = new Label();
+            CompDuration_label = new Label();
+            CompDurationWithPause_label = new Label();
+            RangeCommit_label = new Label();
+            SameDate_label = new Label();
+            SameDate_checkBox = new CheckBox();
+            Since_dateTimePicker = new DateTimePicker();
+            RecordSinceText_label = new Label();
+            RecordSinceDate_label = new Label();
+            RecordUntilText_label = new Label();
+            RecordUntilDate_label = new Label();
+            CommeTime_label = new Label();
+            tableLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // ReturnToMain_button
             // 
-            this.ReturnToMain_button.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ReturnToMain_button.Location = new System.Drawing.Point(966, 408);
-            this.ReturnToMain_button.Name = "ReturnToMain_button";
-            this.ReturnToMain_button.Size = new System.Drawing.Size(110, 70);
-            this.ReturnToMain_button.TabIndex = 0;
-            this.ReturnToMain_button.Text = "ReturnToMain_button";
-            this.ReturnToMain_button.UseVisualStyleBackColor = true;
-            this.ReturnToMain_button.Click += new System.EventHandler(this.MainFormOpening_button_Click);
+            ReturnToMain_button.Anchor = AnchorStyles.None;
+            ReturnToMain_button.Location = new Point(1120, 408);
+            ReturnToMain_button.Name = "ReturnToMain_button";
+            ReturnToMain_button.Size = new Size(110, 70);
+            ReturnToMain_button.TabIndex = 0;
+            ReturnToMain_button.Text = "ReturnToMain_button";
+            ReturnToMain_button.UseVisualStyleBackColor = true;
+            ReturnToMain_button.Click += MainFormOpening_button_Click;
             // 
             // Commit_richTextBox
             // 
-            this.Commit_richTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Commit_richTextBox.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.Commit_richTextBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Commit_richTextBox.Location = new System.Drawing.Point(21, 57);
-            this.Commit_richTextBox.Name = "Commit_richTextBox";
-            this.Commit_richTextBox.Size = new System.Drawing.Size(286, 423);
-            this.Commit_richTextBox.TabIndex = 6;
-            this.Commit_richTextBox.Text = "1234567890123456789012345678901234567890";
+            Commit_richTextBox.Anchor = AnchorStyles.None;
+            Commit_richTextBox.BackColor = SystemColors.MenuBar;
+            Commit_richTextBox.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Commit_richTextBox.Location = new Point(12, 55);
+            Commit_richTextBox.Name = "Commit_richTextBox";
+            Commit_richTextBox.Size = new Size(286, 423);
+            Commit_richTextBox.TabIndex = 6;
+            Commit_richTextBox.Text = "1234567890123456789012345678901234567890";
             // 
             // Commit_vScrollBar
             // 
-            this.Commit_vScrollBar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Commit_vScrollBar.LargeChange = 1;
-            this.Commit_vScrollBar.Location = new System.Drawing.Point(329, 57);
-            this.Commit_vScrollBar.Maximum = 5;
-            this.Commit_vScrollBar.Name = "Commit_vScrollBar";
-            this.Commit_vScrollBar.Size = new System.Drawing.Size(26, 394);
-            this.Commit_vScrollBar.TabIndex = 8;
-            this.Commit_vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Commit_vScrollBar_Scroll);
+            Commit_vScrollBar.Anchor = AnchorStyles.None;
+            Commit_vScrollBar.LargeChange = 1;
+            Commit_vScrollBar.Location = new Point(320, 55);
+            Commit_vScrollBar.Maximum = 5;
+            Commit_vScrollBar.Name = "Commit_vScrollBar";
+            Commit_vScrollBar.Size = new Size(26, 394);
+            Commit_vScrollBar.TabIndex = 8;
+            Commit_vScrollBar.Scroll += Commit_vScrollBar_Scroll;
             // 
             // CompDurationText_label
             // 
-            this.CompDurationText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CompDurationText_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CompDurationText_label.Location = new System.Drawing.Point(358, 307);
-            this.CompDurationText_label.Name = "CompDurationText_label";
-            this.CompDurationText_label.Size = new System.Drawing.Size(438, 35);
-            this.CompDurationText_label.TabIndex = 11;
-            this.CompDurationText_label.Text = "CompDurationText_label";
+            CompDurationText_label.Anchor = AnchorStyles.None;
+            CompDurationText_label.Font = new Font("Segoe UI", 12.8F, FontStyle.Bold, GraphicsUnit.Point);
+            CompDurationText_label.Location = new Point(349, 305);
+            CompDurationText_label.Name = "CompDurationText_label";
+            CompDurationText_label.Size = new Size(438, 35);
+            CompDurationText_label.TabIndex = 11;
+            CompDurationText_label.Text = "CompDurationText_label";
             // 
             // Until_dateTimePicker
             // 
-            this.Until_dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Until_dateTimePicker.Location = new System.Drawing.Point(788, 37);
-            this.Until_dateTimePicker.Name = "Until_dateTimePicker";
-            this.Until_dateTimePicker.Size = new System.Drawing.Size(250, 27);
-            this.Until_dateTimePicker.TabIndex = 13;
-            this.Until_dateTimePicker.CloseUp += new System.EventHandler(this.Until_dateTimePicker_CloseUp);
+            Until_dateTimePicker.Anchor = AnchorStyles.None;
+            Until_dateTimePicker.Location = new Point(927, 37);
+            Until_dateTimePicker.Name = "Until_dateTimePicker";
+            Until_dateTimePicker.Size = new Size(250, 27);
+            Until_dateTimePicker.TabIndex = 13;
+            Until_dateTimePicker.CloseUp += Until_dateTimePicker_CloseUp;
             // 
             // Since_label
             // 
-            this.Since_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Since_label.Location = new System.Drawing.Point(413, 9);
-            this.Since_label.Name = "Since_label";
-            this.Since_label.Size = new System.Drawing.Size(248, 20);
-            this.Since_label.TabIndex = 14;
-            this.Since_label.Text = "Since_label";
-            this.Since_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            Since_label.Anchor = AnchorStyles.None;
+            Since_label.Location = new Point(440, 9);
+            Since_label.Name = "Since_label";
+            Since_label.Size = new Size(248, 20);
+            Since_label.TabIndex = 14;
+            Since_label.Text = "Since_label";
+            Since_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // Until_label
             // 
-            this.Until_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Until_label.Location = new System.Drawing.Point(788, 9);
-            this.Until_label.Name = "Until_label";
-            this.Until_label.Size = new System.Drawing.Size(250, 20);
-            this.Until_label.TabIndex = 15;
-            this.Until_label.Text = "Until_label";
-            this.Until_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            Until_label.Anchor = AnchorStyles.None;
+            Until_label.Location = new Point(927, 9);
+            Until_label.Name = "Until_label";
+            Until_label.Size = new Size(250, 20);
+            Until_label.TabIndex = 15;
+            Until_label.Text = "Until_label";
+            Until_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // CompDurationWithPauseText_label
             // 
-            this.CompDurationWithPauseText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CompDurationWithPauseText_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CompDurationWithPauseText_label.Location = new System.Drawing.Point(358, 387);
-            this.CompDurationWithPauseText_label.Name = "CompDurationWithPauseText_label";
-            this.CompDurationWithPauseText_label.Size = new System.Drawing.Size(438, 70);
-            this.CompDurationWithPauseText_label.TabIndex = 16;
-            this.CompDurationWithPauseText_label.Text = "CompDurationWithPauseText_label";
+            CompDurationWithPauseText_label.Anchor = AnchorStyles.None;
+            CompDurationWithPauseText_label.Font = new Font("Segoe UI", 12.8F, FontStyle.Bold, GraphicsUnit.Point);
+            CompDurationWithPauseText_label.Location = new Point(349, 385);
+            CompDurationWithPauseText_label.Name = "CompDurationWithPauseText_label";
+            CompDurationWithPauseText_label.Size = new Size(438, 70);
+            CompDurationWithPauseText_label.TabIndex = 16;
+            CompDurationWithPauseText_label.Text = "CompDurationWithPauseText_label";
             // 
             // CreatDuration_label
             // 
-            this.CreatDuration_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.CreatDuration_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CreatDuration_label.Location = new System.Drawing.Point(3, 0);
-            this.CreatDuration_label.Name = "CreatDuration_label";
-            this.CreatDuration_label.Size = new System.Drawing.Size(163, 25);
-            this.CreatDuration_label.TabIndex = 17;
-            this.CreatDuration_label.Text = "CreatDuration_label";
-            this.CreatDuration_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            CreatDuration_label.Anchor = AnchorStyles.Top;
+            CreatDuration_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CreatDuration_label.Location = new Point(7, 0);
+            CreatDuration_label.Name = "CreatDuration_label";
+            CreatDuration_label.Size = new Size(163, 25);
+            CreatDuration_label.TabIndex = 17;
+            CreatDuration_label.Text = "CreatDuration_label";
+            CreatDuration_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // CreatDurationWithPause_label
             // 
-            this.CreatDurationWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.CreatDurationWithPause_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CreatDurationWithPause_label.Location = new System.Drawing.Point(3, 62);
-            this.CreatDurationWithPause_label.Name = "CreatDurationWithPause_label";
-            this.CreatDurationWithPause_label.Size = new System.Drawing.Size(163, 25);
-            this.CreatDurationWithPause_label.TabIndex = 18;
-            this.CreatDurationWithPause_label.Text = "CreatDurationWithPause_label";
-            this.CreatDurationWithPause_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            CreatDurationWithPause_label.Anchor = AnchorStyles.Top;
+            CreatDurationWithPause_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CreatDurationWithPause_label.Location = new Point(7, 62);
+            CreatDurationWithPause_label.Name = "CreatDurationWithPause_label";
+            CreatDurationWithPause_label.Size = new Size(163, 25);
+            CreatDurationWithPause_label.TabIndex = 18;
+            CreatDurationWithPause_label.Text = "CreatDurationWithPause_label";
+            CreatDurationWithPause_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // ProgrDuration_label
             // 
-            this.ProgrDuration_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ProgrDuration_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ProgrDuration_label.Location = new System.Drawing.Point(172, 0);
-            this.ProgrDuration_label.Name = "ProgrDuration_label";
-            this.ProgrDuration_label.Size = new System.Drawing.Size(172, 25);
-            this.ProgrDuration_label.TabIndex = 19;
-            this.ProgrDuration_label.Text = "ProgrDuration_label";
-            this.ProgrDuration_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            ProgrDuration_label.Anchor = AnchorStyles.Top;
+            ProgrDuration_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            ProgrDuration_label.Location = new Point(181, 0);
+            ProgrDuration_label.Name = "ProgrDuration_label";
+            ProgrDuration_label.Size = new Size(172, 25);
+            ProgrDuration_label.TabIndex = 19;
+            ProgrDuration_label.Text = "ProgrDuration_label";
+            ProgrDuration_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // ProgrDurationWithPause_label
             // 
-            this.ProgrDurationWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ProgrDurationWithPause_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ProgrDurationWithPause_label.Location = new System.Drawing.Point(172, 62);
-            this.ProgrDurationWithPause_label.Name = "ProgrDurationWithPause_label";
-            this.ProgrDurationWithPause_label.Size = new System.Drawing.Size(172, 25);
-            this.ProgrDurationWithPause_label.TabIndex = 20;
-            this.ProgrDurationWithPause_label.Text = "ProgrDurationWithPause_label";
-            this.ProgrDurationWithPause_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            ProgrDurationWithPause_label.Anchor = AnchorStyles.Top;
+            ProgrDurationWithPause_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            ProgrDurationWithPause_label.Location = new Point(181, 62);
+            ProgrDurationWithPause_label.Name = "ProgrDurationWithPause_label";
+            ProgrDurationWithPause_label.Size = new Size(172, 25);
+            ProgrDurationWithPause_label.TabIndex = 20;
+            ProgrDurationWithPause_label.Text = "ProgrDurationWithPause_label";
+            ProgrDurationWithPause_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // DebugDuration_label
             // 
-            this.DebugDuration_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.DebugDuration_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DebugDuration_label.Location = new System.Drawing.Point(350, 0);
-            this.DebugDuration_label.Name = "DebugDuration_label";
-            this.DebugDuration_label.Size = new System.Drawing.Size(168, 25);
-            this.DebugDuration_label.TabIndex = 21;
-            this.DebugDuration_label.Text = "DebugDuration_label";
-            this.DebugDuration_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            DebugDuration_label.Anchor = AnchorStyles.Top;
+            DebugDuration_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            DebugDuration_label.Location = new Point(361, 0);
+            DebugDuration_label.Name = "DebugDuration_label";
+            DebugDuration_label.Size = new Size(168, 25);
+            DebugDuration_label.TabIndex = 21;
+            DebugDuration_label.Text = "DebugDuration_label";
+            DebugDuration_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // DebugDurationWithPause_label
             // 
-            this.DebugDurationWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.DebugDurationWithPause_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DebugDurationWithPause_label.Location = new System.Drawing.Point(350, 62);
-            this.DebugDurationWithPause_label.Name = "DebugDurationWithPause_label";
-            this.DebugDurationWithPause_label.Size = new System.Drawing.Size(168, 25);
-            this.DebugDurationWithPause_label.TabIndex = 22;
-            this.DebugDurationWithPause_label.Text = "DebugDurationWithPause_label";
-            this.DebugDurationWithPause_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            DebugDurationWithPause_label.Anchor = AnchorStyles.Top;
+            DebugDurationWithPause_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            DebugDurationWithPause_label.Location = new Point(361, 62);
+            DebugDurationWithPause_label.Name = "DebugDurationWithPause_label";
+            DebugDurationWithPause_label.Size = new Size(168, 25);
+            DebugDurationWithPause_label.TabIndex = 22;
+            DebugDurationWithPause_label.Text = "DebugDurationWithPause_label";
+            DebugDurationWithPause_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.70317F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.29683F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173F));
-            this.tableLayoutPanel1.Controls.Add(this.DebugDurationWithPause_label, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.DebugDuration_label, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ProgrDuration_label, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.CreatDurationWithPause_label, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.ProgrDurationWithPause_label, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.CreatDuration_label, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(534, 156);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(521, 125);
-            this.tableLayoutPanel1.TabIndex = 23;
+            tableLayoutPanel1.Anchor = AnchorStyles.None;
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.Controls.Add(CommeDurationWithPause_label, 3, 1);
+            tableLayoutPanel1.Controls.Add(CommeDuration_label, 3, 0);
+            tableLayoutPanel1.Controls.Add(DebugDurationWithPause_label, 2, 1);
+            tableLayoutPanel1.Controls.Add(DebugDuration_label, 2, 0);
+            tableLayoutPanel1.Controls.Add(ProgrDuration_label, 1, 0);
+            tableLayoutPanel1.Controls.Add(CreatDurationWithPause_label, 0, 1);
+            tableLayoutPanel1.Controls.Add(ProgrDurationWithPause_label, 1, 1);
+            tableLayoutPanel1.Controls.Add(CreatDuration_label, 0, 0);
+            tableLayoutPanel1.Location = new Point(518, 154);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(712, 125);
+            tableLayoutPanel1.TabIndex = 23;
+            // 
+            // CommeDurationWithPause_label
+            // 
+            CommeDurationWithPause_label.Anchor = AnchorStyles.Top;
+            CommeDurationWithPause_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CommeDurationWithPause_label.Location = new Point(541, 62);
+            CommeDurationWithPause_label.Name = "CommeDurationWithPause_label";
+            CommeDurationWithPause_label.Size = new Size(163, 25);
+            CommeDurationWithPause_label.TabIndex = 39;
+            CommeDurationWithPause_label.Text = "CommeDurationWithPause_label";
+            CommeDurationWithPause_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // CommeDuration_label
+            // 
+            CommeDuration_label.Anchor = AnchorStyles.Top;
+            CommeDuration_label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CommeDuration_label.Location = new Point(541, 0);
+            CommeDuration_label.Name = "CommeDuration_label";
+            CommeDuration_label.Size = new Size(163, 25);
+            CommeDuration_label.TabIndex = 39;
+            CommeDuration_label.Text = "CommeDuration_label";
+            CommeDuration_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // RecordingTimeWithPause_label
             // 
-            this.RecordingTimeWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RecordingTimeWithPause_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RecordingTimeWithPause_label.Location = new System.Drawing.Point(365, 218);
-            this.RecordingTimeWithPause_label.Name = "RecordingTimeWithPause_label";
-            this.RecordingTimeWithPause_label.Size = new System.Drawing.Size(163, 44);
-            this.RecordingTimeWithPause_label.TabIndex = 24;
-            this.RecordingTimeWithPause_label.Text = "RecordingTimeWithPause_label";
-            this.RecordingTimeWithPause_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            RecordingTimeWithPause_label.Anchor = AnchorStyles.None;
+            RecordingTimeWithPause_label.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            RecordingTimeWithPause_label.Location = new Point(356, 216);
+            RecordingTimeWithPause_label.Name = "RecordingTimeWithPause_label";
+            RecordingTimeWithPause_label.Size = new Size(163, 44);
+            RecordingTimeWithPause_label.TabIndex = 24;
+            RecordingTimeWithPause_label.Text = "RecordingTimeWithPause_label";
+            RecordingTimeWithPause_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // RecordingTime_label
             // 
-            this.RecordingTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RecordingTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RecordingTime_label.Location = new System.Drawing.Point(365, 163);
-            this.RecordingTime_label.Name = "RecordingTime_label";
-            this.RecordingTime_label.Size = new System.Drawing.Size(163, 20);
-            this.RecordingTime_label.TabIndex = 25;
-            this.RecordingTime_label.Text = "RecordingTime_label";
-            this.RecordingTime_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            RecordingTime_label.Anchor = AnchorStyles.None;
+            RecordingTime_label.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            RecordingTime_label.Location = new Point(356, 161);
+            RecordingTime_label.Name = "RecordingTime_label";
+            RecordingTime_label.Size = new Size(163, 20);
+            RecordingTime_label.TabIndex = 25;
+            RecordingTime_label.Text = "RecordingTime_label";
+            RecordingTime_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // CreatTime_label
             // 
-            this.CreatTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CreatTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CreatTime_label.Location = new System.Drawing.Point(537, 120);
-            this.CreatTime_label.Name = "CreatTime_label";
-            this.CreatTime_label.Size = new System.Drawing.Size(163, 33);
-            this.CreatTime_label.TabIndex = 26;
-            this.CreatTime_label.Text = "CreatTime_label";
-            this.CreatTime_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            CreatTime_label.Anchor = AnchorStyles.None;
+            CreatTime_label.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            CreatTime_label.Location = new Point(528, 118);
+            CreatTime_label.Name = "CreatTime_label";
+            CreatTime_label.Size = new Size(163, 33);
+            CreatTime_label.TabIndex = 26;
+            CreatTime_label.Text = "CreatTime_label";
+            CreatTime_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // ProgrTime_label
             // 
-            this.ProgrTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ProgrTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ProgrTime_label.Location = new System.Drawing.Point(706, 120);
-            this.ProgrTime_label.Name = "ProgrTime_label";
-            this.ProgrTime_label.Size = new System.Drawing.Size(172, 33);
-            this.ProgrTime_label.TabIndex = 27;
-            this.ProgrTime_label.Text = "ProgrTime_label";
-            this.ProgrTime_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            ProgrTime_label.Anchor = AnchorStyles.None;
+            ProgrTime_label.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            ProgrTime_label.Location = new Point(697, 118);
+            ProgrTime_label.Name = "ProgrTime_label";
+            ProgrTime_label.Size = new Size(172, 33);
+            ProgrTime_label.TabIndex = 27;
+            ProgrTime_label.Text = "ProgrTime_label";
+            ProgrTime_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // DebugTime_label
             // 
-            this.DebugTime_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.DebugTime_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DebugTime_label.Location = new System.Drawing.Point(884, 120);
-            this.DebugTime_label.Name = "DebugTime_label";
-            this.DebugTime_label.Size = new System.Drawing.Size(171, 33);
-            this.DebugTime_label.TabIndex = 28;
-            this.DebugTime_label.Text = "DebugTime_label";
-            this.DebugTime_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            DebugTime_label.Anchor = AnchorStyles.None;
+            DebugTime_label.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            DebugTime_label.Location = new Point(875, 118);
+            DebugTime_label.Name = "DebugTime_label";
+            DebugTime_label.Size = new Size(171, 33);
+            DebugTime_label.TabIndex = 28;
+            DebugTime_label.Text = "DebugTime_label";
+            DebugTime_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // CompDuration_label
             // 
-            this.CompDuration_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CompDuration_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CompDuration_label.Location = new System.Drawing.Point(358, 339);
-            this.CompDuration_label.Name = "CompDuration_label";
-            this.CompDuration_label.Size = new System.Drawing.Size(438, 28);
-            this.CompDuration_label.TabIndex = 29;
-            this.CompDuration_label.Text = "CompDuration_label";
+            CompDuration_label.Anchor = AnchorStyles.None;
+            CompDuration_label.Font = new Font("Segoe UI", 12.8F, FontStyle.Bold, GraphicsUnit.Point);
+            CompDuration_label.Location = new Point(349, 337);
+            CompDuration_label.Name = "CompDuration_label";
+            CompDuration_label.Size = new Size(438, 28);
+            CompDuration_label.TabIndex = 29;
+            CompDuration_label.Text = "CompDuration_label";
             // 
             // CompDurationWithPause_label
             // 
-            this.CompDurationWithPause_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CompDurationWithPause_label.Font = new System.Drawing.Font("Segoe UI", 12.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CompDurationWithPause_label.Location = new System.Drawing.Point(358, 450);
-            this.CompDurationWithPause_label.Name = "CompDurationWithPause_label";
-            this.CompDurationWithPause_label.Size = new System.Drawing.Size(438, 28);
-            this.CompDurationWithPause_label.TabIndex = 30;
-            this.CompDurationWithPause_label.Text = "CompDurationWithPause_label";
+            CompDurationWithPause_label.Anchor = AnchorStyles.None;
+            CompDurationWithPause_label.Font = new Font("Segoe UI", 12.8F, FontStyle.Bold, GraphicsUnit.Point);
+            CompDurationWithPause_label.Location = new Point(349, 448);
+            CompDurationWithPause_label.Name = "CompDurationWithPause_label";
+            CompDurationWithPause_label.Size = new Size(438, 28);
+            CompDurationWithPause_label.TabIndex = 30;
+            CompDurationWithPause_label.Text = "CompDurationWithPause_label";
             // 
             // RangeCommit_label
             // 
-            this.RangeCommit_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RangeCommit_label.Location = new System.Drawing.Point(21, 29);
-            this.RangeCommit_label.Name = "RangeCommit_label";
-            this.RangeCommit_label.Size = new System.Drawing.Size(286, 25);
-            this.RangeCommit_label.TabIndex = 31;
-            this.RangeCommit_label.Text = "RangeCommit_label";
-            this.RangeCommit_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            RangeCommit_label.Anchor = AnchorStyles.None;
+            RangeCommit_label.Location = new Point(12, 27);
+            RangeCommit_label.Name = "RangeCommit_label";
+            RangeCommit_label.Size = new Size(286, 25);
+            RangeCommit_label.TabIndex = 31;
+            RangeCommit_label.Text = "RangeCommit_label";
+            RangeCommit_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // SameDate_label
             // 
-            this.SameDate_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SameDate_label.Location = new System.Drawing.Point(655, 9);
-            this.SameDate_label.Name = "SameDate_label";
-            this.SameDate_label.Size = new System.Drawing.Size(141, 20);
-            this.SameDate_label.TabIndex = 32;
-            this.SameDate_label.Text = "SameDate_label";
-            this.SameDate_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            SameDate_label.Anchor = AnchorStyles.None;
+            SameDate_label.Location = new Point(739, 9);
+            SameDate_label.Name = "SameDate_label";
+            SameDate_label.Size = new Size(141, 20);
+            SameDate_label.TabIndex = 32;
+            SameDate_label.Text = "SameDate_label";
+            SameDate_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // SameDate_checkBox
             // 
-            this.SameDate_checkBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.SameDate_checkBox.AutoSize = true;
-            this.SameDate_checkBox.Location = new System.Drawing.Point(715, 37);
-            this.SameDate_checkBox.Name = "SameDate_checkBox";
-            this.SameDate_checkBox.Size = new System.Drawing.Size(18, 17);
-            this.SameDate_checkBox.TabIndex = 33;
-            this.SameDate_checkBox.UseVisualStyleBackColor = true;
-            this.SameDate_checkBox.CheckedChanged += new System.EventHandler(this.SameDate_checkBox_CheckedChanged);
+            SameDate_checkBox.Anchor = AnchorStyles.None;
+            SameDate_checkBox.AutoSize = true;
+            SameDate_checkBox.Location = new Point(799, 37);
+            SameDate_checkBox.Name = "SameDate_checkBox";
+            SameDate_checkBox.Size = new Size(18, 17);
+            SameDate_checkBox.TabIndex = 33;
+            SameDate_checkBox.UseVisualStyleBackColor = true;
+            SameDate_checkBox.CheckedChanged += SameDate_checkBox_CheckedChanged;
             // 
             // Since_dateTimePicker
             // 
-            this.Since_dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Since_dateTimePicker.Location = new System.Drawing.Point(413, 37);
-            this.Since_dateTimePicker.Name = "Since_dateTimePicker";
-            this.Since_dateTimePicker.Size = new System.Drawing.Size(250, 27);
-            this.Since_dateTimePicker.TabIndex = 34;
-            this.Since_dateTimePicker.CloseUp += new System.EventHandler(this.Since_dateTimePicker_CloseUp);
+            Since_dateTimePicker.Anchor = AnchorStyles.None;
+            Since_dateTimePicker.Location = new Point(440, 37);
+            Since_dateTimePicker.Name = "Since_dateTimePicker";
+            Since_dateTimePicker.Size = new Size(250, 27);
+            Since_dateTimePicker.TabIndex = 34;
+            Since_dateTimePicker.CloseUp += Since_dateTimePicker_CloseUp;
             // 
             // RecordSinceText_label
             // 
-            this.RecordSinceText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RecordSinceText_label.Location = new System.Drawing.Point(413, 67);
-            this.RecordSinceText_label.Name = "RecordSinceText_label";
-            this.RecordSinceText_label.Size = new System.Drawing.Size(132, 20);
-            this.RecordSinceText_label.TabIndex = 35;
-            this.RecordSinceText_label.Text = "RecordSinceText_label";
-            this.RecordSinceText_label.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            RecordSinceText_label.Anchor = AnchorStyles.None;
+            RecordSinceText_label.Location = new Point(440, 67);
+            RecordSinceText_label.Name = "RecordSinceText_label";
+            RecordSinceText_label.Size = new Size(132, 20);
+            RecordSinceText_label.TabIndex = 35;
+            RecordSinceText_label.Text = "RecordSinceText_label";
+            RecordSinceText_label.TextAlign = ContentAlignment.TopRight;
             // 
             // RecordSinceDate_label
             // 
-            this.RecordSinceDate_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RecordSinceDate_label.Location = new System.Drawing.Point(551, 67);
-            this.RecordSinceDate_label.Name = "RecordSinceDate_label";
-            this.RecordSinceDate_label.Size = new System.Drawing.Size(110, 20);
-            this.RecordSinceDate_label.TabIndex = 36;
-            this.RecordSinceDate_label.Text = "RecordSinceDate_label";
+            RecordSinceDate_label.Anchor = AnchorStyles.None;
+            RecordSinceDate_label.Location = new Point(578, 67);
+            RecordSinceDate_label.Name = "RecordSinceDate_label";
+            RecordSinceDate_label.Size = new Size(110, 20);
+            RecordSinceDate_label.TabIndex = 36;
+            RecordSinceDate_label.Text = "RecordSinceDate_label";
             // 
             // RecordUntilText_label
             // 
-            this.RecordUntilText_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RecordUntilText_label.Location = new System.Drawing.Point(788, 67);
-            this.RecordUntilText_label.Name = "RecordUntilText_label";
-            this.RecordUntilText_label.Size = new System.Drawing.Size(135, 20);
-            this.RecordUntilText_label.TabIndex = 37;
-            this.RecordUntilText_label.Text = "RecordUntilText_label";
-            this.RecordUntilText_label.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            RecordUntilText_label.Anchor = AnchorStyles.None;
+            RecordUntilText_label.Location = new Point(927, 67);
+            RecordUntilText_label.Name = "RecordUntilText_label";
+            RecordUntilText_label.Size = new Size(135, 20);
+            RecordUntilText_label.TabIndex = 37;
+            RecordUntilText_label.Text = "RecordUntilText_label";
+            RecordUntilText_label.TextAlign = ContentAlignment.TopRight;
             // 
             // RecordUntilDate_label
             // 
-            this.RecordUntilDate_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RecordUntilDate_label.Location = new System.Drawing.Point(929, 67);
-            this.RecordUntilDate_label.Name = "RecordUntilDate_label";
-            this.RecordUntilDate_label.Size = new System.Drawing.Size(109, 20);
-            this.RecordUntilDate_label.TabIndex = 38;
-            this.RecordUntilDate_label.Text = "RecordUntilDate_label";
+            RecordUntilDate_label.Anchor = AnchorStyles.None;
+            RecordUntilDate_label.Location = new Point(1068, 67);
+            RecordUntilDate_label.Name = "RecordUntilDate_label";
+            RecordUntilDate_label.Size = new Size(109, 20);
+            RecordUntilDate_label.TabIndex = 38;
+            RecordUntilDate_label.Text = "RecordUntilDate_label";
+            // 
+            // CommeTime_label
+            // 
+            CommeTime_label.Anchor = AnchorStyles.None;
+            CommeTime_label.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            CommeTime_label.Location = new Point(1051, 118);
+            CommeTime_label.Name = "CommeTime_label";
+            CommeTime_label.Size = new Size(171, 33);
+            CommeTime_label.TabIndex = 39;
+            CommeTime_label.Text = "CommeTime_label";
+            CommeTime_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // Progress_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1105, 495);
-            this.Controls.Add(this.RecordUntilDate_label);
-            this.Controls.Add(this.RecordUntilText_label);
-            this.Controls.Add(this.RecordSinceDate_label);
-            this.Controls.Add(this.RecordSinceText_label);
-            this.Controls.Add(this.Since_dateTimePicker);
-            this.Controls.Add(this.SameDate_checkBox);
-            this.Controls.Add(this.SameDate_label);
-            this.Controls.Add(this.RangeCommit_label);
-            this.Controls.Add(this.CompDurationWithPause_label);
-            this.Controls.Add(this.CompDuration_label);
-            this.Controls.Add(this.DebugTime_label);
-            this.Controls.Add(this.ProgrTime_label);
-            this.Controls.Add(this.CreatTime_label);
-            this.Controls.Add(this.RecordingTime_label);
-            this.Controls.Add(this.RecordingTimeWithPause_label);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.CompDurationWithPauseText_label);
-            this.Controls.Add(this.Until_label);
-            this.Controls.Add(this.Since_label);
-            this.Controls.Add(this.Until_dateTimePicker);
-            this.Controls.Add(this.CompDurationText_label);
-            this.Controls.Add(this.Commit_vScrollBar);
-            this.Controls.Add(this.Commit_richTextBox);
-            this.Controls.Add(this.ReturnToMain_button);
-            this.Name = "Progress_form";
-            this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Progress_form_FormClosing);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1247, 495);
+            Controls.Add(CommeTime_label);
+            Controls.Add(RecordUntilDate_label);
+            Controls.Add(RecordUntilText_label);
+            Controls.Add(RecordSinceDate_label);
+            Controls.Add(RecordSinceText_label);
+            Controls.Add(Since_dateTimePicker);
+            Controls.Add(SameDate_checkBox);
+            Controls.Add(SameDate_label);
+            Controls.Add(RangeCommit_label);
+            Controls.Add(CompDurationWithPause_label);
+            Controls.Add(CompDuration_label);
+            Controls.Add(DebugTime_label);
+            Controls.Add(ProgrTime_label);
+            Controls.Add(CreatTime_label);
+            Controls.Add(RecordingTime_label);
+            Controls.Add(RecordingTimeWithPause_label);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(CompDurationWithPauseText_label);
+            Controls.Add(Until_label);
+            Controls.Add(Since_label);
+            Controls.Add(Until_dateTimePicker);
+            Controls.Add(CompDurationText_label);
+            Controls.Add(Commit_vScrollBar);
+            Controls.Add(Commit_richTextBox);
+            Controls.Add(ReturnToMain_button);
+            Name = "Progress_form";
+            Text = "Form1";
+            FormClosing += Progress_form_FormClosing;
+            tableLayoutPanel1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -454,5 +493,8 @@
         private Label RecordSinceDate_label;
         private Label RecordUntilText_label;
         private Label RecordUntilDate_label;
+        private Label CommeDurationWithPause_label;
+        private Label CommeDuration_label;
+        private Label CommeTime_label;
     }
 }

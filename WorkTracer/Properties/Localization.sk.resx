@@ -360,4 +360,10 @@ Dokým sa problém nevyrieši, nebude možné prezrieť výsledky.</value>
   <data name="Progress_RecordUntilText_label_text" xml:space="preserve">
     <value>Nahrávané do:</value>
   </data>
+  <data name="PhaseComment_label_text" xml:space="preserve">
+    <value>Komentovanie</value>
+  </data>
+  <data name="Progress_CommeTime_label_text" xml:space="preserve">
+    <value>Komentovanie</value>
+  </data>
 </root>

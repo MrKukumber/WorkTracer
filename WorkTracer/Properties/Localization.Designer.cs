@@ -395,6 +395,15 @@ namespace WorkTracer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Commenting.
+        /// </summary>
+        internal static string PhaseComment_label_text {
+            get {
+                return ResourceManager.GetString("PhaseComment_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating.
         /// </summary>
         internal static string PhaseCreate_label_text {
@@ -418,6 +427,15 @@ namespace WorkTracer.Properties {
         internal static string PhaseProgr_label_text {
             get {
                 return ResourceManager.GetString("PhaseProgr_label_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commenting.
+        /// </summary>
+        internal static string Progress_CommeTime_label_text {
+            get {
+                return ResourceManager.GetString("Progress_CommeTime_label_text", resourceCulture);
             }
         }
         

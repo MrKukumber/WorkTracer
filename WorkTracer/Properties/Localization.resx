@@ -125,39 +125,30 @@
   </data>
   <data name="Commit_WantCommit_label_text" xml:space="preserve">
     <value>Do you want to commit your work?</value>
-    
   </data>
   <data name="Config_BackToPrevForm_button_text" xml:space="preserve">
     <value>Return back</value>
-    
   </data>
   <data name="Config_ChooseLanguge_label_text" xml:space="preserve">
     <value>Choose language</value>
-    
   </data>
   <data name="Config_ChooseProjDir_label_text" xml:space="preserve">
     <value>Select project for tracking</value>
-    
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
-    
   </data>
   <data name="Config_Mode1_label_text" xml:space="preserve">
     <value>Select mode</value>
-    
   </data>
   <data name="Config_Mode2_label_text" xml:space="preserve">
     <value>local     repo</value>
-    
   </data>
   <data name="Main_Commit_label_text" xml:space="preserve">
     <value>Last project commit</value>
-    
   </data>
   <data name="Main_ConfigFormOpening_button_text" xml:space="preserve">
     <value>Open configuration</value>
-    
   </data>
   <data name="CurrTrackState_label_pause_text" xml:space="preserve">
     <value>Recording is paused</value>
@@ -192,23 +183,18 @@ Are you sure, you want to exit?</value>
   </data>
   <data name="Main_TortoiseFileNotSelected_label_text" xml:space="preserve">
     <value>Valid TGit directory is not selected</value>
-    
   </data>
   <data name="Main_RecordingFormOpening_Button_text" xml:space="preserve">
     <value>Record</value>
-    
   </data>
   <data name="Main_ProjNotSelected_label_text" xml:space="preserve">
     <value>No valid project is selected</value>
-    
   </data>
   <data name="Mode_repo_text" xml:space="preserve">
     <value>Mode: Repozitory</value>
-    
   </data>
   <data name="Mode_local_text" xml:space="preserve">
     <value>Mode: Local</value>
-    
   </data>
   <data name="Recording_Faze_label_text" xml:space="preserve">
     <value>Work phase</value>
@@ -372,5 +358,11 @@ Until the problem is not solved, it will not be possible to see the results.</va
   </data>
   <data name="Progress_RecordUntilText_label_text" xml:space="preserve">
     <value>Recorded until:</value>
+  </data>
+  <data name="PhaseComment_label_text" xml:space="preserve">
+    <value>Commenting</value>
+  </data>
+  <data name="Progress_CommeTime_label_text" xml:space="preserve">
+    <value>Commenting</value>
   </data>
 </root>
